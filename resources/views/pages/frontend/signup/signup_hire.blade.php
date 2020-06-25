@@ -29,33 +29,76 @@
                                                 <i class="fa fa-google"></i>
                                             </a>
                                         </div>
-                                        <form class="form" method="post" action = "http://www.sukhadaam.com/demo/sawlii/units-sd/signup-sd/index.php" name="signUpFrm" id="signUpFrm">
+                                        <form method="POST" action="{{ route('register') }}">
+                                            @csrf   
                                             <div class="row">
                                                 <div class="col-lg-6 col-sm-12 right">
                                                     <div class="form-group">
-                                                        <input class="form-control" type="text" name="firstName" id="firstName" placeholder="First Name"/>
+                                                        <input class="form-control{{ $errors->has('firstname') ? ' is-invalid' : '' }}" type="text" name="firstname" id="firstname" placeholder="First Name" required autofocus/>
                                                     </div>
+                                                    @if($errors->has('firstname'))
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $errors->first('firstname') }}</strong>
+                                                        </span>
+                                                    @endif
                                                 </div>
                                                 <div class="col-lg-6 col-sm-12 left">
                                                     <div class="form-group">
-                                                        <input class="form-control" type="text" name="lastName" id="lastName" placeholder="Last Name"/>
+                                                        <input class="form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }}" type="text" name="lastname" id="lastname" placeholder="Last Name" required autofocus/>
                                                     </div>
+                                                    @if($errors->has('lastname'))
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $errors->first('lastname') }}</strong>
+                                                        </span>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" class="form-control location" name="location" id="location" placeholder="Location"/>
+                                                <input type="text" class="form-control {{ $errors->has('location') ? ' is-invalid' : '' }}" name="location" id="#" placeholder="Location" required autofocus/>
+                                                @if($errors->has('location'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('location') }}</strong>
+                                                    </span>
+                                                @endif
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="userName" id="userName" placeholder="Username"/>
+                                                <input type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" id="userName" placeholder="Username" required autofocus/>
+                                                @if($errors->has('username'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('username') }}</strong>
+                                                    </span>
+                                                @endif
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="email" id="email" placeholder="Email"/>
+                                                <input type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" id="#" placeholder="Email" required autofocus/>
+                                                @if($errors->has('email'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('email') }}</strong>
+                                                    </span>
+                                                @endif
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" class="form-control" name="pwd" id="pwd" placeholder="Password"/>
+                                                <select class="form-control{{ $errors->has('type') ? ' is-invalid' : '' }}" name="type" required >
+                                                    <option value="F">F</option>
+                                                    <option value="C">C</option>
+                                                    <option value="A">A</option>
+                                                </select>
+                                                @if($errors->has('type'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('type') }}</strong>
+                                                    </span>
+                                                @endif
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" class="form-control" name="cpwd" id="cpwd" placeholder="Confirm Password"/>
+                                                <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" id="password" placeholder="Password"/>
+                                                @if($errors->has('password'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('password') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="Confirm Password"/>
                                             </div>
                                            
                                             <div class="row">
@@ -66,7 +109,7 @@
                                                 <div class="col-md-12 col-sm-12">
                                                     <div class="g-recaptcha" data-sitekey="6LdpKaEUAAAAADPUbqo8M7CHk6eLeYBzogMg9kPs"></div>
                                                     <div class="form-group">
-                                                         <input type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha" id="hiddenRecaptcha">
+                                                         <input type="hidden" class="hiddenRecaptcha required" name="#" id="hiddenRecaptcha">
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="userType" id="userType" value="Hire">
@@ -76,13 +119,13 @@
                                                 <span class="checkmark"></span>
                                             </label>
                                             <label class="signin-check">I agree to all <a href="{{route('terms_and_conditions',$lang)}}">Terms & Conditions</a> and <a href="{{route('privacy_policy',$lang)}}">Privacy Policy</a>.
-                                                <input type="checkbox" name="terms" id="term4" class="ipAgree">
+                                                <input type="checkbox" name="#" id="term4" class="ipAgree">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <label class="lbl_agree_error"></label>
                                             <div class="get_started">
-                                                <button type="submit" name="submitAddData" id="submitAddData" class="btn btn-block btn-system">Get Started</button>
-                                                <input type="hidden" name="action" id="action" value="submitAddForm">
+                                                <button type="submit" class="btn btn-block btn-system">Get Started</button>
+                                                <!-- <input type="hidden" name="action" id="action" value="submitAddForm"> -->
                                             </div>
                                         </form>
                                     </div>

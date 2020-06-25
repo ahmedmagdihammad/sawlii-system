@@ -1,26 +1,15 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/login', function () {
-//     return view('auth.login');
-// });
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-
 Route::group(['middleware' => ['web']], function () {
     Route::group(['prefix'=>'{lang}'], function(){
-        // Route::get('/login', function () {
-        //     return view('pages.frontend.signin');
-        // });
         Route::get('/', 'Frontend\HomeController@index')->name('/');
         Route::get('/freelancer', 'Frontend\HomeController@freelancer')->name('freelancer');
         Route::get('/sub-category/1', 'Frontend\HomeController@sub_category')->name('sub_category');
         Route::get('/search/service', 'Frontend\HomeController@service')->name('service');
         Route::get('/service/test-service', 'Frontend\HomeController@test_service')->name('service.test_service');
         Route::get('/review', 'Frontend\HomeController@review')->name('review'); 
-        Route::get('/profile', 'Frontend\HomeController@profile')->name('profile');
+        Route::get('/profile', 'Frontend\ProfileController@index')->name('profile');
         Route::get('/search/jobs/', 'Frontend\HomeController@jobs')->name('jobs');
         Route::get('/signup', 'Frontend\HomeController@signup')->name('signup');
         Route::get('/signup/work', 'Frontend\HomeController@signup_work')->name('signup.work');
@@ -42,6 +31,13 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix'=>'{lang}'], function(){
         // Login Freelancer
+        Route::get('f/profile', 'Frontend\ProfileController@f_profile')->name('f_profile');
+        Route::get('c/profile', 'Frontend\ProfileController@c_profile')->name('c_profile');
+        Route::get('c/profile/update', 'Frontend\ProfileController@update')->name('profile.update');
+        Route::get('c/profile/update', 'Frontend\ProfileController@update')->name('profile.update');
+        Route::get('c/profile/add-skills', 'Frontend\ProfileController@add_skills')->name('profile.add_skills');
+
+
         Route::get('/account-setting', 'Frontend\HomeController@account_setting')->name('account_setting');
         Route::get('/wrong-turn', 'Frontend\HomeController@wrong_turn')->name('wrong_turn');
         Route::get('/post-services', 'Frontend\HomeController@post_services')->name('post_services');

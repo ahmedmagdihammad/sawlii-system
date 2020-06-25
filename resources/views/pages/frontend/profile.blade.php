@@ -4,16 +4,17 @@
 @endsection
 @section('content')
 
-@if(!Auth::user())
-    @include('pages.frontend.include.home_profile')
-    @else
+    @if(Auth::user()->type != 'C' && Auth::user()->type != 'F')
+        @include('pages.frontend.include.home_profile')
+    @endif 
 
-    @if(Auth::user()->type == 'F')
-            @include('pages.frontend.include.freelancer_profile')
-        @else
-            @include('pages.frontend.include.freelancer_profile')
+    @if(Auth::user()->type == 'C')
+        @include('pages.frontend.include.customer_profile')
     @endif
 
-@endif 
+    @if(Auth::user()->type == 'F')
+
+        @include('pages.frontend.include.freelancer_profile')
+    @endif
 
 @endsection

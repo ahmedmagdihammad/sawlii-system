@@ -48,9 +48,9 @@ class HomeController extends Controller
     {
         app()->setLocale($lang);
 
-        // return view('pages.frontend.signup', compact('lang'));
+        return view('pages.frontend.signup', compact('lang'));
 
-        return view('auth.register', compact('lang'));
+        // return view('auth.register', compact('lang'));
 
     }
 
@@ -74,9 +74,7 @@ class HomeController extends Controller
     {
         app()->setLocale($lang);
 
-        // return view('pages.frontend.signin', compact('lang'));
-
-        return view('auth.login', compact('lang'));
+        return view('pages.frontend.signin', compact('lang'));
     }
 
     public function contact_us($lang)
@@ -133,13 +131,6 @@ class HomeController extends Controller
         app()->setLocale($lang);
 
         return view('pages.frontend.categories.sub_category', compact('lang'));
-    }
-
-    public function profile($lang)
-    {
-        app()->setLocale($lang);
-
-        return view('pages.frontend.profile', compact('lang'));
     }
 
     public function freelancer($lang)

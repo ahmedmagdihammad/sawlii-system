@@ -29,8 +29,8 @@
                                                                 </span>    
                                                             </div>
                                                             <div class="switch-wrap  ">
-                                                                <a class="switch-btn btn-flr " href="#">Freelancer</a>
-                                                                <a class="switch-btn btn-ctm active" href="#">Customer</a>
+                                                                <a class="switch-btn btn-flr " href="{{route('f_profile',$lang)}}">Freelancer</a>
+                                                                <a class="switch-btn btn-ctm active" href="{{route('c_profile',$lang)}}">Customer</a>
                                                             </div>
                                                         </div>
                                                     </div>

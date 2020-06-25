@@ -167,7 +167,7 @@
   }
 </style>
 </head>
-@if(Auth::user() == 'C')
+@if(Auth::user()->type == 'C')
   @if(Route::is('/'))
   <body class='homepage user_customer customer_home'>
   @else

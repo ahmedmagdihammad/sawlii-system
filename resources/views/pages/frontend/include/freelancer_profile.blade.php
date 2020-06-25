@@ -29,8 +29,8 @@
                                                                                 </span>    
                                                                             </div>
                                                                             <div class="switch-wrap">
-                                                                                <a class="switch-btn btn-flr active" href="#">Freelancer</a>
-                                                                                <a class="switch-btn btn-ctm" href="#">Customer</a>
+                                                                                <a class="switch-btn btn-flr active" href="{{route('f_profile',$lang)}}">Freelancer</a>
+                                                                                <a class="switch-btn btn-ctm" href="{{route('c_profile',$lang)}}">Customer</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -38,7 +38,7 @@
                                                                         <div class="user-details-wrap">
                                                                             <div class="personal-details-wrap">
                                                                                 <div class="user-title-wrap">
-                                                                                    <h3 class="user-name">Mohamed Hammad</h3>
+                                                                                    <h3 class="user-name">{{Auth::user()->firstname}} {{Auth::user()->lastname }}</h3>
                                                                                     <div class="data_edit">
                                                                                     <a href="#" data-toggle="modal" data-target="#profile_name">
                                                                                         <i class="fa fa-pencil"></i>
@@ -55,9 +55,9 @@
                                                                                     <!-- <a href="#" class="user-profile-edit">Edit <i class="fa fa-edit"></i></a> -->
                                                                                 </div>
                                                                                 <ul class="user-location-detail liststyle-none">
-                                                                                <li class=""><span><i class="fa fa-envelope"></i></span>fastkood@gmail.com</li>
+                                                                                <li class=""><span><i class="fa fa-envelope"></i></span>{{Auth::user()->email}}</li>
                                                                                     <li>
-                                                                                    <span><i class="fa fa-map-marker"></i></span>Egypt
+                                                                                    <span><i class="fa fa-map-marker"></i></span>{{Auth::user()->location}}
                                                                                         <div class="data_edit">
                                                                                         <a href="#" data-toggle="modal" data-target="#profile_location">
                                                                                         <i class="fa fa-pencil"></i>
@@ -102,7 +102,7 @@
                                                                     <ul class="skills-list clearfix">
                                                                         <li>React Js  <a href="javascript:void(0);" data-id="40" data-item-type="skill" class="delete_data remove-skill"></a></li>
                                                                         <li>
-                                                                            <a href="#" data-toggle="modal" data-target="#skills" title="Add Skills">
+                                                                            <a href="#" data-toggle="modal" data-target="#skills" title="Add ">
                                                                             Add more skills
                                                                             </a>
                                                                         </li>
@@ -442,34 +442,40 @@
                                 </form>
                             </div>
                         </div>
+                        
                         <div class="modal fade" id="skills" role="dialog" tabindex="-1">
                         <div class="modal-dialog">
                             <!-- Modal content-->
-                            <form name="#" id="#" method="post">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">
-                                    &times;
-                                </button>
-                                <h4 class="modal-title">
-                                    Add Skill
-                                </h4>
+                            <form method="get" action="{{route('profile.add_skills',$lang)}}">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title"> Add Skill</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group add-skill-form-group">
+                                            <select data-placeholder="Skill list" class="form-control skill_choose_skillList" multiple tabindex="4" name="skills[]" id="#">
+                                            <option value=40 selected>React Js</option>
+                                            <option value=44 >Selenium Web Driver</option>
+                                            <option value=45 >QA Automation</option>
+                                            <option value=37 >Node Js</option>
+                                            <option value=36 >Java</option>
+                                            <option value=31 >UX Designers</option>
+                                            <option value=30 >Writer</option>
+                                            <option value=29 >Writers</option>
+                                            <option value=28 >Web Designers</option>
+                                            <option value=27 >Virtual Assistants</option>
+                                            <option value=25 >Wordpress Developers</option>
+                                            <option value=24 >Technical Writers</option><option value=23 >Swift Developers</option><option value=22 >Social Media Consultants</option><option value=21 >UI Designers</option><option value=20 >Sales Consultants</option><option value=19 >Python Developers</option><option value=18 >PHP Developers</option><option value=17 >SEO Experts</option>
+                                            <option value=16 >Mobile App Developers</option>  <option value=15 >JQuery Developers</option> <option value=14 >JavaScript Developers</option> <option value=13 >Objective-C Developers</option> <option value=12 >Graphic Designers</option><option value=11 >Facebook Marketers</option> <option value=10 >Excel Experts</option><option value=9 >Email Marketing Consultants</option><option value=8 >Data Entry Specialists</option><option value=7 >Customer Service Representatives</option><option value=6 >Copywriters</option><option value=5 >Content Writers</option><option value=4 >C# Developers</option><option value=3 >Bookkeepers</option><option value=2 >Android Developers</option><option value=1 >AngularJS Developers</option></select>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="theme-button">
+                                            <button type="submit" class="btn btn-system">Save</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                <div class="form-group add-skill-form-group">
-                                    <select data-placeholder="Skill list" class="form-control skill_choose_skillList" multiple tabindex="4" name="skill_name[]" id="skill_name"><option value=40 selected>React Js</option><option value=44 >Selenium Web Driver</option><option value=45 >QA Automation</option><option value=37 >Node Js</option><option value=36 >Java</option><option value=31 >UX Designers</option><option value=30 >Writer</option><option value=29 >Writers</option><option value=28 >Web Designers</option><option value=27 >Virtual Assistants</option><option value=25 >Wordpress Developers</option><option value=24 >Technical Writers</option><option value=23 >Swift Developers</option><option value=22 >Social Media Consultants</option><option value=21 >UI Designers</option><option value=20 >Sales Consultants</option><option value=19 >Python Developers</option><option value=18 >PHP Developers</option><option value=17 >SEO Experts</option><option value=16 >Mobile App Developers</option><option value=15 >JQuery Developers</option><option value=14 >JavaScript Developers</option><option value=13 >Objective-C Developers</option><option value=12 >Graphic Designers</option><option value=11 >Facebook Marketers</option><option value=10 >Excel Experts</option><option value=9 >Email Marketing Consultants</option><option value=8 >Data Entry Specialists</option><option value=7 >Customer Service Representatives</option><option value=6 >Copywriters</option><option value=5 >Content Writers</option><option value=4 >C# Developers</option><option value=3 >Bookkeepers</option><option value=2 >Android Developers</option><option value=1 >AngularJS Developers</option></select>
-                                </div>
-                                </div>
-                                <div class="modal-footer">
-                                <!-- <div class="theme-button-default">
-                                    <a href="#" data-dismiss="modal">Cancel</a>
-                                </div> -->
-                                <div class="theme-button">
-                                    <input type="hidden" name="action" value="skillAdd">
-                                    <button type="submit" class="btn btn-system">Save</button>
-                                </div>
-                                </div>
-                            </div>
                             </form>
                         </div>
                         </div>
@@ -518,66 +524,58 @@
                         <div class="modal fade" id="profile_name" role="dialog" tabindex="-1">
                         <div class="modal-dialog">
                             <!-- Modal content-->
-                            <form method="post" name="#" id="#">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">
-                                    &times;
-                                </button>
-                                <h4 class="modal-title">
-                                    Enter name
-                                </h4>
+                            <form method="get" action="{{route('profile.update', $lang)}}">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">
+                                            &times;
+                                        </button>
+                                        <h4 class="modal-title">
+                                            Enter name
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label> First name </label>
+                                            <input type="text" name="firstname" id="firstname" value="{{Auth::user()->firstname}}" class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>
+                                            Last name
+                                            </label>
+                                            <input type="text" name="lastname" id="lastname" value="{{Auth::user()->lastname}}" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="theme-button">
+                                            <button type="submit" class="btn btn-system" id="#">Save</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                <div class="form-group">
-                                    <label>
-                                    First name
-                                    </label>
-                                    <input type="text" name="firstName" id="firstName" value="Mohamed" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label>
-                                    Last name
-                                    </label>
-                                    <input type="text" name="lastName" id="lastName" value="Hammad" class="form-control" />
-                                </div>
-                                </div>
-                                <div class="modal-footer">
-                                <div class="theme-button">
-                                    <input type="hidden" name="action" id="action" value="addUserName">
-                                    <button type="submit" class="btn btn-system" id="saveFnm">Save</button>
-                                </div>
-                                </div>
-                            </div>
                             </form>
                         </div>
                         </div>
                         <div class="modal fade" id="profile_location" role="dialog" tabindex="-1">
                             <div class="modal-dialog">
                                 <!-- Modal content-->
-                                <form method="post" name="#" id="#">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">
-                                        &times;
-                                    </button>
-                                    <h4 class="modal-title">
-                                    Location
-                                    </h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                    <input type="text" class="form-control load_ggl_autocomplete" name="userLocation" id="userLocation" value="Egypt" />
+                                <form method="get" action="{{route('profile.update', $lang)}}">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title"> Location </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control load_ggl_autocomplete" name="location" id="location" value="{{Auth::user()->location}}" />
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="theme-button">
+                                                <button type="submit" class="btn btn-system">Save</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <div class="theme-button">
-                                    <input type="hidden" name="action" id="action" value="addLocation">
-                                    <button type="submit" class="btn btn-system" id="locationSave">Save</button>
-                                    </div>
-                                </div>
-                                </div>
-                            </form>
+                                </form>
                             </div>
                         </div>
                         <div class="modal fade" id="UserLevel" role="dialog" tabindex="-1">

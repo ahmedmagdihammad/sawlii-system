@@ -27,30 +27,31 @@
                                 <i class="fa fa-google"></i>
                               </a>
                             </div>
-                            <form method="post" action="{{ route('signin',$lang) }}" id="#">
+                            <form method="POST" action="{{ route('login') }}">
+                              @csrf
                               <div class="row">
                                 <div class="col-md-12 col-sm-12">
                                   <div class="form-group">
-                                    <input class="form-control @error('Email or Email') is-invalid @enderror" type="text"  value="{{ old('email') }}" tabindex=1 name="username" id="#" placeholder="Username or Email" required autocomplete="email" autofocus/>
+                                    <input id="email" name="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" type="email"  value="{{ old('email') }}" placeholder="Username or Email" required autofocus/>
                                   </div> 
 
-                                  @error('email')
+                                  @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{ $errors->first('email') }}</strong>
                                     </span>
-                                  @enderror
+                                  @endif
                                 </div>
                                 <div class="col-md-12 col-sm-12">
                                   <div class="form-group">
-                                    <input class="form-control @error('password') is-invalid @enderror" type="password" placeholder="Password" name="password" required autocomplete="current-password" tabindex=2/>
+                                    <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" type="password" placeholder="Password" name="password" required/>
                                     <span class="danger hide">Invalid sign in! Username or password did not match</span>
                                   </div>
 
-                                  @error('password')
+                                  @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{ $errors->first('password') }}</strong>
                                     </span>
-                                  @enderror
+                                  @endif
                                 </div>
                               </div>
                               <div class="terms-condition">
@@ -61,7 +62,7 @@
                               </div>
                               <div class="get_started">
                                   <input type="hidden" name="action" value="login">
-                                  <button type="submit" name="submitForm" id="submitForm" class="btn btn-block btn-system">Sign In</button>
+                                  <button type="submit" class="btn btn-block btn-system">Sign In</button>
                               </div>
                               <div class="forgot-pwd">
                                 <a href="{{route('forgetPassword',$lang)}}" class="forget_pw">Forgot password?</a>

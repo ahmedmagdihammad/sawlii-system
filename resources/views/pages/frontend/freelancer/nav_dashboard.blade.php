@@ -43,7 +43,7 @@
                 <!-- sidenav mobile view -->
 
                 <ul class="dashboard-navbar tablet-hide">
-                    <li class="">
+                    <li class="active">
                         <a href="{{route('signin',$lang)}}">Dashboard</a>
                     </li>
                     <li class="">
@@ -119,25 +119,25 @@
                     <!-- sidenav mobile view -->
 
                     <ul class="dashboard-navbar tablet-hide">
-                        <li class="">
+                        <li class="@if(Route::is('profile',$lang)) active @endif">
                             <a href="{{route('profile',$lang)}}">Dashboard</a>
                         </li>
-                        <li class="">
+                        <li class="@if(Route::is('my_jobs',$lang)) active @endif">
                             <a href="{{route('my_jobs',$lang)}}">Jobs</a>
                         </li>
-                        <li class="">
+                        <li class="@if(Route::is('services_order',$lang)) active @endif">
                             <a href="{{route('services_order',$lang)}}">Service Orders</a>
                         </li>
-                        <li class="">
+                        <li class="@if(Route::is('my_services',$lang)) active @endif">
                             <a href="{{route('my_services',$lang)}}">Posted Services</a>
                         </li>
-                        <li class="">
+                        <li class="@if(Route::is('job_invitations',$lang)) active @endif">
                             <a href="{{route('job_invitations',$lang)}}">Received Invitations</a>
                         </li>
-                        <li class="">
+                        <li class="@if(Route::is('review',$lang)) active @endif">
                             <a href="{{route('review',$lang)}}">My Reviews</a>
                         </li>
-                        <li class="">
+                        <li class="@if(Route::is('financial_dashboard',$lang)) active @endif">
                             <a href="{{route('financial_dashboard',$lang)}}">Financial Dashboard</a>
                         </li>
                         <li class=" hide">

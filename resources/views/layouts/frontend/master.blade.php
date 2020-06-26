@@ -167,17 +167,19 @@
   }
 </style>
 </head>
-@if(Auth::user()->type == 'C')
-  @if(Route::is('/'))
-  <body class='homepage user_customer customer_home'>
-  @else
-  <body class='homepage user_customer'>
-  @endif
-@else
+@if (!Auth::user())
   @if(Route::is('/'))
   <body class='homepage homepage_class'>
   @else
   <body class='homepage '>
+  @endif
+@else
+  @if(Auth::user()->type == 'C')
+    @if(Route::is('/'))
+    <body class='homepage user_customer customer_home'>
+    @else
+    <body class='homepage user_customer'>
+    @endif
   @endif
 @endif
         <!-- <div class="hidden-header"></div> -->

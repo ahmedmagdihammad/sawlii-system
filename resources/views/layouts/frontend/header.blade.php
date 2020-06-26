@@ -1,4 +1,4 @@
-@if(Auth::user()->type != 'C' && Auth::user()->type != 'F')
+@if(!Auth::user())
 <div class="loading hide">
     <div>
         <img src="{{asset('frontend/img/loadingGraphic.gif')}}" alt="processing"/>
@@ -60,7 +60,7 @@
         </div>
     </nav>
 </header>
-@endif
+@else
 
 @if(Auth::user()->type == 'C')
 <div class="loading hide">
@@ -316,4 +316,5 @@
             </div>
         </nav>
     </header>
+@endif
 @endif

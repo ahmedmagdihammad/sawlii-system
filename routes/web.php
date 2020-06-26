@@ -32,10 +32,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix'=>'{lang}'], function(){
         // Login Freelancer
         Route::get('f/profile', 'Frontend\ProfileController@f_profile')->name('f_profile');
+        Route::post('f/profile/update', 'Frontend\ProfileController@update')->name('profile.update');
+        Route::post('f/profile/add-skills', 'Frontend\ProfileController@add_skills')->name('profile.add_skills');
+        Route::post('f/profile/add-languages', 'Frontend\ProfileController@add_languages')->name('profile.add_languages');
+        Route::post('f/profile/add-categories', 'Frontend\ProfileController@add_categories')->name('profile.add_categories');
+        Route::post('f/profile/add-video', 'Frontend\ProfileController@add_video')->name('profile.add_video');
+
+        // Login Customers
         Route::get('c/profile', 'Frontend\ProfileController@c_profile')->name('c_profile');
-        Route::get('c/profile/update', 'Frontend\ProfileController@update')->name('profile.update');
-        Route::get('c/profile/update', 'Frontend\ProfileController@update')->name('profile.update');
-        Route::get('c/profile/add-skills', 'Frontend\ProfileController@add_skills')->name('profile.add_skills');
 
 
         Route::get('/account-setting', 'Frontend\HomeController@account_setting')->name('account_setting');

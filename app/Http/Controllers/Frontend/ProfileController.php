@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Auth;
 use App\Freelancer;
+use App\Category;
+use App\subCategory;
 
 class ProfileController extends Controller
 {
@@ -18,7 +20,13 @@ class ProfileController extends Controller
     public function index($lang)
     {
         app()->setLocale($lang);
-        return view('pages.frontend.profile', compact('lang'));
+        $users = User::find(Auth::user()->id);
+        $freelancer = Freelancer::where('userid', '=', Auth::user()->id)->first();
+        $languages = json_decode($freelancer->languages);
+        $categores = json_decode($freelancer->categories);
+        $skills = json_decode($freelancer->skills);
+        $categories = Category::all();
+        return view('pages.frontend.profile', compact('lang', 'users', 'freelancer', 'categories', 'skills', 'languages', 'categores'));
     }
 
     public function f_profile($lang)
@@ -44,47 +52,56 @@ class ProfileController extends Controller
     public function add_skills(Request $request, $lang)
     {
         app()->setlocale($lang);
+        // return json_encode((object) $request->skills);
 
-        $freelancer = Freelancer::all();
-        $freelancer->userid = Auth::user()->id;
-        $freelancer->skills = $request->skills;
+
+        $freelancer = Freelancer::where('userid', '=', Auth::user()->id)->first();
+        if(empty($freelancer)){
+            $freelancer = new Freelancer();
+            $freelancer->userid = Auth::user()->id;
+        }
+        $freelancer->skills = json_encode((object)$request->skills);
         $freelancer->save();
-        return $freelancer;
+        return back();
+    }
 
-        // $freelancer = Freelancer::where('userid', '=', Auth::user()->id)->get();
-        // if ($freelancer->userid != Auth::user()->id) {
-            // $freelancer->userid = Auth::user()->id;
-            // $freelancer->title = $request->title;
-            // $freelancer->level = $request->level;
-            // $freelancer->rating = $request->rating;
-            // $freelancer->jobs = $request->jobs;
-            // $freelancer->services = $request->services;
-            // $freelancer->earning = $request->earning;
-            // $freelancer->response = $request->response;
-            // $freelancer->skills = $request->skills;
-            // $freelancer->languages = $request->languages;
-            // $freelancer->categories = $request->categories;
-            // $freelancer->video = $request->video;
-            // $freelancer->overview = $request->overview;
-            // $freelancer->save();
-            // return $freelancer;
-        // }else {
-        //     $freelancer->userid = $request->title;
-        //     $freelancer->title = $request->title;
-        //     $freelancer->level = $request->level;
-        //     $freelancer->rating = $request->rating;
-        //     $freelancer->jobs = $request->jobs;
-        //     $freelancer->services = $request->services;
-        //     $freelancer->earning = $request->earning;
-        //     $freelancer->response = $request->response;
-        //     $freelancer->skills = $request->skills;
-        //     $freelancer->languages = $request->languages;
-        //     $freelancer->categories = $request->categories;
-        //     $freelancer->video = $request->video;
-        //     $freelancer->overview = $request->overview;
-        //     $freelancer->save();
-        //     return back();
-        // }
+    public function add_languages(Request $request, $lang)
+    {
+        app()->setlocale($lang);
+        $freelancer = Freelancer::where('userid', '=', Auth::user()->id)->first();
+        $freelancer->languages = json_encode((object)$request->languages);
+        if(empty($freelancer->id)){
+            $freelancer = new Freelancer();
+            $freelancer->userid = Auth::user()->id;
+        }
+        $freelancer->save();
+        return back();
+    }
+
+    public function add_categories(Request $request, $lang)
+    {
+        app()->setlocale($lang);
+        $freelancer = Freelancer::where('userid', '=', Auth::user()->id)->first();
+        $freelancer->categories = json_encode((object)$request->categories);
+        if(empty($freelancer)){
+            $freelancer = new Freelancer();
+            $freelancer->userid = Auth::user()->id;
+        }
+        $freelancer->save();
+        return back();
+    }
+    
+    public function add_video(Request $request, $lang)
+    {
+        app()->setlocale($lang);
+        $freelancer = Freelancer::where('userid', '=', Auth::user()->id)->first();
+        $freelancer->video = $request->video;
+        if(empty($freelancer)){
+            $freelancer = new Freelancer();
+            $freelancer->userid = Auth::user()->id;
+        }
+        $freelancer->save();
+        return back();
     }
 
     /**

@@ -167,7 +167,7 @@
   }
 </style>
 </head>
-@if (!Auth::user())
+@if(!Auth::user())
   @if(Route::is('/'))
   <body class='homepage homepage_class'>
   @else
@@ -179,6 +179,12 @@
     <body class='homepage user_customer customer_home'>
     @else
     <body class='homepage user_customer'>
+    @endif
+  @else
+    @if(Route::is('/'))
+    <body class='homepage homepage_class'>
+    @else
+    <body class='homepage '>
     @endif
   @endif
 @endif

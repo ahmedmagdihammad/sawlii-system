@@ -43,8 +43,8 @@
                                                                         <span style="width:0%" class="star-ratings-sprite-rating"></span>
                                                                     </div>
                                                                     <ul class="user-since-detail liststyle-none">
-                                                                        <li>member since May, 2020</li>
-                                                                        <li>Last Login 10 minutes ago</li>
+                                                                    <li>Member since {{date('d M,Y', strtotime(Auth::user()->created_at)) }}</li>          
+                                                                    <li>Last Login {{Auth::user()->lastLogin}} hours ago</li>
                                                                     </ul>
                                                                     <div class="">
                                                                         <a href="#" class="edit_button user-profile-edit">Edit <i class="fa fa-edit"></i></a>
@@ -93,7 +93,8 @@
                                                             <h3 class="box-title">Edit Profile</h3>
                                                         </div>
                                                         <div class="box-body">
-                                                            <form class="form" action="" name="frmCustomer" id="frmCustomer" method="POST" enctype="multipart/form-data">
+                                                            <form action="{{route('c_profile.update',$lang)}}" method="POST" enctype="multipart/form-data">
+                                                                @csrf
                                                                 <div class="profile-edit-wrap media">
                                                                     <div class="media-left">
                                                                         <div class="user-switch-wrap">
@@ -113,17 +114,17 @@
                                                                         <div class="row">
                                                                             <div class="col-sm-6">
                                                                             <div class="form-group">
-                                                                                <input type="text" class="form-control" name="firstName" placeholder="First Name" id="firstName" value="Mohamed">
+                                                                                <input type="text" class="form-control" name="firstname" placeholder="First Name" id="#" value="{{Auth::user()->firstname}}">
                                                                             </div>
                                                                             </div>
                                                                             <div class="col-sm-6">
                                                                             <div class="form-group">
-                                                                                <input type="text" class="form-control" placeholder="Last Name" name="lastName" id="lastName" value="Hammad">
+                                                                                <input type="text" class="form-control" placeholder="Last Name" name="lastname" id="#" value="{{Auth::user()->lastname}}">
                                                                             </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <input type="text" class="form-control" name="location" value="Egypt" id="location" id="location" placeholder="Location">
+                                                                            <input type="text" class="form-control" name="location" value="{{Auth::user()->location}}" id="#" placeholder="Location">
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <textarea class="form-control" name="aboutme" id="aboutme" rows="2" placeholder="Overview">-</textarea>
@@ -138,7 +139,7 @@
                                                                                     <a href="{{route('profile',$lang)}}">Cancel</a>
                                                                                 </div>
                                                                                 <div class="theme-button">
-                                                                                    <input type="submit" name="submitFrmCust" value="Save" id="subminFrmCust" class="btn btn-block btn-system">
+                                                                                    <input type="submit" value="Save" class="btn btn-block btn-system">
                                                                                     <!-- <a href="#" class="save">Save Changes</a> -->
                                                                                 </div>
                                                                             </div>

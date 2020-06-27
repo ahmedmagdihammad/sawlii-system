@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use App\USer;
+use Auth;
 
 class C_profileController extends Controller
 {
@@ -15,6 +18,36 @@ class C_profileController extends Controller
     public function index()
     {
         //
+    }
+
+    public function c_profile($lang)
+    {
+        app()->setlocale($lang);
+        $user = User::find(Auth::user()->id);
+        $user->type = 'C';
+        $user->save();
+        
+        return redirect()->back();
+    }
+
+    public function changePassword(Request $request ,$lang)
+    {
+        $user = auth()->user();
+        request()->validate([
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'currentPassword' => ['required', function ($attribute, $value, $fail) {
+                if (!\Hash::check($value, Auth::user()->password)) {
+                    return $fail(__('The current password is incorrect.'));
+                }
+            }]
+        ]);
+
+        app()->setlocale($lang);
+        $user = User::find(Auth::user()->id);
+        $user->password = Hash::make($request['password']);
+        $user->save();
+        
+        return redirect()->back();
     }
 
     /**
@@ -67,9 +100,15 @@ class C_profileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $lang)
     {
-        //
+        app()->setlocale($lang);
+        $catesomer = User::find(Auth::user()->id);
+        $catesomer->firstname	= $request->firstname;
+        $catesomer->lastname	= $request->lastname;
+        $catesomer->location	= $request->location;
+        $catesomer->save();
+        return back();
     }
 
     /**

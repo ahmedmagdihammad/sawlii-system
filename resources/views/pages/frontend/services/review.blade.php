@@ -6,7 +6,7 @@
 
 <!-- Your share button code -->
 <div id="main-content">
- <!-- Dashboard Navigation -->
+<!-- Dashboard Navigation -->
  @include('pages.frontend.freelancer.nav_dashboard')
 <!-- Dashboard Navigation End -->
 <section class="main-dashboard">

@@ -49,8 +49,8 @@
                                                                 </div>
 
                                                                 <ul class="user-since-detail liststyle-none">
-                                                                    <li>Member since 25 May,2020</li>          
-                                                                    <li>Last Login 2 hours ago</li>
+                                                                    <li>Member since {{date('d M,Y', strtotime(Auth::user()->created_at)) }}</li>          
+                                                                    <li>Last Login {{Auth::user()->lastLogin}} hours ago</li>
                                                                 </ul>
                                                                 <!-- <a href="#" class="user-profile-edit">Edit <i class="fa fa-edit"></i></a> -->
                                                             </div>
@@ -101,13 +101,12 @@
                                                 <h4 class="skills-title">My Skills</h4>
                                                 <ul class="skills-list clearfix">
                                                     <li>
-                                                        @if(empty($freelancer))
+                                                        @if(empty($freelancer->skills))
                                                         @else
                                                             @foreach($skills as $skill)
                                                             {{$skill}} -
                                                             @endforeach
                                                         @endif
-
                                                         <a href="javascript:void(0);" data-id="40" data-item-type="skill" class="delete_data remove-skill"></a>
                                                     </li>
                                                     <li>
@@ -121,10 +120,10 @@
                                                 <h4 class="skills-title">Language</h4>
                                                 <ul class="skills-list clearfix">
                                                     <li>
-                                                        @if(empty($freelancer))
+                                                        @if(empty($freelancer->languages))
                                                         @else
                                                             @foreach($languages as $language)
-                                                            {{$language}} -
+                                                                {{$language}} -
                                                             @endforeach
                                                         @endif
                                                         <a href="javascript:void(0);" data-id="1" data-item-type="lang" class="delete_data remove-skill"></a>
@@ -140,10 +139,10 @@
                                                 <h4 class="skills-title">Category</h4>
                                                 <ul class="skills-list clearfix">
                                                     <li>
-                                                        <!-- @if(empty($freelancer))
+                                                        <!-- @if(empty($freelancer->categories))
                                                         @else
-                                                            @foreach($categores as $category)
-                                                            {{$category}} 
+                                                            @foreach($subcategories as $subcateg)
+                                                                {{$subcateg}} -
                                                             @endforeach
                                                         @endif -->
                                                         <a href="javascript:void(0);" data-id="1" data-item-type="lang" class="delete_data remove-skill"></a>
@@ -476,7 +475,13 @@
                     </div> -->
                     <div class="form-group add-skill-form-group">
                         <select name="skills[]" data-placeholder="Skill list" class="form-control skill_choose_skillList" multiple tabindex="4" id="#">
-                            <option value="40" selected>--</option>
+                            @if(empty($freelancer->skills))
+                                <option value="" selected></option>
+                            @else
+                                @foreach($skills as $skill)
+                                <option value="{{$skill}}" selected>{{$skill}}</option>
+                                @endforeach
+                            @endif
                             <option value="React Js" >React Js</option>
                             <option value="Selenium Web Driver" >Selenium Web Driver</option>
                             <option value="QA Automation" >QA Automation</option>
@@ -983,7 +988,8 @@
     <div class="modal fade" id="overview" role="dialog" tabindex="-1">
         <div class="modal-dialog">
             <!-- Modal content-->
-            <form method="post" name="overviewFrm" id="overviewFrm">
+            <form method="post" action="{{route('profile.add_overview',$lang)}}">
+                @csrf
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">
@@ -995,7 +1001,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <textarea class="form-control" rows="5" name="overview" id="overview"></textarea>
+                            <textarea class="form-control" rows="5" name="overview" id="overview" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -1003,8 +1009,7 @@
                         <a href="#" data-dismiss="modal">Cancel</a>
                         </div>
                         <div class="theme-button">
-                            <input type="hidden" name="action" value="addOverview">
-                        <button type="submit" name="overviewAdd" id="overviewAdd" class="btn btn-system">Save</button>
+                        <button type="submit" class="btn btn-system">Save</button>
                         </div>
                     </div>
                 </div>

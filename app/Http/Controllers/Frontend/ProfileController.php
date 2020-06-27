@@ -20,88 +20,26 @@ class ProfileController extends Controller
     public function index($lang)
     {
         app()->setLocale($lang);
-        $users = User::find(Auth::user()->id);
-        $freelancer = Freelancer::where('userid', '=', Auth::user()->id)->first();
-        $languages = json_decode($freelancer->languages);
-        $categores = json_decode($freelancer->categories);
-        $skills = json_decode($freelancer->skills);
-        $categories = Category::all();
-        return view('pages.frontend.profile', compact('lang', 'users', 'freelancer', 'categories', 'skills', 'languages', 'categores'));
-    }
-
-    public function f_profile($lang)
-    {
-        app()->setlocale($lang);
-        $user = User::find(Auth::user()->id);
-        $user->type = 'F';
-        $user->save();
+        if (!Auth::user()) {
+            return view('pages.frontend.profile', compact('lang'));
+        } else if(Auth::user()->type == 'C') {
+            return view('pages.frontend.profile', compact('lang'));
+        }else{
+            $users = User::find(Auth::user()->id);
+            $categories = Category::all();
+            $freelancer = Freelancer::where('userid', '=', Auth::user()->id)->first();
+            if (empty($freelancer)) {
+                return view('pages.frontend.profile', 
+                compact('lang', 'users', 'freelancer', 'categories'));
+            } else {
+                $languages = json_decode($freelancer->languages);
+                $subcategories = json_decode($freelancer->categories);
+                $skills = json_decode($freelancer->skills);
+                return view('pages.frontend.profile', compact('lang', 'users', 'freelancer', 'categories', 'skills', 'languages', 'subcategories'));
+            }
+            
+        }
         
-        return redirect()->back();
-    }
-
-    public function c_profile($lang)
-    {
-        app()->setlocale($lang);
-        $user = User::find(Auth::user()->id);
-        $user->type = 'C';
-        $user->save();
-        
-        return redirect()->back();
-    }
-
-    public function add_skills(Request $request, $lang)
-    {
-        app()->setlocale($lang);
-        // return json_encode((object) $request->skills);
-
-
-        $freelancer = Freelancer::where('userid', '=', Auth::user()->id)->first();
-        if(empty($freelancer)){
-            $freelancer = new Freelancer();
-            $freelancer->userid = Auth::user()->id;
-        }
-        $freelancer->skills = json_encode((object)$request->skills);
-        $freelancer->save();
-        return back();
-    }
-
-    public function add_languages(Request $request, $lang)
-    {
-        app()->setlocale($lang);
-        $freelancer = Freelancer::where('userid', '=', Auth::user()->id)->first();
-        $freelancer->languages = json_encode((object)$request->languages);
-        if(empty($freelancer->id)){
-            $freelancer = new Freelancer();
-            $freelancer->userid = Auth::user()->id;
-        }
-        $freelancer->save();
-        return back();
-    }
-
-    public function add_categories(Request $request, $lang)
-    {
-        app()->setlocale($lang);
-        $freelancer = Freelancer::where('userid', '=', Auth::user()->id)->first();
-        $freelancer->categories = json_encode((object)$request->categories);
-        if(empty($freelancer)){
-            $freelancer = new Freelancer();
-            $freelancer->userid = Auth::user()->id;
-        }
-        $freelancer->save();
-        return back();
-    }
-    
-    public function add_video(Request $request, $lang)
-    {
-        app()->setlocale($lang);
-        $freelancer = Freelancer::where('userid', '=', Auth::user()->id)->first();
-        $freelancer->video = $request->video;
-        if(empty($freelancer)){
-            $freelancer = new Freelancer();
-            $freelancer->userid = Auth::user()->id;
-        }
-        $freelancer->save();
-        return back();
     }
 
     /**
@@ -154,15 +92,9 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $lang)
+    public function update(Request $request, $id)
     {
-        app()->setlocale($lang);
-        $freelancer = User::find(Auth::user()->id);
-        $freelancer->firstname	= $request->firstname;
-        $freelancer->lastname	= $request->lastname;
-        $freelancer->location	= $request->location;
-        $freelancer->save();
-        return back();
+        //
     }
 
     /**

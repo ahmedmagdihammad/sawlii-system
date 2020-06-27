@@ -31,15 +31,18 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix'=>'{lang}'], function(){
         // Login Freelancer
-        Route::get('f/profile', 'Frontend\ProfileController@f_profile')->name('f_profile');
-        Route::post('f/profile/update', 'Frontend\ProfileController@update')->name('profile.update');
-        Route::post('f/profile/add-skills', 'Frontend\ProfileController@add_skills')->name('profile.add_skills');
-        Route::post('f/profile/add-languages', 'Frontend\ProfileController@add_languages')->name('profile.add_languages');
-        Route::post('f/profile/add-categories', 'Frontend\ProfileController@add_categories')->name('profile.add_categories');
-        Route::post('f/profile/add-video', 'Frontend\ProfileController@add_video')->name('profile.add_video');
+        Route::get('f/profile', 'Frontend\F_profileController@f_profile')->name('f_profile');
+        Route::post('f/profile/update', 'Frontend\F_profileController@update')->name('profile.update');
+        Route::post('f/profile/add-skills', 'Frontend\F_profileController@add_skills')->name('profile.add_skills');
+        Route::post('f/profile/add-languages', 'Frontend\F_profileController@add_languages')->name('profile.add_languages');
+        Route::post('f/profile/add-categories', 'Frontend\F_profileController@add_categories')->name('profile.add_categories');
+        Route::post('f/profile/add-video', 'Frontend\F_profileController@add_video')->name('profile.add_video');
+        Route::post('f/profile/add-overview', 'Frontend\F_profileController@add_overview')->name('profile.add_overview');
 
         // Login Customers
-        Route::get('c/profile', 'Frontend\ProfileController@c_profile')->name('c_profile');
+        Route::get('c/profile', 'Frontend\C_profileController@c_profile')->name('c_profile');
+        Route::post('c/profile/update', 'Frontend\C_profileController@update')->name('c_profile.update');
+        Route::get('c/profile/changePassword', 'Frontend\C_profileController@changePassword')->name('c_profile.changePassword');
 
 
         Route::get('/account-setting', 'Frontend\HomeController@account_setting')->name('account_setting');

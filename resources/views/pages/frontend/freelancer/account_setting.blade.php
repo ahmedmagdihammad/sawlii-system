@@ -53,29 +53,32 @@
                                         <div class="box-body">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <form name="#" id="#" method="post">
+                                                    <form method="get" action="{{route('c_profile.changePassword',$lang)}}">
+                                                        @csrf
                                                         <div class="form-group">
                                                             <label>
                                                                 Current Password
                                                             </label>
-                                                            <input type="password" class="form-control" name="currentPassword" id="currebtPassword" />
+                                                            <input type="password" class="form-control" name="currentPassword" id="currebtPassword" required autocomplete="current-password"/>
+                                                            {!! $errors->first('currentPassword', '<span class="invalid-feedback alert-danger" role="alert"><strong>:message</strong></span>') !!}
                                                         </div>
                                                         <div class="form-group">
                                                             <label>
                                                                 New Password
                                                             </label>
-                                                            <input type="password" class="form-control" name="password" id="password" />
+                                                            <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" id="password" aria-hidden="true" onclick="myFunction()" required/>
+                                                            {!! $errors->first('password', '<span class="invalid-feedback alert-danger" role="alert"><strong>:message</strong></span>') !!}
                                                         </div>
                                                         <div class="form-group">
                                                             <label>
                                                                 Confirm Password
                                                             </label>
-                                                            <input type="password" class="form-control" name="cPassword" id="cPassword" />
+                                                            <input type="password" class="form-control" name="password_confirmation" id="myInput1" value="{{old('password-confirm')}}" required/>
+                                                            {!! $errors->first('password-confirm', '<span class="invalid-feedback alert-danger" role="alert"><strong>:message</strong></span>') !!}
                                                         </div>
                                                         <div class="text-right">
                                                             <div class="theme-button">
-                                                                <input type="hidden" name="action" id="action" value="changePwd">
-                                                                <button class="btn btn-system" name="passwordSave" id="passwordSave">Save</button>
+                                                                <button type="submit" class="btn btn-system" name="#" id="#">Save</button>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -270,7 +273,6 @@
                         minlength: 6
                     }
                 },
-
                 messages: {
                     currentPassword: {
                         required: "Please enter current password"

@@ -77,12 +77,8 @@
                                                     </span>
                                                 @endif
                                             </div>
-                                            <div class="form-group">
-                                                <select class="form-control{{ $errors->has('type') ? ' is-invalid' : '' }}" name="type" required >
-                                                    <option value="F">F</option>
-                                                    <option value="C">C</option>
-                                                    <option value="A">A</option>
-                                                </select>
+                                            <div class="form-group hide">
+                                                <input type="text" name="type" value="F" class="form-control{{ $errors->has('type') ? ' is-invalid' : '' }}" placeholder="Type" required autofocus>
                                                 @if($errors->has('type'))
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $errors->first('type') }}</strong>
@@ -90,7 +86,7 @@
                                                 @endif
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" id="password" placeholder="Password"/>
+                                                <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" id="password" placeholder="Password" required autofocus/>
                                                 @if($errors->has('password'))
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $errors->first('password') }}</strong>
@@ -119,7 +115,7 @@
                                                 <span class="checkmark"></span>
                                             </label>
                                             <label class="signin-check">I agree to all <a href="{{route('terms_and_conditions',$lang)}}">Terms & Conditions</a> and <a href="{{route('privacy_policy',$lang)}}">Privacy Policy</a>.
-                                                <input type="checkbox" name="#" id="term4" class="ipAgree">
+                                                <input type="checkbox" name="#" id="term4" class="ipAgree" required>
                                                 <span class="checkmark"></span>
                                             </label>
                                             <label class="lbl_agree_error"></label>

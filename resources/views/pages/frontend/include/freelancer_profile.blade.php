@@ -945,7 +945,7 @@
     </div>
     </div> 
 
-    <div class="modal hid" id="categoryMofel" role="dialog" tabindex="-1">
+    <div class="modal fade" id="categoryMofel" role="dialog" tabindex="-1">
         <div class="modal-dialog">
             <!-- Modal content-->
             <form method="post" action="{{route('profile.add_categories',$lang)}}">

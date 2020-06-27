@@ -32,12 +32,12 @@
                               <div class="row">
                                 <div class="col-md-12 col-sm-12">
                                   <div class="form-group">
-                                    <input id="email" name="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" type="email"  value="{{ old('email') }}" placeholder="Username or Email" required autofocus/>
+                                    <input id="login" type="text" name="login" class="form-control {{ $errors->has('username') || $errors->has('email') ? ' is-invalid' : '' }}"  value="{{ old('username') ?: old('email') }}" placeholder="Username or Email" required autofocus/>
                                   </div> 
 
-                                  @if ($errors->has('email'))
+                                  @if ($errors->has('username') || $errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('username') ?: $errors->first('email') }}</strong>
                                     </span>
                                   @endif
                                 </div>

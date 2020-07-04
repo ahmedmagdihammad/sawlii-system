@@ -171,14 +171,19 @@
                     </li>  
 
                     <li class="post-a-job-wrap">
-                        <a href="{{route('post_services',$lang)}}">Post a Job</a>
+                        <a href="{{route('post_job',$lang)}}">Post a Job</a>
                     </li>
 
                     <li>
                         <div class="language-selection">
                         <select class="form-control change_language">
-                            <option value="Default">English</option>
-                            <option value="1"  > Arabic </option> 
+                            @if(App::isLocale('en'))
+                            <option value="{{Route(Route::currentRouteName(), 'en')}}">English</option>
+                            <option value="{{Route(Route::currentRouteName(), 'ar')}}">Arabic</option>
+                            @else
+                            <option value="{{Route(Route::currentRouteName(), 'ar')}}">Arabic</option>
+                            <option value="{{Route(Route::currentRouteName(), 'en')}}">English</option>
+                            @endif
                         </select>
                         </div>
                     </li>

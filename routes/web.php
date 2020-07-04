@@ -39,18 +39,22 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('f/profile/delete', 'Frontend\F_profileController@destroy')->name('profile.delete');
         Route::post('f/profile/add-video', 'Frontend\F_profileController@add_video')->name('profile.add_video');
         Route::post('f/profile/add-overview', 'Frontend\F_profileController@add_overview')->name('profile.add_overview');
+        
+        // Route Service Freelancer
+        Route::get('/post-services', 'Frontend\PostServicesController@index')->name('post_services');
+        Route::post('/post-services/store', 'Frontend\PostServicesController@store')->name('post_services.store');
+        Route::get('/post-services/{id}/edit', 'Frontend\PostServicesController@edit')->name('post_services.edit');
+        Route::post('/post-services/{id}/update', 'Frontend\PostServicesController@update')->name('post_services.update');
+        Route::get('/post-services/getSubcategory', 'Frontend\PostServicesController@getSubcategory')->name('getSubcategory');
        
         // Login Customers
         Route::get('c/profile', 'Frontend\C_profileController@c_profile')->name('c_profile');
         Route::post('c/profile/update', 'Frontend\C_profileController@update')->name('c_profile.update');
         Route::get('c/profile/changePassword', 'Frontend\C_profileController@changePassword')->name('c_profile.changePassword');
 
-        // Route Service
-        Route::get('/post-services', 'Frontend\PostServicesController@index')->name('post_services');
-        Route::post('/post-services/store', 'Frontend\PostServicesController@store')->name('post_services.store');
-        Route::get('/post-services/{id}/edit', 'Frontend\PostServicesController@edit')->name('post_services.edit');
-        Route::post('/post-services/{id}/update', 'Frontend\PostServicesController@update')->name('post_services.update');
-        Route::get('/post-services/getSubcategory', 'Frontend\PostServicesController@getSubcategory')->name('getSubcategory');
+        // Route Posts-job
+        Route::get('c/post-job', 'Frontend\PostJobController@index')->name('post_job');
+        Route::post('c/post-job/store', 'Frontend\PostJobController@store')->name('post_job.store');
 
         Route::get('/account-setting', 'Frontend\HomeController@account_setting')->name('account_setting');
         Route::get('/wrong-turn', 'Frontend\HomeController@wrong_turn')->name('wrong_turn');

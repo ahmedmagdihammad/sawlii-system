@@ -151,7 +151,7 @@ class PostServicesController extends Controller
      */
     public function edit($lang, $id)
     {
-        app()->getLocale($lang);
+        app()->getlocale($lang);
         $categories = Category::all();
         $service = Service::find($id);
         $serviceaddons = Serviceaddon::where('service', $id)->get();

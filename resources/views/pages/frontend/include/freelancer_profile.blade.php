@@ -100,15 +100,14 @@
                                             <div class="myskills-box">
                                                 <h4 class="skills-title">My Skills</h4>
                                                 <ul class="skills-list clearfix">
-                                                    <li>
                                                         @if(empty($freelancer->skills))
                                                         @else
                                                             @foreach(explode('#',$freelancer->skills) as $skills)
-                                                            {{ $skills }} - 
+                                                            <li>{{ $skills }} - 
+                                                                <a href="#" data-id="40" data-item-type="skill" class="delete_data remove-skill"></a>
+                                                            </li>
                                                             @endforeach
                                                         @endif
-                                                        <a href="javascript:void(0);" data-id="40" data-item-type="skill" class="delete_data remove-skill"></a>
-                                                    </li>
                                                     <li>
                                                         <a href="#" data-toggle="modal" data-target="#skills" title="Add ">
                                                         Add more skills
@@ -122,7 +121,7 @@
                                                     <li>
                                                         @if(empty($freelancer->languages))
                                                         @else
-                                                            {{json_decode($languages)}}
+                                                            {{$languages}}  
                                                         @endif
                                                         <a href="javascript:void(0);" data-id="1" data-item-type="lang" class="delete_data remove-skill"></a>
                                                     </li>
@@ -136,15 +135,18 @@
                                             <div class="myskills-box">
                                                 <h4 class="skills-title">Category</h4>
                                                 <ul class="skills-list clearfix">
-                                                    <li>
                                                         @if(empty($freelancer->categories))
                                                         @else
+                                                            @foreach($subcategories as $subcategore)
                                                             @foreach(explode("#",$freelancer->categories) as $category)
-                                                            {{$category}}
+                                                                @if($subcategore->id == $category)
+                                                                <li>{{$subcategore->name}} 
+                                                                    <a href="javascript:void(0);" data-id="1" data-item-type="lang" class="delete_data remove-skill"></a>
+                                                                </li> 
+                                                                @endif
+                                                            @endforeach
                                                             @endforeach
                                                         @endif
-                                                        <a href="javascript:void(0);" data-id="1" data-item-type="lang" class="delete_data remove-skill"></a>
-                                                    </li>
                                                     <li>
                                                         <a href="javascript:void(0)" data-toggle="modal" data-target="#categoryMofel" class="addRecord" title="Add subcategory" data-entity="categories">
                                                         Add more categories
@@ -177,7 +179,7 @@
                                     </div>
                                     <div id="overview_div" class="panel-collapse collapse in" >
                                         <div class="box-body" >
-                                            <p>{{$freelancer->overview}}</p>
+                                            <p>@if(empty($freelancer->overview)) @else{{$freelancer->overview}} @endif</p>
                                             <!-- <iframe id="playVideo" style="width:100%; min-height:450px;" src="wqdqwdw"></iframe> -->
                                             <div class="data_edit">
                                                 <a href="#" data-toggle="modal" data-target="#overview">
@@ -1013,7 +1015,17 @@
                                 @foreach($category->subCategory as $subcateg)
                                 <div class="col-md-6">
                                     <label class="signin-check">&nbsp;{{$subcateg->name}}
-                                        <input type="checkbox" name="categories[]" value="#{{$subcateg->id}}#" >
+                                        @if(!empty($freelancer->categories))
+                                        @foreach(explode("#",$freelancer->categories) as $category)
+                                            @if($subcateg->id == $category)
+                                            <input type="checkbox" name="categories[]" value="#{{$subcateg->id}}#" checked>
+                                            @else
+                                            <input type="checkbox" name="categories[]" value="#{{$subcateg->id}}#" >
+                                            @endif
+                                        @endforeach
+                                        @else
+                                            <input type="checkbox" name="categories[]" value="#{{$subcateg->id}}#" >
+                                        @endif
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>

@@ -36,7 +36,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('f/profile/add-skills', 'Frontend\F_profileController@add_skills')->name('profile.add_skills');
         Route::post('f/profile/add-languages', 'Frontend\F_profileController@add_languages')->name('profile.add_languages');
         Route::post('f/profile/add-categories', 'Frontend\F_profileController@add_categories')->name('profile.add_categories');
-        Route::post('f/profile/delete', 'Frontend\F_profileController@destroy')->name('profile.delete');
+        Route::get('f/profile/delete', 'Frontend\F_profileController@destroy')->name('profile.delete');
         Route::post('f/profile/add-video', 'Frontend\F_profileController@add_video')->name('profile.add_video');
         Route::post('f/profile/add-overview', 'Frontend\F_profileController@add_overview')->name('profile.add_overview');
        

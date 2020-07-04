@@ -33,8 +33,11 @@ class ProfileController extends Controller
             if (empty($freelancer)) {
                 return view('pages.frontend.profile', compact('lang', 'users', 'freelancer', 'categories','services'));
             } else {
-                $languages = json_encode($freelancer->languages);
-                return view('pages.frontend.profile', compact('lang', 'users', 'freelancer', 'languages', 'categories', 'services'));
+                $languag = json_encode($freelancer->languages);
+                $languages = json_decode($languag);
+                $subcategories = subCategory::all();
+
+                return view('pages.frontend.profile', compact('lang', 'users', 'freelancer', 'languages', 'categories', 'services', 'subcategories'));
             }
             
         }

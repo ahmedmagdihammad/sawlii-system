@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use Auth;
+use DB;
 use App\User;
 use App\Freelancer;
 use App\Category;
@@ -53,7 +54,7 @@ class F_profileController extends Controller
         }
         $freelancer->skills = implode('#',$request->skills);;
         $freelancer->save();
-        return $freelancer;
+        return back();
     }
 
     public function add_languages(Request $request, $lang)
@@ -173,9 +174,22 @@ class F_profileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy(Request $request)
     {
-        $freelancer = User::find(Auth::user()->id);
-        return $freelancer;
+        // $freelancers = Freelancer::where('userid',Auth::user()->id)->select('skills')->get();
+        // foreach (explode('#',$freelancers) as $key => $value) {
+        //     if ($value == $request->delskills) {
+        //         return $value;
+        //     }
+        // }
+        // foreach ($freelancers as $freelancer) {
+        //     $freelancer = explode('#',$freelancer->skills);
+        //     foreach ($freelancer as $key => $value) {
+        //         if ($value == $request->delskills) {
+        //             // return $content;
+        //         }
+        //     }
+        // }
+        // return $freelancers;
     }
 }

@@ -297,8 +297,8 @@
                             <div class="language-selection">
                                 <select  class="form-control" onchange="top.location=this.value">
                                     @if(App::isLocale('en'))
-                                    <option value="{{Route(Route::currentRouteName(), 'en')}}">English</option>
-                                    <option value="{{Route(Route::currentRouteName(), 'ar')}}">Arabic</option>
+                                    <option value="{{route(Route::currentRouteName(), 'en')}}">English</option>
+                                    <option value="{{route(Route::currentRouteName(), 'ar')}}">Arabic</option>
                                     @else
                                     <option value="{{Route(Route::currentRouteName(), 'ar')}}">Arabic</option>
                                     <option value="{{Route(Route::currentRouteName(), 'en')}}">English</option>

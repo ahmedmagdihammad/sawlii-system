@@ -28,8 +28,14 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 Auth::routes();
+
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix'=>'{lang}'], function(){
+        
+        // Routes
+        Route::get('/getSubcategory', 'Frontend\PostServicesController@getSubcategory')->name('getSubcategory');
+        Route::get('/my-jobs', 'Frontend\HomeController@my_jobs')->name('my_jobs');
+        
         // Login Freelancer
         Route::get('f/profile', 'Frontend\F_profileController@f_profile')->name('f_profile');
         Route::post('f/profile/update', 'Frontend\F_profileController@update')->name('profile.update');
@@ -45,7 +51,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/post-services/store', 'Frontend\PostServicesController@store')->name('post_services.store');
         Route::get('/post-services/{id}/edit', 'Frontend\PostServicesController@edit')->name('post_services.edit');
         Route::post('/post-services/{id}/update', 'Frontend\PostServicesController@update')->name('post_services.update');
-        Route::get('/post-services/getSubcategory', 'Frontend\PostServicesController@getSubcategory')->name('getSubcategory');
        
         // Login Customers
         Route::get('c/profile', 'Frontend\C_profileController@c_profile')->name('c_profile');
@@ -53,15 +58,17 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('c/profile/changePassword', 'Frontend\C_profileController@changePassword')->name('c_profile.changePassword');
 
         // Route Posts-job
-        Route::get('c/post-job', 'Frontend\PostJobController@index')->name('post_job');
+        Route::get('c/my-jobs', 'Frontend\PostJobController@index')->name('post_jobs');
+        Route::get('c/post-job', 'Frontend\PostJobController@create')->name('post_job.create');
         Route::post('c/post-job/store', 'Frontend\PostJobController@store')->name('post_job.store');
+        Route::get('c/post-job/{id}/edit', 'Frontend\PostJobController@edit')->name('post_job.edit');
+        Route::post('c/post-job/{id}/update', 'Frontend\PostJobController@update')->name('post_job.update');
 
         Route::get('/account-setting', 'Frontend\HomeController@account_setting')->name('account_setting');
         Route::get('/wrong-turn', 'Frontend\HomeController@wrong_turn')->name('wrong_turn');
         Route::get('/test-job', 'Frontend\HomeController@test_job')->name('test_job');
         Route::get('/profile/1', 'Frontend\HomeController@my_profile')->name('my_profile');
         Route::get('/customer-review-all/1', 'Frontend\HomeController@customer_review_all')->name('customer_review_all');
-        Route::get('/my-jobs', 'Frontend\HomeController@my_jobs')->name('my_jobs');
         Route::get('/workroom', 'Frontend\HomeController@workroom')->name('workroom');
         Route::get('/my-jobs/profile/1', 'Frontend\HomeController@profile_job')->name('profile_job');
         Route::get('/my-jobs/my-bids', 'Frontend\HomeController@my_bids')->name('my_bids');

@@ -151,14 +151,14 @@ class PostServicesController extends Controller
      */
     public function edit($lang, $id)
     {
-        app()->getlocale($lang);
+        app()->setLocale($lang);
         $categories = Category::all();
         $service = Service::find($id);
         $serviceaddons = Serviceaddon::where('service', $id)->get();
         foreach ($serviceaddons as $serviceaddon) {
-            return view('pages.frontend.freelancer.uppost_services', compact('lang', 'categories', 'serviceaddons', 'serviceaddon', 'service'));
+            return view('pages.frontend.freelancer.uppost_services', compact('lang', 'id','categories', 'serviceaddons', 'serviceaddon', 'service'));
         }
-        return view('pages.frontend.freelancer.uppost_services', compact('lang', 'categories', 'serviceaddons', 'service'));
+        return view('pages.frontend.freelancer.uppost_services', compact('lang', 'id','categories', 'serviceaddons', 'service'));
     }
 
     /**

@@ -1302,7 +1302,7 @@ input#search-query{
     margin:30px 0;
 }
 .star-ratings-sprite {
-    background: url('../images-sd/rating.png') repeat-x;
+    background: url('../img_star/rating.png') repeat-x!important;
     font-size: 0;
     height: 15px;
     line-height: 0;
@@ -1312,7 +1312,7 @@ input#search-query{
     display: inline-block;
 }
 .star-ratings-sprite-rating {
-    background: url('../images-sd/rating.png') repeat-x;
+    background: url('../img_star/rating.png') repeat-x!important;
     background-position: 0 100%;
     float: left;
     height: 15px;

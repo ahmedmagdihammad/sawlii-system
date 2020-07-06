@@ -103,7 +103,7 @@
                                                         @if(empty($freelancer->skills))
                                                         @else
                                                             @foreach(explode('#',$freelancer->skills) as $skills)
-                                                            <li>{{ $skills }} - 
+                                                            <li>{{ $skills }} 
                                                                 <a href="#" data-id="40" data-item-type="skill" class="delete_data remove-skill"></a>
                                                             </li>
                                                             @endforeach
@@ -121,7 +121,7 @@
                                                     <li>
                                                         @if(empty($freelancer->languages))
                                                         @else
-                                                            {{$languages}}  
+                                                            {{str_replace(['{"','":"', '"}'], ['', ' - '],$languages)}}
                                                         @endif
                                                         <a href="javascript:void(0);" data-id="1" data-item-type="lang" class="delete_data remove-skill"></a>
                                                     </li>
@@ -275,7 +275,7 @@
                                                                                     <span class="checkmark"></span>
                                                                                 </label>
                                                                             </li>
-                                                                            <li class="fls-edit"><a class="edit " href="{{ route('post_services.edit',['lang' => $lang, 'id' => $service->id]) }}" title="Edit"><i class="fa fa-edit"></i></a></li>
+                                                                            <li class="fls-edit"><a class="edit " href="{{ route('post_services.edit',[$lang, $service->id]) }}" title="Edit"><i class="fa fa-edit"></i></a></li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>

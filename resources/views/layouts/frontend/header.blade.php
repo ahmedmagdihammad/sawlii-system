@@ -171,20 +171,30 @@
                     </li>  
 
                     <li class="post-a-job-wrap">
-                        <a href="{{route('post_job',$lang)}}">Post a Job</a>
+                        <a href="{{route('post_job.create',$lang)}}">Post a Job</a>
                     </li>
 
                     <li>
                         <div class="language-selection">
-                        <select class="form-control change_language">
-                            @if(App::isLocale('en'))
-                            <option value="{{Route(Route::currentRouteName(), 'en')}}">English</option>
-                            <option value="{{Route(Route::currentRouteName(), 'ar')}}">Arabic</option>
-                            @else
-                            <option value="{{Route(Route::currentRouteName(), 'ar')}}">Arabic</option>
-                            <option value="{{Route(Route::currentRouteName(), 'en')}}">English</option>
-                            @endif
-                        </select>
+                            <select  class="form-control" onchange="top.location=this.value">
+                                @if(Route::is('post_job.edit') || Route::is('post_services.edit'))
+                                @if(App::isLocale('en'))
+                                <option value="{{Route(Route::currentRouteName(), ['en', $id])}}">English</option>
+                                <option value="{{Route(Route::currentRouteName(), ['ar', $id])}}">Arabic</option>
+                                @else
+                                <option value="{{Route(Route::currentRouteName(), ['ar', $id])}}">Arabic</option>
+                                <option value="{{Route(Route::currentRouteName(), ['en', $id])}}">English</option>
+                                @endif
+                                @else
+                                @if(App::isLocale('en'))
+                                <option value="{{Route(Route::currentRouteName(), 'en')}}">English</option>
+                                <option value="{{Route(Route::currentRouteName(), 'ar')}}">Arabic</option>
+                                @else
+                                <option value="{{Route(Route::currentRouteName(), 'ar')}}">Arabic</option>
+                                <option value="{{Route(Route::currentRouteName(), 'en')}}">English</option>
+                                @endif
+                                @endif
+                            </select>
                         </div>
                     </li>
                 </ul>
@@ -301,12 +311,22 @@
                         <li>
                             <div class="language-selection">
                                 <select  class="form-control" onchange="top.location=this.value">
+                                    @if(Route::is('post_job.edit') || Route::is('post_services.edit'))
                                     @if(App::isLocale('en'))
-                                    <option value="{{route(Route::currentRouteName(), 'en')}}">English</option>
-                                    <option value="{{route(Route::currentRouteName(), 'ar')}}">Arabic</option>
+                                    <option value="{{Route(Route::currentRouteName(), ['en', $id])}}">English</option>
+                                    <option value="{{Route(Route::currentRouteName(), ['ar', $id])}}">Arabic</option>
+                                    @else
+                                    <option value="{{Route(Route::currentRouteName(), ['ar', $id])}}">Arabic</option>
+                                    <option value="{{Route(Route::currentRouteName(), ['en', $id])}}">English</option>
+                                    @endif
+                                    @else
+                                    @if(App::isLocale('en'))
+                                    <option value="{{Route(Route::currentRouteName(), 'en')}}">English</option>
+                                    <option value="{{Route(Route::currentRouteName(), 'ar')}}">Arabic</option>
                                     @else
                                     <option value="{{Route(Route::currentRouteName(), 'ar')}}">Arabic</option>
                                     <option value="{{Route(Route::currentRouteName(), 'en')}}">English</option>
+                                    @endif
                                     @endif
                                 </select>
                             </div>

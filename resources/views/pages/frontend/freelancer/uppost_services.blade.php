@@ -34,7 +34,7 @@
                                     @csrf
                                     <div class="tab-content">
                                         <!-- <input type="hidden" name="fid" id="fid" value="1"> -->
-                                        <div class="tab-pane active" id="postEnglish">
+                                        <div class="tab-pane active" @if(App::isLocale('ar')) id="postArabic" @else id="postEnglish" @endif>
                                             <div class="theme-form">
                                                 <h2 class="main-heading">
                                                     Post a Service
@@ -178,7 +178,7 @@
                                                     <div class="col-md-8 col-sm-6">
                                                         <label>Payable Amount : </label>
                                                         <div class="featured_amount" id="featured_amount_text_1">{{$service->cost}}$</div>
-                                                        <div class="sp-input">
+                                                        <div class="sp-input hide">
                                                             <input type="text" name="cost" class="featured_amount" id="featured_amount_1"  value="{{$service->cost}}">
                                                         </div>
                                                     </div>
@@ -251,7 +251,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="tab-pane postarabic " dir="rtl" lang="ar"  id="postArabic">
+                                        <div class="tab-pane postarabic " dir="rtl" lang="ar"  @if(App::isLocale('ar')) id="postEnglish" @else id="postArabic" @endif>
                                             <div class="theme-form">
                                                 <h2 class="main-heading">
                                                 Post a Service

@@ -14,7 +14,7 @@
                                     <a href="@if(Auth::user()) {{route('profile',$lang)}} @else {{Route('signin',$lang)}} @endif">Dashboard</a>
                                 </li>
                                 <li  class="@if(Route::is('my_jobs',$lang)) active @endif">
-                                    <a href="{{route('my_jobs',$lang)}}">My Jobs</a>
+                                    <a href="{{route('post_jobs',$lang)}}">My Jobs</a>
                                 </li>
                                 <li  class="@if(Route::is('review',$lang)) active @endif">
                                     <a href="{{route('review',$lang)}}">My Reviews</a>
@@ -49,7 +49,7 @@
                             <a href="@if(Auth::user()) {{route('profile',$lang)}} @else {{Route('signin',$lang)}} @endif">Dashboard</a>
                         </li>
                         <li class="@if(Route::is('my_jobs',$lang)) active @endif">
-                            <a href="{{route('my_jobs',$lang)}}">Posted Jobs</a>
+                            <a href="{{route('post_jobs',$lang)}}">Posted Jobs</a>
                         </li>
                         <li class="@if(Route::is('review',$lang)) active @endif">
                             <a href="{{route('review',$lang)}}">My Reviews</a>
@@ -159,7 +159,7 @@
                                     <a href="{{route('profile',$lang)}}">Dashboard</a>
                                 </li>
                                 <li  class="@if(Route::is('my_jobs',$lang)) active @endif">
-                                    <a href="{{route('my_jobs',$lang)}}">My Jobs</a>
+                                    <a href="{{route('post_jobs',$lang)}}">My Jobs</a>
                                 </li>
                                 <li  class="@if(Route::is('review',$lang)) active @endif">
                                     <a href="{{route('review',$lang)}}">My Reviews</a>
@@ -194,7 +194,7 @@
                             <a href="{{route('profile',$lang)}}">Dashboard</a>
                         </li>
                         <li class="@if(Route::is('my_jobs',$lang)) active @endif">
-                            <a href="{{route('my_jobs',$lang)}}">Posted Jobs</a>
+                            <a href="{{route('post_jobs',$lang)}}">Posted Jobs</a>
                         </li>
                         <li class="@if(Route::is('review',$lang)) active @endif">
                             <a href="{{route('review',$lang)}}">My Reviews</a>

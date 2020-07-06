@@ -1247,7 +1247,7 @@ input#search-query{
     margin:30px 0;
 }
 .star-ratings-sprite {
-    background: url('../images-sd/rating.png') repeat-x;
+    background: url('../img_star/rating.png') repeat-x!important;
     font-size: 0;
     height: 15px;
     line-height: 0;
@@ -1257,7 +1257,7 @@ input#search-query{
     display: inline-block;
 }
 .star-ratings-sprite-rating {
-    background: url('../images-sd/rating.png') repeat-x;
+    background: url('../img_star/rating.png') repeat-x!important;
     background-position: 0 100%;
     float: left;
     height: 15px;
@@ -5636,7 +5636,7 @@ form#frmMilestones .remove-mls a{
     padding:15px 15px;
 }
 .main-work-room .star-ratings-sprite {
-    background: rgba(0, 0, 0, 0) url("../images-sd/rating.png") repeat-x scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../img_star/rating.png") repeat-x scroll 0 0;
     display: inline-block;
     font-size: 0;
     height: 15px;

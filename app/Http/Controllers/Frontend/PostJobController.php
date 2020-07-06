@@ -7,7 +7,8 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\Job;
 use App\Category;
-use App\subCatgeory;
+use App\subCategory;
+use App\Question;
 
 class PostJobController extends Controller
 {
@@ -18,9 +19,9 @@ class PostJobController extends Controller
      */
     public function index($lang)
     {
-        app()->setlocale($lang);
-        $categories = Category::all();
-        return view('pages.frontend.customer.post_jobs', compact('lang', 'categories'));
+        app()->setLocale($lang);
+        $jobs = Job::where('customer', Auth::user()->id)->get();
+        return view('pages.frontend.freelancer.navigation.my_jobs', compact('lang', 'jobs'));
     }
 
     /**
@@ -28,9 +29,12 @@ class PostJobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($lang)
     {
-        //
+        app()->setLocale($lang);
+        $categories = Category::all();
+        $jobs = Job::where('customer', Auth::user()->id)->get();
+        return view('pages.frontend.customer.post_jobs', compact('lang', 'categories'));
     }
 
     /**
@@ -67,28 +71,36 @@ class PostJobController extends Controller
         }else {
             $job->country = NULL;
         }
-        $job->hide = $request->hide;
+        if ($request->hide == '1') {
+            $job->hide = $request->hide;
+        }else {
+            $job->hide = '0';
+        }
         $job->featured = $request->featured;
         $job->cost = $request->cost;
-        // if ($request->hasFile('files')) {
-        //     $job->files = $this->uploadimage($request->files);
-        // }else {
-        //     $job->files = NULL; 
-        // }
+        if ($request->hasFile('files')) {
+            foreach($request->file('files') as $image)
+            {
+                $name=$image->getClientOriginalName();
+                $image->move(public_path().'/frontend/img_customer', $name);
+                // $returenurl = 'frontend/img_customer/'.$name;
+                // return $returenurl;
+                $images_data[] = 'frontend/img_customer/'.$name;
+                $job->files = json_encode((object) $images_data);
+            }
+        } 
         // return $job;
         $job->save();
-        return $job;
+
+        // Start Add Questions
+        if (!empty($request->question)) {
+            $question = new Question();
+            $question->job = $job->id;
+            $question->question = $request->question;
+            $question->save();
         }
-    }
-
-    public function uploadimage($file)
-    {
-        $imagename = time().'.'.$file->getClientOriginalExtension();
-        $destinationPath = public_path('frontend/img_customer');
-        $file->move($destinationPath, $imagename); 
-        $returenurl = 'frontend/img_customer/'.$imagename; 
-
-        return $returenurl;  
+        return back();
+        }
     }
 
     /**
@@ -108,9 +120,13 @@ class PostJobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($lang, $id)
     {
-        //
+        app()->setLocale($lang);
+        $job = Job::find($id);
+        $categories = Category::all();
+        $questions = Question::where('job', $job->id)->get();
+        return view('pages.frontend.customer.uppost_job', compact('lang', 'id','job', 'categories', 'questions'));
     }
 
     /**
@@ -120,9 +136,62 @@ class PostJobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$lang, $id)
     {
-        //
+        if (empty($request->title_en) && empty($request->title_ar)) {
+            return back();
+        }else {
+        $job = Job::find($id);
+        $job->customer = Auth::user()->id;
+        $job->title_en = $request->title_en;
+        $job->title_ar = $request->title_ar;
+        $job->category = $request->category;
+        $job->subcategory = $request->subcategory;
+        $job->level = $request->level;
+        $job->budget = $request->Budget;
+        $job->description_en = $request->description_en;
+        $job->description_ar = $request->title_en;
+        if(!empty($request->skills)){
+        $job->skills = implode('#',$request->skills);
+        }else {
+            $job->skills = NULL;
+        }
+        $job->deadline = $request->deadline;
+        $job->duration = $request->duration;
+        $job->public = $request->public;
+        if(!empty($request->country)){
+        $job->country = implode('#',$request->country);
+        }else {
+            $job->country = NULL;
+        }
+        if ($request->hide == '1') {
+            $job->hide = $request->hide;
+        }else {
+            $job->hide = '0';
+        }
+        $job->featured = $request->featured;
+        $job->cost = $request->cost;
+        if ($request->hasFile('files')) {
+            foreach($request->file('files') as $image)
+            {
+                $name=$image->getClientOriginalName();
+                $image->move(public_path().'/frontend/img_customer', $name);
+                $images_data[] = 'frontend/img_customer/'.$name;
+                $job->files = json_encode((object) $images_data);
+            }
+        } 
+        // return $job;
+        $job->save();
+
+        // Start Add Questions
+        if (!empty($request->question)) {
+            $question = new Question();
+            $question->job = $job->id;
+            $question->question = $request->question;
+            $question->save();
+        }
+        return back();
+        }
     }
 
     /**

@@ -34,7 +34,7 @@
                                     @csrf
                                     <div class="tab-content">
                                         <!-- <input type="hidden" name="fid" id="fid" value="1"> -->
-                                        <div class="tab-pane active" id="postEnglish">
+                                        <div class="tab-pane active"  @if(App::isLocale('ar')) id="postArabic" @else id="postEnglish" @endif>
                                             <div class="theme-form">
                                                 <h2 class="main-heading">
                                                     Post a Service
@@ -243,7 +243,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="tab-pane postarabic " dir="rtl" lang="ar"  id="postArabic">
+                                        <div class="tab-pane postarabic " dir="rtl" lang="ar"   @if(App::isLocale('ar')) id="postEnglish" @else id="postArabic" @endif>
                                             <div class="theme-form">
                                                 <h2 class="main-heading">
                                                 Post a Service
@@ -481,37 +481,37 @@
 <script type="text/javascript">
 
 $("#category").on('change', function() {
-		var id = $(this).children("option:selected").val();
-        var cat = $(this).val();
-		$.ajax({
-			type: 'get',
-			url: '{{route("getSubcategory",$lang)}}',
-			data: { 'id': id, },
-			success: function(data) {
-				if (data == '') {
-					$('#subcategory').html('<option>There is no Sub Category here</option>');
-				}else{
-					$("#subcategory").html(" ").append('<option>- Select Sub Category -</option>');
-					for (var i = 0; i < data.length; i++) {
-						var o = new Option(data[i].name, data[i].id);
-						$("#subcategory").append(o);
-					}
-                    removeOverlay();
-                    $("#subcategory_"+fid).html(data.name);
-                    $("#subcategory_2").html(data.name);
-                    //Default Select 2nd form Category
-                    $('#category_2 option').filter(function() { 
-                        return ($(this).val() == cat); //To select Blue
-                    }).prop('selected', true);
-                    $('#category_2').prop("disabled",true);
-				} 
-			},
-			error: function(data) {
-			$('#edit-done').attr('hidden', 'hidden');
-			$('#edit-error').removeAttr('hidden', 'hidden').slideDown(700).slideUp(700);
-			}
-		}); 
-	});
+    var id = $(this).children("option:selected").val();
+    var cat = $(this).val();
+    $.ajax({
+        type: 'get',
+        url: '{{route("getSubcategory",$lang)}}',
+        data: { 'id': id, },
+        success: function(data) {
+            if (data == '') {
+                $('#subcategory').html('<option>There is no Sub Category here</option>');
+            }else{
+                $("#subcategory").html(" ").append('<option>- Select Sub Category -</option>');
+                for (var i = 0; i < data.length; i++) {
+                    var o = new Option(data[i].name, data[i].id);
+                    $("#subcategory").append(o);
+                }
+                removeOverlay();
+                $("#subcategory_"+fid).html(data.name);
+                $("#subcategory_2").html(data.name);
+                //Default Select 2nd form Category
+                $('#category_2 option').filter(function() { 
+                    return ($(this).val() == cat); //To select Blue
+                }).prop('selected', true);
+                $('#category_2').prop("disabled",true);
+            } 
+        },
+        error: function(data) {
+        $('#edit-done').attr('hidden', 'hidden');
+        $('#edit-error').removeAttr('hidden', 'hidden').slideDown(700).slideUp(700);
+        }
+    }); 
+});
 
     // $("#upcategoryt").on('change', function() {
     //     var id = $(this).children("option:selected").val();

@@ -13,7 +13,7 @@
   @include('pages.frontend.freelancer.nav_dashboard')
 <!-- Dashboard Navigation End -->
 
-@if(!Auth::user()->type == 'C')
+@if(Auth::user()->type == 'C')
 
 <!-- Searchbar Section -->
 <section class="serchbar-section">
@@ -52,7 +52,7 @@
                                     <div class="panel-heading">
                                         <h3 class="panel-title">Filters</h3>
                                         <div class="panel-tools pull-right">
-                                            <a href="{{route('my_jobs',$lang)}}">Clear <i class="fa fa-refresh" aria-hidden="true"></i></a>
+                                            <a href="{{route('post_jobs',$lang)}}">Clear <i class="fa fa-refresh" aria-hidden="true"></i></a>
                                         </div>
                                     </div>
                                     <div class="panel-body">
@@ -192,8 +192,69 @@
                                         <h3 class="panel-title">My Jobs</h3>
                                     </div>
                                     <div class="panel-body">
-                                       <ul class="cm-job-item-lists my-jobs">
-                                            <span class='no-records'><i class='fa fa-exclamation-triangle'></i>No Records Found</span>
+                                        <ul class="cm-job-item-lists my-jobs">
+                                            @foreach($jobs as $job)
+                                            @if(empty($job))
+                                                <span class='no-records'><i class='fa fa-exclamation-triangle'></i>No Records Found</span>
+                                            @else
+
+                                            <li class="cm-job-item job_81">
+                                                <div class="cmj-title-wrap">
+                                                    <h4 class="cmj-title"><a href="{{route('post_jobs',$lang)}}">@if(!empty($job->title_en)) {{$job->title_en}} @else {{$job->title_ar}} @endif</a></h4>
+                                                    <span class="cmj-deadline">Ending in 8 hour(s) 10 minute(s)</span>
+                                                </div>
+                                                <ul class="cmj-breadcrumb ">
+                                                    <li>{{$job->getcategory->name}}</li>
+                                                    <li class="">{{$job->getsubcategory->name}}</li>
+                                                </ul>
+                                                <div class="cmj-budget">Est.budget : <div class="amount-wrap">{{$job->budget}}<span>$</span></div></div>
+                                                <div class="cmj-details"><p>@if(!empty($job->description_en)){{$job->description_en}} @else {{$job->description_ar}} @endif</p><br />
+                                            </div>
+                                                <ul class="cmj-skills clearfix">
+                                                    @foreach(explode('#', $job->skills) as $skills)
+                                                    <li>{{$skills}}</li>
+                                                    @endforeach
+                                                </ul>
+                                                <ul class="cmj-status clearfix">
+                                                    <li>No of Bids : <span>0</span></li>
+                                                    <li><span>@if($job->public == '0') Public @else Private @endif</span></li>
+                                                    <li>Job acceptance status : <span>Pending</span></li>
+                                                    <li class=""><span>@if($job->level == 'B') Beginner @else @if($job->level == 'M') Intermediate @else Pro @endif @endif</span></li>
+                                                </ul>
+                                                <div class="cmj-footer">
+                                                    <div class="cmj-action-wrap clearfix">
+                                                        <ul class="cmj-post-status">
+                                                            <li><span class="badge badge-pill badge-success">Pending</span></li>
+                                                            <li>Posted : <span>11 minutes ago</span></li>
+                                                        </ul>
+                                                        <ul class="cmj-post-action pull-right">
+                                                            <li class="hide">Featured <span><i class="fa fa-check-square"></i></span></li>
+                                                            <li class=" "><a class="edit  " title="Edit" href="{{route('post_job.edit',[$lang, $job->id])}}" id="job_edit" data-id="81"><i class="fa fa-edit" aria-hidden="true"></i></a></li>
+                                                            <li class=""><a class="delete " data-id="81" id="job_delete" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="cmj-button-wrap">
+                                                        <!-- <a class="btn btn-secondary" href="">Pay featured Fee</a> -->
+                                                        <div class="cmj-button notApproved   ask_feature" data-id="81">
+                                                            <a class="btn btn-secondary btn-md" href="javascript:void(0)">Make Featured</a>
+                                                        </div>
+                                                        <div class="cmj-button hide notApproved payNow" data-id="81" data-dur="0">
+                                                            <a class="btn btn-secondary btn-md" href="javascript:void(0)">Pay Featured Fee</a>
+                                                        </div>
+                                                        <div class="cmj-button hide">
+                                                            <a class="btn btn-primary" href="http://www.sukhadaam.com/demo/sawlii/proposals/test-test">View Bids</a>
+                                                        </div>
+                                                        <div class="cmj-button hide">
+                                                            <a class="btn btn-primary" href="http://www.sukhadaam.com/demo/sawlii/job/workroom/test-test">Workroom</a>
+                                                        </div>
+                                                        <div class="cmj-button hide">
+                                                            <a class="btn btn-primary" href="http://www.sukhadaam.com/demo/sawlii/c/my-jobs/job-invitation/test-test"> View Invited Freelancer </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>    
+                                            @endif
+                                            @endforeach
                                         </ul>
                                         <div class="view-more-button">
                                           <div class="theme-button">
@@ -249,61 +310,61 @@
     e.preventDefault();
    });
    
-   var url = "http://www.sukhadaam.com/demo/sawlii/ajaxMyJobs";
-   $(document).ready(function() {
+    var url = "http://www.sukhadaam.com/demo/sawlii/ajaxMyJobs";
+    $(document).ready(function() {
 
-      $(document).on("click",".payNow",function(){
-        if($(this).hasClass("notApproved")){
-          toastr['error']("Job is not approved by admin");
-        }else{
-          var id = $(this).attr("data-id"),$this = $(this);
-          var dur= $(this).data("dur");
-          var f_fees = dur*"10";
-          swal({
-            title: "Confirmation!",
-            text: "Total amount of $"+f_fees+" will be deducted from your wallet to make this job as featured for "+dur+" days.",
-            showCancelButton: true,
-            closeOnConfirm: false,
-            inputPlaceholder: "Write something"
-          },
-          function (inputValue) {
-            if(inputValue)
-            {
-               $.post(url,{"action":"payFeaturedFees","id":id,"f_dur":dur},function(data){
-                  $this.hide();
-                  swal(data.initial, data.msg);
-                  setTimeout(function(){location.reload();},3000);
-               },'json');
+        $(document).on("click",".payNow",function(){
+            if($(this).hasClass("notApproved")){
+            toastr['error']("Job is not approved by admin");
+            }else{
+            var id = $(this).attr("data-id"),$this = $(this);
+            var dur= $(this).data("dur");
+            var f_fees = dur*"10";
+            swal({
+                title: "Confirmation!",
+                text: "Total amount of $"+f_fees+" will be deducted from your wallet to make this job as featured for "+dur+" days.",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                inputPlaceholder: "Write something"
+            },
+            function (inputValue) {
+                if(inputValue)
+                {
+                $.post(url,{"action":"payFeaturedFees","id":id,"f_dur":dur},function(data){
+                    $this.hide();
+                    swal(data.initial, data.msg);
+                    setTimeout(function(){location.reload();},3000);
+                },'json');
+                }
+            });
             }
-          });
+        });
+        $(document).on("click",".ask_feature",function(){
+            $('#makeFeatured').modal('show');
+            $('.makeFPayment').attr('data-id',$(this).data("id"));
+
+        });
+
+        $(document).on("keypress","#txtDays",function(e){
+        var charCode = (typeof e.which == "undefined") ? e.keyCode : e.which;
+        if (charCode > 31 && (charCode < 48 || charCode > 57) && (charCode < 95 || charCode > 106)){
+            return false;
         }
-      });
-      $(document).on("click",".ask_feature",function(){
-         $('#makeFeatured').modal('show');
-         $('.makeFPayment').attr('data-id',$(this).data("id"));
+        return true;
+    });
 
-      });
+        $(document).on("keyup","#txtDays",function(e){
 
-      $(document).on("keypress","#txtDays",function(e){
-       var charCode = (typeof e.which == "undefined") ? e.keyCode : e.which;
-       if (charCode > 31 && (charCode < 48 || charCode > 57) && (charCode < 95 || charCode > 106)){
-         return false;
-      }
-      return true;
-   });
-
-      $(document).on("keyup","#txtDays",function(e){
-
-       var total_fetured_amount = ($("#txtDays").val())*"10";
-       if(!isNaN(total_fetured_amount)){
-        $("#txtAmount").val(total_fetured_amount);
-     }
-     else{
-        toastr['error']("It is not a valid value");
-        $("#txtAmount").val("10");
-        $("#txtDays").val("1");
-     }
-  });
+        var total_fetured_amount = ($("#txtDays").val())*"10";
+        if(!isNaN(total_fetured_amount)){
+            $("#txtAmount").val(total_fetured_amount);
+        }
+        else{
+            toastr['error']("It is not a valid value");
+            $("#txtAmount").val("10");
+            $("#txtDays").val("1");
+        }
+    });
 
       $(document).on("click",".featured_cancel",function(e){
          $("#txtAmount").val("10");

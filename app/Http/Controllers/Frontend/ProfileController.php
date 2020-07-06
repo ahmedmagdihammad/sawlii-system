@@ -22,10 +22,13 @@ class ProfileController extends Controller
     {
         app()->setLocale($lang);
         if (!Auth::user()) {
+            app()->setLocale($lang);
             return view('pages.frontend.profile', compact('lang'));
         } else if(Auth::user()->type == 'C') {
+            app()->setLocale($lang);
             return view('pages.frontend.profile', compact('lang'));
         }else{
+            app()->setLocale($lang);
             $users = User::find(Auth::user()->id);
             $categories = Category::all();
             $services = Service::where('freelancer', Auth::user()->id)->get();

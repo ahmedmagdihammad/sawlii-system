@@ -103,9 +103,14 @@
                                                         @if(empty($freelancer->skills))
                                                         @else
                                                             @foreach(explode('#',$freelancer->skills) as $skills)
-                                                            <li>{{ $skills }} 
-                                                                <a href="#" data-id="40" data-item-type="skill" class="delete_data remove-skill"></a>
-                                                            </li>
+                                                            <form method="POST" action="{{route('profile.delete_skills', [$lang, $freelancer->id])}}">
+                                                            @csrf
+                                                                <li>{{ $skills }} 
+                                                                    <a href="javascript:void(0);" type="submit" data-id="{{$skills}}" data-skills="{{$skills}}" data-item-type="skill" class="delete_data remove-skill"></a>
+                                                                    <input type="text" value="{{$skills}}#" name="delskills" class="hide">
+                                                                    <input type="submit" class="delete_skill hide">
+                                                                </li>
+                                                            </form>
                                                             @endforeach
                                                         @endif
                                                     <li>
@@ -121,9 +126,13 @@
                                                     <li>
                                                         @if(empty($freelancer->languages))
                                                         @else
-                                                            {{str_replace(['{"','":"', '"}'], ['', ' - '],$languages)}}
+                                                            <form method="post" action="{{route('profile.delete_language', [$lang, $freelancer->id])}}">
+                                                            @csrf
+                                                                {{str_replace(['{"','":"', '"}'], ['', ' - '],$languages)}}
+                                                                <a href="javascript:void(0);" data-id="1" data-item-type="lang" class="delete_data remove-skill"></a>
+                                                                <input type="submit" class="delete_language hide">
+                                                            </form>
                                                         @endif
-                                                        <a href="javascript:void(0);" data-id="1" data-item-type="lang" class="delete_data remove-skill"></a>
                                                     </li>
                                                     <li>
                                                         <a href="#" data-toggle="modal" data-target="#languages" title="Add Language">
@@ -213,7 +222,8 @@
                                         <li><a data-toggle="tab" href="#tab_6" aria-expanded="false">Reviews</a></li>
                                     </ul>
                                     <div class="tab-content">
-                                        <!-- <div class="tab-pane fade in active" id="tab_1">
+                                        @if(count($services) <= 0)
+                                        <div class="tab-pane fade in active" id="tab_1">
                                             <div class="panel theme-box no-bg no-padding">
                                                 <div class="panel-heading">
                                                     <h4 class="panel-title">Services</h4>
@@ -227,9 +237,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div> -->
-
-
+                                        </div>
+                                        @else
                                         <div class="tab-pane fade in active" id="tab_1">
                                             <div class="panel theme-box no-bg no-padding">
                                                 <div class="panel-heading">
@@ -286,7 +295,7 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        @endif
                                         <div class="tab-pane fade " id="tab_2">
                                             <div class="panel theme-box no-bg no-padding">
                                                 <div class="panel-heading">
@@ -1825,6 +1834,7 @@
     var entityId = $(this).attr("data-id");
     var parent = $(this).closest('ul');
     var $this = $(this);
+    var nameSkills = $(this).data('skills');
     swal({
         title: "Are you sure you want to delete?",
         type: "warning",
@@ -1843,7 +1853,10 @@
             //parent.html(data.div_content);
             $this.closest('li').remove();
         },'json');
-        swal("Deleted!", "Record deleted successfully", "success");
+            swal("Deleted!", "Record deleted successfully", "success");
+            if (entityType == 'lang') {
+                $('.delete_language').click();
+            }else
         }
 
     });

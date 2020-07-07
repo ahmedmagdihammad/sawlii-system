@@ -153,6 +153,202 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="sawlii-tabs-wrap">
+                                        <ul class="nav nav-tabs" id="dasTabs">
+                                            <li class="active"><a data-toggle="tab" href="#tab_1" aria-expanded="true">My Jobs</a></li>
+                                            <li><a data-toggle="tab" href="#tab_2" aria-expanded="false">Portfolio</a></li>
+                                            <li><a data-toggle="tab" href="#tab_3" aria-expanded="false">Education Details</a></li>
+                                            <li><a data-toggle="tab" href="#tab_4" aria-expanded="false">Certifications</a></li>
+                                            <li><a data-toggle="tab" href="#tab_5" aria-expanded="false">Experience</a></li>
+                                            <li><a data-toggle="tab" href="#tab_6" aria-expanded="false">Reviews</a></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade in active" id="tab_1">
+                                                <div class="panel theme-box no-bg no-padding">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">Services</h4>
+                                                        <div class="panel-tools pull-right">
+                                                            <a href="{{route('post_services',$lang)}}">Add More <i class="fa fa-plus"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        @if(count($jobs) <= '0')
+                                                        <div class="fl-services ">
+                                                        <span class='no-records'><i class='fa fa-exclamation-triangle'></i>No Records Found</span>
+                                                        </div>
+                                                        @else       
+
+                                                        @foreach($jobs as $job) 
+                                                        <li class="cm-job-item job_81">
+                                                            <div class="cmj-title-wrap">
+                                                                <h4 class="cmj-title"><a href="{{route('post_jobs',$lang)}}">@if(!empty($job->title_en)) {{$job->title_en}} @else {{$job->title_ar}} @endif</a></h4>
+                                                                <span class="cmj-deadline">Ending in 8 hour(s) 10 minute(s)</span>
+                                                            </div>
+                                                            <ul class="cmj-breadcrumb ">
+                                                                <li>{{$job->getcategory->name}}</li>
+                                                                <li class="">{{$job->getsubcategory->name}}</li>
+                                                            </ul>
+                                                            <div class="cmj-budget">Est.budget : <div class="amount-wrap">{{$job->budget}}<span>$</span></div></div>
+                                                            <div class="cmj-details"><p>@if(!empty($job->description_en)){{str_replace(['<p>', '</p>'], NULL,$job->description_en)}} @else {{str_replace(['<p>', '</p>'], NULL, $job->description_ar)}} @endif</p><br /> </div>
+                                                            <ul class="cmj-skills clearfix">
+                                                                @foreach(explode('#', $job->skills) as $skills)
+                                                                <li>{{$skills}}</li>
+                                                                @endforeach
+                                                            </ul>
+                                                            <ul class="cmj-status clearfix">
+                                                                <li>No of Bids : <span>0</span></li>
+                                                                <li><span>@if($job->public == '0') Public @else Private @endif</span></li>
+                                                                <li>Job acceptance status : <span>Pending</span></li>
+                                                                <li class=""><span>@if($job->level == 'B') Beginner @else @if($job->level == 'M') Intermediate @else Pro @endif @endif</span></li>
+                                                            </ul>
+                                                            <div class="cmj-footer">
+                                                                <div class="cmj-action-wrap clearfix">
+                                                                    <ul class="cmj-post-status">
+                                                                        <li><span class="badge badge-pill badge-success">Pending</span></li>
+                                                                        <li>Posted : <span>11 minutes ago</span></li>
+                                                                    </ul>
+                                                                    <ul class="cmj-post-action pull-right">
+                                                                        <li class="hide">Featured <span><i class="fa fa-check-square"></i></span></li>
+                                                                        <li class=" "><a class="edit  " title="Edit" href="{{route('post_job.edit',[$lang, $job->id])}}" id="job_edit" data-id="81"><i class="fa fa-edit" aria-hidden="true"></i></a></li>
+                                                                        <li class=""><a href="{{route('post_job.delete', [$lang, $job->id])}}" class="delete " data-id="81" id="job_delete" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="cmj-button-wrap">
+                                                                    <!-- <a class="btn btn-secondary" href="">Pay featured Fee</a> -->
+                                                                    <div class="cmj-button notApproved   ask_feature" data-id="81">
+                                                                        <a class="btn btn-secondary btn-md" href="javascript:void(0)">Make Featured</a>
+                                                                    </div>
+                                                                    <div class="cmj-button hide notApproved payNow" data-id="81" data-dur="0">
+                                                                        <a class="btn btn-secondary btn-md" href="javascript:void(0)">Pay Featured Fee</a>
+                                                                    </div>
+                                                                    <div class="cmj-button hide">
+                                                                        <a class="btn btn-primary" href="http://www.sukhadaam.com/demo/sawlii/proposals/test-test">View Bids</a>
+                                                                    </div>
+                                                                    <div class="cmj-button hide">
+                                                                        <a class="btn btn-primary" href="http://www.sukhadaam.com/demo/sawlii/job/workroom/test-test">Workroom</a>
+                                                                    </div>
+                                                                    <div class="cmj-button hide">
+                                                                        <a class="btn btn-primary" href="http://www.sukhadaam.com/demo/sawlii/c/my-jobs/job-invitation/test-test"> View Invited Freelancer </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        @endforeach
+
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade " id="tab_2">
+                                                <div class="panel theme-box no-bg no-padding">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">Portfolio</h4>
+                                                        <div class="panel-tools pull-right">
+                                                            <a href="javascript:void(0)" data-entity="add_portfolio" title="Add Portfolio" class="add_portfolio_btn addRecord">Add More<i class="fa fa-plus"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="fl-portfolio "> 
+                                                        
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade " id="tab_3">
+                                                <div class="panel  theme-box no-bg no-padding">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title">Educational Details</h4>
+                                                    <div class="panel-tools pull-right">
+                                                    <a href="javascript:void(0)" data-entity="add_education" title="Add Education" class="addRecord">Add More <i class="fa fa-plus"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="fl-edu">
+                                                    
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade " id="tab_4">
+                                                <div class="panel theme-box no-bg no-padding">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">Certifications</h4>
+                                                        <div class="panel-tools pull-right">
+                                                            <a href="#" class="addRecord" data-entity="add_certificate" title="Add Certificate">Add More <i class="fa fa-plus"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <ul class="fl-certi">
+                                                            
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="tab_5">
+                                                <div class="panel theme-box no-bg no-padding">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">Experience</h4>
+                                                        <div class="panel-tools pull-right">
+                                                            <a href="javascript:void(0)" class="addRecord" data-entity="add_experience" title="Add Experience">Add More<i class="fa fa-plus"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="fl-experience">
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="tab_6">
+                                                <div class="panel theme-box no-bg no-padding">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">Reviews</h4>
+                                                        <div class="panel-tools pull-right">
+                                                            <a href="{{route('review',$lang)}}" class="addRecord">View More<i class="fa fa-angle-right"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <ul class="fl-avg-review clearfix">
+                                                            <li class="fl-avg-review-item">
+                                                                <label>Punctuality</label>
+                                                                <div class="star-ratings-sprite">
+                                                                    <span style="width:0%" class="star-ratings-sprite-rating"></span>
+                                                                </div>
+                                                            </li>
+                                                            <li class="fl-avg-review-item">
+                                                                <label>Work Clarification</label>
+                                                                <div class="star-ratings-sprite">
+                                                                    <span style="width:0%" class="star-ratings-sprite-rating"></span>
+                                                                </div>
+                                                            </li>
+                                                            <li class="fl-avg-review-item">
+                                                                <label>Communication</label>
+                                                                <div class="star-ratings-sprite">
+                                                                    <span style="width:0%" class="star-ratings-sprite-rating"></span>
+                                                                </div>
+                                                            </li>
+                                                            <li class="fl-avg-review-item">
+                                                                <label>Work Quality</label>
+                                                                <div class="star-ratings-sprite">
+                                                                    <span style="width:0%" class="star-ratings-sprite-rating"></span>
+                                                                </div>
+                                                            </li>
+                                                            <li class="fl-avg-review-item">
+                                                                <label>Expertise</label>
+                                                                <div class="star-ratings-sprite">
+                                                                    <span style="width:0%" class="star-ratings-sprite-rating"></span>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Bootstrap Accordion -->
+                                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"></div>
+                                        <!-- /Bootstrap Accordion -->
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

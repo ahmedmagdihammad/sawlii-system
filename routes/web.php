@@ -42,9 +42,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('f/profile/add-skills', 'Frontend\F_profileController@add_skills')->name('profile.add_skills');
         Route::post('f/profile/add-languages', 'Frontend\F_profileController@add_languages')->name('profile.add_languages');
         Route::post('f/profile/add-categories', 'Frontend\F_profileController@add_categories')->name('profile.add_categories');
-        Route::get('f/profile/delete', 'Frontend\F_profileController@destroy')->name('profile.delete');
         Route::post('f/profile/add-video', 'Frontend\F_profileController@add_video')->name('profile.add_video');
         Route::post('f/profile/add-overview', 'Frontend\F_profileController@add_overview')->name('profile.add_overview');
+        Route::post('f/profile/{id}/delete_skills', 'Frontend\F_profileController@delete_skills')->name('profile.delete_skills');
+        Route::post('f/profile/{id}/delete-language', 'Frontend\F_profileController@delete_language')->name('profile.delete_language');
         
         // Route Service Freelancer
         Route::get('/post-services', 'Frontend\PostServicesController@index')->name('post_services');
@@ -63,6 +64,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('c/post-job/store', 'Frontend\PostJobController@store')->name('post_job.store');
         Route::get('c/post-job/{id}/edit', 'Frontend\PostJobController@edit')->name('post_job.edit');
         Route::post('c/post-job/{id}/update', 'Frontend\PostJobController@update')->name('post_job.update');
+        Route::get('c/post-job/{id}/delete', 'Frontend\PostJobController@destroy')->name('post_job.delete');
 
         Route::get('/account-setting', 'Frontend\HomeController@account_setting')->name('account_setting');
         Route::get('/wrong-turn', 'Frontend\HomeController@wrong_turn')->name('wrong_turn');

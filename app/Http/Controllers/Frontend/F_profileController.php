@@ -52,7 +52,7 @@ class F_profileController extends Controller
             $freelancer = new Freelancer();
             $freelancer->userid = Auth::user()->id;
         }
-        $freelancer->skills = implode('#',$request->skills);;
+        $freelancer->skills = implode('#',$request->skills).'#';
         $freelancer->save();
         return back();
     }
@@ -174,8 +174,16 @@ class F_profileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request,$lang, $id)
     {
+        return $request->delskills;
+        app()->setLocale($lang);
+        $freelancer = Freelancer::find($id);
+        foreach (explode('#',$freelancer->skills) as $skills) {
+            if ($skills == $request->delskills) {
+            }
+        }
+        return $request->all();
         // $freelancers = Freelancer::where('userid',Auth::user()->id)->select('skills')->get();
         // foreach (explode('#',$freelancers) as $key => $value) {
         //     if ($value == $request->delskills) {
@@ -191,5 +199,28 @@ class F_profileController extends Controller
         //     }
         // }
         // return $freelancers;
+    }
+
+    // Delete Skills
+    public function delete_skills(Request $request, $lang, $id)
+    {
+        $freelancer = Freelancer::find($id);
+        $freelancer->skills = str_replace($request->delskills, NULL, $freelancer->skills);
+        $freelancer->save();
+        if(empty($freelancer->skills)){
+            $freelancer->skills = NULL;
+            $freelancer->save();
+        }
+        return back();
+        
+    }
+
+    // Delete Language
+    public function delete_language(Request $request, $lang, $id)
+    {
+        $freelancer = Freelancer::find($id);
+        $freelancer->languages = NULL;
+        $freelancer->save();
+        return back();
     }
 }

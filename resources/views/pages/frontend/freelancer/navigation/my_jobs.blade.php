@@ -208,8 +208,7 @@
                                                     <li class="">{{$job->getsubcategory->name}}</li>
                                                 </ul>
                                                 <div class="cmj-budget">Est.budget : <div class="amount-wrap">{{$job->budget}}<span>$</span></div></div>
-                                                <div class="cmj-details"><p>@if(!empty($job->description_en)){{$job->description_en}} @else {{$job->description_ar}} @endif</p><br />
-                                            </div>
+                                                <div class="cmj-details"><p>@if(!empty($job->description_en)){{str_replace(['<p>', '</p>'] ,NULL, $job->description_en)}} @else {{str_replace(['<p>', '</p>'] ,NULL, $job->description_ar)}} @endif</p><br /> </div>
                                                 <ul class="cmj-skills clearfix">
                                                     @foreach(explode('#', $job->skills) as $skills)
                                                     <li>{{$skills}}</li>
@@ -230,7 +229,7 @@
                                                         <ul class="cmj-post-action pull-right">
                                                             <li class="hide">Featured <span><i class="fa fa-check-square"></i></span></li>
                                                             <li class=" "><a class="edit  " title="Edit" href="{{route('post_job.edit',[$lang, $job->id])}}" id="job_edit" data-id="81"><i class="fa fa-edit" aria-hidden="true"></i></a></li>
-                                                            <li class=""><a class="delete " data-id="81" id="job_delete" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
+                                                            <li class=""><a href="{{route('post_job.delete', [$lang, $job->id])}}" class="delete " data-id="81" id="job_delete" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
                                                         </ul>
                                                     </div>
                                                     <div class="cmj-button-wrap">

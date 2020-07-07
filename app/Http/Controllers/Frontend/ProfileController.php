@@ -10,6 +10,7 @@ use App\Freelancer;
 use App\Category;
 use App\subCategory;
 use App\Service;
+use App\Job;
 
 class ProfileController extends Controller
 {
@@ -26,7 +27,8 @@ class ProfileController extends Controller
             return view('pages.frontend.profile', compact('lang'));
         } else if(Auth::user()->type == 'C') {
             app()->setLocale($lang);
-            return view('pages.frontend.profile', compact('lang'));
+            $jobs = Job::where('customer', Auth::user()->id)->get();
+            return view('pages.frontend.profile', compact('lang', 'jobs'));
         }else{
             app()->setLocale($lang);
             $users = User::find(Auth::user()->id);

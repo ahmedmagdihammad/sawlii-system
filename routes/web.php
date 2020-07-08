@@ -53,6 +53,26 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/post-services/{id}/edit', 'Frontend\PostServicesController@edit')->name('post_services.edit');
         Route::post('/post-services/{id}/update', 'Frontend\PostServicesController@update')->name('post_services.update');
        
+        // Route Portfolios
+        Route::post('/portfolio/store', 'Frontend\PortfoliosControllers@store')->name('portfolio.store');
+        Route::post('/portfolio/{id}/edit', 'Frontend\PortfoliosControllers@update')->name('portfolio.edit');
+        Route::post('/portfolio/{id}/delete', 'Frontend\PortfoliosControllers@destroy')->name('portfolio.delete');
+
+        // Route Educations
+        Route::post('/education/store', 'Frontend\EducationsController@store')->name('education.store');
+        Route::post('/education/{id}/edit', 'Frontend\EducationsController@update')->name('education.edit');
+        Route::post('/education/{id}/delete', 'Frontend\EducationsController@destroy')->name('education.delete');
+
+        // Route Certifications
+        Route::post('certification/store', 'Frontend\CertificationsController@store')->name('certification.store');
+        Route::post('certification/{id}/edit', 'Frontend\CertificationsController@update')->name('certification.edit');
+        Route::post('certification/{id}/delete', 'Frontend\CertificationsController@destroy')->name('certification.delete');
+
+        // Route Experiences
+        Route::post('/experience/store', 'Frontend\ExperiencesController@store')->name('experience.store');
+        Route::post('/experience/{id}/edit', 'Frontend\ExperiencesController@update')->name('experience.edit');
+        Route::post('/experience/{id}/delete', 'Frontend\ExperiencesController@destroy')->name('experience.delete');
+
         // Login Customers
         Route::get('c/profile', 'Frontend\C_profileController@c_profile')->name('c_profile');
         Route::post('c/profile/update', 'Frontend\C_profileController@update')->name('c_profile.update');

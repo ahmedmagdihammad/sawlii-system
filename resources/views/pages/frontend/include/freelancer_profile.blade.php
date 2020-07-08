@@ -306,24 +306,73 @@
                                                 </div>
                                                 <div class="panel-body">
                                                     <div class="fl-portfolio "> 
-                                                    
+                                                    @foreach($portfolios as $portfolio)
+                                                        <div class="fl-portfolio-item showPortfolio{{$portfolio->id}}">
+                                                            <div class="media">
+                                                                <div class="media-left">
+                                                                    <div class="fl-portfolio-thumb">
+                                                                        <img src="{{asset($portfolio->image)}}" title="test project">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="media-body fl-portfolio-info">
+                                                                    <div class="fl-portfolio-heading">
+                                                                        <h4 class="main-title">{{$portfolio->title}} </h4>
+                                                                        <span>{{$portfolio->duration}}</span>
+                                                                    </div>
+                                                                    <div class="pull-right userdetail-itemaction">
+                                                                        <a href="javascript:void(0)" class="edit editRecord" data-entity="add_portfolio" data-id="8" data-div="portfolioSection" title="Edit"><i class="fa fa-pencil"></i></a>
+                                                                        <a href="javascript:void(0)" class="delete delRecord" data-entity="portfolio" data-id="8" title="Delete"><i class="fa fa-trash-o"></i></a>
+                                                                    </div>
+                                                                    <div class="fl-portfolio-sort-info">{{$portfolio->description}}</div>
+                                                                    <ul class="fl-portfolio-skils">
+                                                                        <li class='flp-skil'>{{$portfolio->skills}}</li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="tab-pane fade " id="tab_3">
                                             <div class="panel  theme-box no-bg no-padding">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">Educational Details</h4>
-                                                <div class="panel-tools pull-right">
-                                                <a href="javascript:void(0)" data-entity="add_education" title="Add Education" class="addRecord">Add More <i class="fa fa-plus"></i></a>
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title">Educational Details</h4>
+                                                    <div class="panel-tools pull-right">
+                                                        <a href="javascript:void(0)" data-entity="add_education" title="Add Education" class="add_education_btn addRecord">Add More <i class="fa fa-plus"></i></a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="fl-edu">
-                                                
+                                                <div class="panel-body">
+                                                    <div class="fl-ducations">
+                                                        @foreach($educations as $education)
+                                                        <div class="fl-edu{{$education->id}}">
+                                                            <div class="fl-edu-item">
+                                                                <div class="media">
+                                                                    <div class="media-left">
+                                                                        <div class="fl-edu-icon">
+                                                                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="media-body fl-edu-info">
+                                                                        <div class="fl-edu-heading">
+                                                                            <h4 class="main-title">{{$education->degree}} <span>{{$education->institute}}</span></h4>
+                                                                            <div class="userdetail-itemaction">
+                                                                                <a href="javascript:void(0)" class="edit editRecord" data-entity="add_education" data-id="6" data-div="educationSection" title="Edit"><i class="fa fa-pencil"></i></a>
+                                                                                <a href="javascript:void(0)" class="delete delRecord" data-entity="education" data-id="6" title="Delete"><i class="fa fa-trash-o"></i></a>
+                                                                            </div>
+                                                                            <div class="edu-years">{{$education->from}} - {{$education->to}}</div>
+                                                                            <div class="edu-department">{{$education->area}}</div>
+                                                                        </div>      
+                                                                        <div class="fl-edu-sort-info">{{$education->description}}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                        @endforeach
+                                                    </div>
                                                 </div>
-                                            </div>
                                             </div>
                                         </div>
                                         <div class="tab-pane fade " id="tab_4">
@@ -331,13 +380,37 @@
                                                 <div class="panel-heading">
                                                     <h4 class="panel-title">Certifications</h4>
                                                     <div class="panel-tools pull-right">
-                                                        <a href="#" class="addRecord" data-entity="add_certificate" title="Add Certificate">Add More <i class="fa fa-plus"></i></a>
+                                                        <a href="#" class="add_certification_btn addRecord" data-entity="add_certificate" title="Add Certificate">Add More <i class="fa fa-plus"></i></a>
                                                     </div>
                                                 </div>
                                                 <div class="panel-body">
-                                                    <ul class="fl-certi">
-                                                        
-                                                    </ul>
+                                                    <div class="certificationShow">
+                                                        @foreach($certifications as $certi)
+                                                        <ul class="fl-certi{{$certi->id}}">
+                                                            <div class="fl-edu-item">
+                                                                <div class="media  fl-certi-item">
+                                                                    <div class="media-left media-middle">
+                                                                        <div class="fl-certi-thumb">
+                                                                            <img src="{{asset('frontend/img/certificate.png')}}" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="media-body fl-edu-info">
+                                                                        <div class="fl-edu-heading">
+                                                                            <h4 class="main-title">{{$certi->institute}} <span>{{$certi->area}}</span></h4>
+                                                                            <div class="userdetail-itemaction">
+                                                                                <a href="javascript:void(0)" class="edit editRecord" data-entity="add_education" data-id="6" data-div="educationSection" title="Edit"><i class="fa fa-pencil"></i></a>
+                                                                                <a href="javascript:void(0)" class="delete delRecord" data-entity="education" data-id="6" title="Delete"><i class="fa fa-trash-o"></i></a>
+                                                                            </div>
+                                                                            <div class="edu-years">{{$certi->duration}}</div>
+                                                                        </div>      
+                                                                        <div class="fl-edu-sort-info">{{$certi->description}}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </ul>
+                                                        <hr>
+                                                        @endforeach
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -346,12 +419,34 @@
                                                 <div class="panel-heading">
                                                     <h4 class="panel-title">Experience</h4>
                                                     <div class="panel-tools pull-right">
-                                                        <a href="javascript:void(0)" class="addRecord" data-entity="add_experience" title="Add Experience">Add More<i class="fa fa-plus"></i></a>
+                                                        <a href="javascript:void(0)" class="add_experience_btn addRecord" data-entity="add_experience" title="Add Experience">Add More<i class="fa fa-plus"></i></a>
                                                     </div>
                                                 </div>
                                                 <div class="panel-body">
                                                     <div class="fl-experience">
-                                                        
+                                                        @foreach($experiences as $exper)
+                                                        <div class="fl-experience-item experience{{$exper->id}}">
+                                                            <div class="media">
+                                                                <div class="media-left">
+                                                                    <div class="fl-experience-icon">
+                                                                        <i class="fa fa-briefcase" aria-hidden="true"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="media-body fl-experience-info">
+                                                                    <div class="fl-experience-heading">
+                                                                        <h4 class="main-title">{{$exper->title}} <span>{{$exper->company}}</span></h4>
+                                                                        <div class="experience-years">@if($exper->current == '0') {{$exper->from}} - {{$exper->to}} @else Currently work here @endif</div>
+                                                                        <div class="experience-location"><span><i class="fa fa-map-marker"></i></span>{{$exper->location}}</div>
+                                                                    </div>
+                                                                    <div class="userdetail-itemaction">
+                                                                        <a href="javascript:void(0)" class="edit editRecord" data-entity="add_experience" data-id="4" data-div="expSection" title="Edit"><i class="fa fa-pencil"></i></a>
+                                                                        <a href="javascript:void(0)" class="delete delRecord" data-entity="experience" data-id="4" title="Delete"><i class="fa fa-trash-o"></i></a>
+                                                                    </div>
+                                                                    <div class="fl-experience-sort-info">{{$exper->description}}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @endforeach
                                                     </div>
                                                 </div>
                                             </div>
@@ -433,62 +528,23 @@
 
                                 <script type="text/javascript">
 
-                                $(document).ready(function(){
+                                    $(document).ready(function(){
 
-                                    if(($(window).width() >= 768) && ($(window).width() <= 991)){
-                                    $(".all-sections-btn a").click(function(){
-                                        $(".all-sections ul.nav").slideToggle();
-                                    });
-                                    }
-                                    else{
-                                    return false;
-                                    }
-                                    $(".all-sections ul.nav li a").click(function(){
-                                    $(".all-sections ul.nav").hide();
-                                    });
+                                        if(($(window).width() >= 768) && ($(window).width() <= 991)){
+                                        $(".all-sections-btn a").click(function(){
+                                            $(".all-sections ul.nav").slideToggle();
+                                            var title = 
+                                        });
+                                        }
+                                        else{
+                                        return false;
+                                        }
+                                        $(".all-sections ul.nav li a").click(function(){
+                                        $(".all-sections ul.nav").hide();
+                                        });
 
-                                });
+                                    });
                                 </script>
-                                <script type="text/javascript">
-                                $(document).on("click",".add_portfolio_btn",function(){
-                                    $(".img_pre").remove();
-                                    $("#projectTitle").val("");
-                                    $("#projectDuration").val("");
-                                    $("#project_skill_name").val("");
-                                    $("#projectDesc").val("");
-                                });
-
-                                    /*Add to favourite */
-                                $(document).on("click",".save_service",function(){
-                                    var url = "http://www.sukhadaam.com/demo/sawlii/ajaxServiceSearch";
-                                    $(this).find('i').removeClass("fa fa-heart-o").addClass("fa fa-heart");
-                                    var id = $(this).attr("data-id");
-                                    $.post(url,{"action":"saveServices","id":id},function(data){
-                                        if(data.type == 'error')
-                                        {
-                                        window.location.href = "http://www.sukhadaam.com/demo/sawlii/SignIn";
-                                        toastr[data.type](data.msg);
-                                        }
-                                        else
-                                        {
-                                        toastr[data.type](data.msg);
-                                        }
-                                    },'json');
-                                });
-
-
-                                $(function(){
-                                    var hash = window.location.hash;
-                                    hash && $('ul.nav a[href="' + hash + '"]').tab('show');
-
-                                    $('.nav-tabs a').click(function (e) {
-                                    $(this).tab('show');
-                                    var scrollmem = $('body').scrollTop() || $('html').scrollTop();
-                                    window.location.hash = this.hash;
-                                    $('html,body').scrollTop(scrollmem);
-                                    });
-                                });
-                            </script>
                         </div>
                     </div>
                 </div>
@@ -527,124 +583,124 @@
     </div>
     
     <div class="modal fade" id="skills" role="dialog" tabindex="-1">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <form method="post" action="{{route('profile.add_skills',$lang)}}">
-            @csrf
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"> Add Skill</h4>
-                </div>
-                <div class="modal-body">
-                    <!-- <div class="form-group add-skill-form-group">
-                        <input name="skills_userid" class="form-control " value="{{Auth::user()->id}}">
-                    </div> -->
-                    <div class="form-group add-skill-form-group">
-                        <select name="skills[]" data-placeholder="Skill list" class="form-control skill_choose_skillList" multiple tabindex="4" id="#">
-                            
-                            <option value="React Js" >React Js</option>
-                            <option value="Selenium Web Driver" >Selenium Web Driver</option>
-                            <option value="QA Automation" >QA Automation</option>
-                            <option value="Node Js" >Node Js</option>
-                            <option value="Java" >Java</option>
-                            <option value="UX Designers" >UX Designers</option>
-                            <option value="Writer" >Writer</option>
-                            <option value="Writers" >Writers</option>
-                            <option value="Web Designers" >Web Designers</option>
-                            <option value="Virtual Assistants">Virtual Assistants</option>
-                            <option value="Wordpress Developers">Wordpress Developers</option>
-                            <option value="Technical Writers" >Technical Writers</option>
-                            <option value="JavaScript Developers" >JavaScript Developers</option>
-                        </select>
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <form method="post" action="{{route('profile.add_skills',$lang)}}">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"> Add Skill</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!-- <div class="form-group add-skill-form-group">
+                            <input name="skills_userid" class="form-control " value="{{Auth::user()->id}}">
+                        </div> -->
+                        <div class="form-group add-skill-form-group">
+                            <select name="skills[]" data-placeholder="Skill list" class="form-control skill_choose_skillList" multiple tabindex="4" id="#">
+                                
+                                <option value="React Js" >React Js</option>
+                                <option value="Selenium Web Driver" >Selenium Web Driver</option>
+                                <option value="QA Automation" >QA Automation</option>
+                                <option value="Node Js" >Node Js</option>
+                                <option value="Java" >Java</option>
+                                <option value="UX Designers" >UX Designers</option>
+                                <option value="Writer" >Writer</option>
+                                <option value="Writers" >Writers</option>
+                                <option value="Web Designers" >Web Designers</option>
+                                <option value="Virtual Assistants">Virtual Assistants</option>
+                                <option value="Wordpress Developers">Wordpress Developers</option>
+                                <option value="Technical Writers" >Technical Writers</option>
+                                <option value="JavaScript Developers" >JavaScript Developers</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="theme-button">
+                            <button type="submit" class="btn btn-system">Save</button>
+                        </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <div class="theme-button">
-                        <button type="submit" class="btn btn-system">Save</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
     </div>
 
     <div class="modal fade" id="languages" role="dialog" tabindex="-1">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <form method="post" action="{{route('profile.add_languages',$lang)}}">
-        @csrf
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"> Add Language</h4>
-            </div>
-            <div class="modal-body">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <form method="post" action="{{route('profile.add_languages',$lang)}}">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"> Add Language</h4>
+                    </div>
+                    <div class="modal-body">
 
-            <div class="form-group">
-                <div class="form-group">
-                <select data-placeholder="Language list" class="form-control" name="languages_key" id="#">
-                    <option value="">--Select Language--</option>
-                    <option value="Arabic">Arabic</option>
-                    <option value="English">English</option>
-                </select>
+                    <div class="form-group">
+                        <div class="form-group">
+                        <select data-placeholder="Language list" class="form-control" name="languages_key" id="#">
+                            <option value="">--Select Language--</option>
+                            <option value="Arabic">Arabic</option>
+                            <option value="English">English</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                        <select data-placeholder="Language list" class="form-control" name="languages_val" id="#">
+                            <option value="">--Select language level--</option>
+                            <option value="Basic">Basic</option>
+                            <option value="Conversational">Conversational</option>
+                            <option value="Fluent">Fluent</option>
+                            <option value="Native">Native</option>
+                        </select>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                    <div class="theme-button">
+                        <button type="submit" class="btn btn-system">Save</button>
+                    </div>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="form-group">
-                <select data-placeholder="Language list" class="form-control" name="languages_val" id="#">
-                    <option value="">--Select language level--</option>
-                    <option value="Basic">Basic</option>
-                    <option value="Conversational">Conversational</option>
-                    <option value="Fluent">Fluent</option>
-                    <option value="Native">Native</option>
-                </select>
-                </div>
-            </div>
-            </div>
-            <div class="modal-footer">
-            <div class="theme-button">
-                <button type="submit" class="btn btn-system">Save</button>
-            </div>
-            </div>
+            </form>
         </div>
-        </form>
-    </div>
     </div>
 
     <div class="modal fade" id="profile_name" role="dialog" tabindex="-1">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <form method="post" action="{{route('profile.update', $lang)}}">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        &times;
-                    </button>
-                    <h4 class="modal-title">
-                        Enter name
-                    </h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label> First name </label>
-                        <input type="text" name="firstname" id="firstname" value="{{Auth::user()->firstname}}" class="form-control" />
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <form method="post" action="{{route('profile.update', $lang)}}">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            &times;
+                        </button>
+                        <h4 class="modal-title">
+                            Enter name
+                        </h4>
                     </div>
-                    <div class="form-group">
-                        <label>
-                        Last name
-                        </label>
-                        <input type="text" name="lastname" id="lastname" value="{{Auth::user()->lastname}}" class="form-control" />
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label> First name </label>
+                            <input type="text" name="firstname" id="firstname" value="{{Auth::user()->firstname}}" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label>
+                            Last name
+                            </label>
+                            <input type="text" name="lastname" id="lastname" value="{{Auth::user()->lastname}}" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="theme-button">
+                            <button type="submit" class="btn btn-system" id="#">Save</button>
+                        </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <div class="theme-button">
-                        <button type="submit" class="btn btn-system" id="#">Save</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
     </div>
 
     <div class="modal fade" id="profile_location" role="dialog" tabindex="-1">
@@ -734,91 +790,105 @@
     </div>
 
     <div class="portfolioSection">
-    <div class="modal fade" id="#" role="dialog" tabindex="-1">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <form name="portfolioFrm" id="portfolioFrm" method="post" enctype="multipart/form-data">
+        <div class="modal fade" id="portfolioModal" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <!-- Modal content-->
                 <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                    &times;
-                    </button>
-                    <h4 class="modal-title">
-                        Add Project
-                    </h4>
-                </div>
-                <div class="modal-body add_portfolio">
-
-                        <div class="form-group text-center">
-                            <div class="file-input-wrapper">
-                            <label for="upload-file" class="file-input-button">
-                            Choose Image
-                            </label>
-                            <input id="upload-file" type="file" name="portFolioimage" class="imgData" accept="image/*" />
-                            <input type="hidden" name="old_image" id="old_image" value="">
-                            <img height='100' width='100' class="hide imgPrev"/>
-                            
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                        </button>
+                        <h4 class="modal-title">
+                            Add Project
+                        </h4>
+                    </div>
+                    <div class="modal-body add_portfolio">
+                        <form method="POST" id="portfolioFrm"  enctype="multipart/form-data">
+                        {{csrf_field()}}
+                            <div class="form-group text-center">
+                                <!-- <div class="file-input-wrapper">
+                                <label for="upload-file" class="file-input-button">
+                                Choose Image
+                                </label> -->
+                                <!-- <input id="upload-file" type="file" name="old_image" class="imgData" />
+                                <input type="hidden" name="old_image" id="old_image" value=""> -->
+                                <!-- <img height='100' width='100' class="hide imgPrev"/>
+                                
+                                </div> -->
+                                <input type="file" name="port_image" class="form-control">
                             </div>
+                            <div class="form-group">
+                                <label>Project Title</label>
+                                <input class="form-control" name="port_title" id="projectTitle" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <label>Project Duration</label>
+                                <select class="form-control" name="port_duration" id="projectDuration">
+                                    <option value=''>Select Duration</option>
+                                    <option value="1day" >1 day or less</option>
+                                    <option value="1week" >Less than 1 week</option>
+                                    <option value="1to2weeks" >1 to 2 weeks</option>
+                                    <option value="3to4weeks" >3 to 4 weeks</option>
+                                    <option value="1to6months" >1 to 6 month</option>
+                                    <option value="plus6months" >More than 6 month</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Project Skills</label>
+                                <select data-placeholder="Skill List"  class="form-control skill_choose" multiple tabindex="4" name="port_skills[]" id="project_skill_name">
+                                    <option value="React Js">React Js</option>
+                                    <option value="Selenium Web Driver" >Selenium Web Driver</option>
+                                    <option value="QA Automation" >QA Automation</option>
+                                    <option value="Node Js" >Node Js</option>
+                                    <option value="Java" >Java</option>
+                                    <option value="UX Designers" >UX Designers</option>
+                                    <option value="Writer" >Writer</option>
+                                    <option value="Writers" >Writers</option>
+                                    <option value="Web Designers" >Web Designers</option>
+                                    <option value="Virtual Assistants" >Virtual Assistants</option>
+                                    <option value="Wordpress Developers" >Wordpress Developers</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Project Description</label>
+                                <textarea class="form-control" name="port_description" id="projectDesc"></textarea>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="theme-button">
+                            <input type="hidden" name="action" id="action" value="addPortfolio">
+                            <input type="hidden" name="id" id="id" value="">
+                            <button type="submit" class="btn btn-system" id="savePortfolio">Save</button>
                         </div>
-                        <div class="form-group">
-                            <label>Project Title</label>
-                            <input class="form-control" name="projectTitle" id="projectTitle" value=""/>
-                        </div>
-                        <div class="form-group">
-                            <label>Project Duration</label>
-                            <select class="form-control" name="projectDuration" id="projectDuration">
-                                <option value=''>Select Duration</option>
-                                <option value="1 day or less" >1 day or less</option>
-                                <option value="Less than 1 week" >Less than 1 week</option>
-                                <option value="1 to 2 weeks" >1 to 2 weeks</option>
-                                <option value="3 to 4 weeks" >3 to 4 weeks</option>
-                                <option value="1 to 6 month" >1 to 6 month</option>
-                                <option value="More than 6 month" >More than 6 month</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Project Skills</label>
-                            <select data-placeholder="Skill List"  class="form-control skill_choose" multiple tabindex="4" name="project_skill_name[]" id="project_skill_name"><option value=40 >React Js</option><option value=44 >Selenium Web Driver</option><option value=45 >QA Automation</option><option value=37 >Node Js</option><option value=36 >Java</option><option value=31 >UX Designers</option><option value=30 >Writer</option><option value=29 >Writers</option><option value=28 >Web Designers</option><option value=27 >Virtual Assistants</option><option value=25 >Wordpress Developers</option><option value=24 >Technical Writers</option><option value=23 >Swift Developers</option><option value=22 >Social Media Consultants</option><option value=21 >UI Designers</option><option value=20 >Sales Consultants</option><option value=19 >Python Developers</option><option value=18 >PHP Developers</option><option value=17 >SEO Experts</option><option value=16 >Mobile App Developers</option><option value=15 >JQuery Developers</option><option value=14 >JavaScript Developers</option><option value=13 >Objective-C Developers</option><option value=12 >Graphic Designers</option><option value=11 >Facebook Marketers</option><option value=10 >Excel Experts</option><option value=9 >Email Marketing Consultants</option><option value=8 >Data Entry Specialists</option><option value=7 >Customer Service Representatives</option><option value=6 >Copywriters</option><option value=5 >Content Writers</option><option value=4 >C# Developers</option><option value=3 >Bookkeepers</option><option value=2 >Android Developers</option><option value=1 >AngularJS Developers</option></select>
-                        </div>
-                        <div class="form-group">
-                            <label>Project Description</label>
-                            <textarea class="form-control" name="projectDesc" id="projectDesc"></textarea>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="theme-button">
-                        <input type="hidden" name="action" id="action" value="addPortfolio">
-                        <input type="hidden" name="id" id="id" value="">
-                        <button type="submit" name="addPorfolio" id="addPorfolio" class="btn btn-system">Save</button>
+                        </form>
                     </div>
                 </div>
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
     </div> 
 
     <div class="educationSection">
-    <div class="modal fade" id="add_education" role="dialog" tabindex="-1">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <form method="post" name="#" id="#">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                    &times;
-                    </button>
-                    <h4 class="modal-title">
-                        Add Education
-                    </h4>
-                </div>
-                <div class="modal-body">
+        <div class="modal fade" id="educationmodal" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <form method="post" name="#" id="educationForm">
+                    @csrf
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                        </button>
+                        <h4 class="modal-title">
+                            Add Education
+                        </h4>
+                    </div>
+                    <div class="modal-body">
                         <label class="red_error error_dur"></label>
                         <div class="form-group">
                             <label>
                             Institute
                             </label>
-                            <input class="form-control" name="instituteName" id="instituteName"  value=""/>
+                            <input class="form-control" name="edu_institute" id="instituteName"  value=""/>
                         </div>
                         <div class="form-group">
                             <label>
@@ -826,13 +896,13 @@
                             </label>
                             <div class="row">
                             <div class="col-md-6 col-sm-6 col-xs-6">
-                                <select class="form-control" name="start_year" id="start_year">
+                                <select class="form-control" name="edu_from" id="start_year">
                                     <option value="">--Select Year--</option><option value='2020' >2020</option><option value='2019' >2019</option><option value='2018' >2018</option><option value='2017' >2017</option><option value='2016' >2016</option><option value='2015' >2015</option><option value='2014' >2014</option><option value='2013' >2013</option><option value='2012' >2012</option><option value='2011' >2011</option><option value='2010' >2010</option><option value='2009' >2009</option><option value='2008' >2008</option><option value='2007' >2007</option><option value='2006' >2006</option><option value='2005' >2005</option><option value='2004' >2004</option><option value='2003' >2003</option><option value='2002' >2002</option><option value='2001' >2001</option><option value='2000' >2000</option><option value='1999' >1999</option><option value='1998' >1998</option><option value='1997' >1997</option><option value='1996' >1996</option><option value='1995' >1995</option><option value='1994' >1994</option><option value='1993' >1993</option><option value='1992' >1992</option><option value='1991' >1991</option><option value='1990' >1990</option><option value='1989' >1989</option><option value='1988' >1988</option><option value='1987' >1987</option><option value='1986' >1986</option><option value='1985' >1985</option><option value='1984' >1984</option><option value='1983' >1983</option><option value='1982' >1982</option><option value='1981' >1981</option><option value='1980' >1980</option><option value='1979' >1979</option><option value='1978' >1978</option><option value='1977' >1977</option><option value='1976' >1976</option><option value='1975' >1975</option><option value='1974' >1974</option><option value='1973' >1973</option><option value='1972' >1972</option><option value='1971' >1971</option><option value='1970' >1970</option><option value='1969' >1969</option><option value='1968' >1968</option><option value='1967' >1967</option><option value='1966' >1966</option><option value='1965' >1965</option><option value='1964' >1964</option><option value='1963' >1963</option><option value='1962' >1962</option><option value='1961' >1961</option><option value='1960' >1960</option><option value='1959' >1959</option><option value='1958' >1958</option><option value='1957' >1957</option><option value='1956' >1956</option><option value='1955' >1955</option><option value='1954' >1954</option><option value='1953' >1953</option><option value='1952' >1952</option><option value='1951' >1951</option><option value='1950' >1950</option><option value='1949' >1949</option><option value='1948' >1948</option><option value='1947' >1947</option><option value='1946' >1946</option><option value='1945' >1945</option><option value='1944' >1944</option><option value='1943' >1943</option><option value='1942' >1942</option><option value='1941' >1941</option><option value='1940' >1940</option><option value='1939' >1939</option><option value='1938' >1938</option><option value='1937' >1937</option><option value='1936' >1936</option><option value='1935' >1935</option><option value='1934' >1934</option><option value='1933' >1933</option><option value='1932' >1932</option><option value='1931' >1931</option><option value='1930' >1930</option><option value='1929' >1929</option><option value='1928' >1928</option><option value='1927' >1927</option><option value='1926' >1926</option><option value='1925' >1925</option><option value='1924' >1924</option><option value='1923' >1923</option><option value='1922' >1922</option><option value='1921' >1921</option><option value='1920' >1920</option><option value='1919' >1919</option><option value='1918' >1918</option><option value='1917' >1917</option><option value='1916' >1916</option><option value='1915' >1915</option><option value='1914' >1914</option><option value='1913' >1913</option><option value='1912' >1912</option><option value='1911' >1911</option><option value='1910' >1910</option><option value='1909' >1909</option><option value='1908' >1908</option><option value='1907' >1907</option><option value='1906' >1906</option><option value='1905' >1905</option><option value='1904' >1904</option><option value='1903' >1903</option><option value='1902' >1902</option><option value='1901' >1901</option><option value='1900' >1900</option>
                                 </select>
                             </div>
 
                             <div class="col-md-6 col-sm-6 col-xs-6">
-                                <select class="form-control" name="end_year" id="end_year">
+                                <select class="form-control" name="edu_to" id="end_year">
                                     <option value="">--Select Year--</option><option value='2020' >2020</option><option value='2019' >2019</option><option value='2018' >2018</option><option value='2017' >2017</option><option value='2016' >2016</option><option value='2015' >2015</option><option value='2014' >2014</option><option value='2013' >2013</option><option value='2012' >2012</option><option value='2011' >2011</option><option value='2010' >2010</option><option value='2009' >2009</option><option value='2008' >2008</option><option value='2007' >2007</option><option value='2006' >2006</option><option value='2005' >2005</option><option value='2004' >2004</option><option value='2003' >2003</option><option value='2002' >2002</option><option value='2001' >2001</option><option value='2000' >2000</option><option value='1999' >1999</option><option value='1998' >1998</option><option value='1997' >1997</option><option value='1996' >1996</option><option value='1995' >1995</option><option value='1994' >1994</option><option value='1993' >1993</option><option value='1992' >1992</option><option value='1991' >1991</option><option value='1990' >1990</option><option value='1989' >1989</option><option value='1988' >1988</option><option value='1987' >1987</option><option value='1986' >1986</option><option value='1985' >1985</option><option value='1984' >1984</option><option value='1983' >1983</option><option value='1982' >1982</option><option value='1981' >1981</option><option value='1980' >1980</option><option value='1979' >1979</option><option value='1978' >1978</option><option value='1977' >1977</option><option value='1976' >1976</option><option value='1975' >1975</option><option value='1974' >1974</option><option value='1973' >1973</option><option value='1972' >1972</option><option value='1971' >1971</option><option value='1970' >1970</option><option value='1969' >1969</option><option value='1968' >1968</option><option value='1967' >1967</option><option value='1966' >1966</option><option value='1965' >1965</option><option value='1964' >1964</option><option value='1963' >1963</option><option value='1962' >1962</option><option value='1961' >1961</option><option value='1960' >1960</option><option value='1959' >1959</option><option value='1958' >1958</option><option value='1957' >1957</option><option value='1956' >1956</option><option value='1955' >1955</option><option value='1954' >1954</option><option value='1953' >1953</option><option value='1952' >1952</option><option value='1951' >1951</option><option value='1950' >1950</option><option value='1949' >1949</option><option value='1948' >1948</option><option value='1947' >1947</option><option value='1946' >1946</option><option value='1945' >1945</option><option value='1944' >1944</option><option value='1943' >1943</option><option value='1942' >1942</option><option value='1941' >1941</option><option value='1940' >1940</option><option value='1939' >1939</option><option value='1938' >1938</option><option value='1937' >1937</option><option value='1936' >1936</option><option value='1935' >1935</option><option value='1934' >1934</option><option value='1933' >1933</option><option value='1932' >1932</option><option value='1931' >1931</option><option value='1930' >1930</option><option value='1929' >1929</option><option value='1928' >1928</option><option value='1927' >1927</option><option value='1926' >1926</option><option value='1925' >1925</option><option value='1924' >1924</option><option value='1923' >1923</option><option value='1922' >1922</option><option value='1921' >1921</option><option value='1920' >1920</option><option value='1919' >1919</option><option value='1918' >1918</option><option value='1917' >1917</option><option value='1916' >1916</option><option value='1915' >1915</option><option value='1914' >1914</option><option value='1913' >1913</option><option value='1912' >1912</option><option value='1911' >1911</option><option value='1910' >1910</option><option value='1909' >1909</option><option value='1908' >1908</option><option value='1907' >1907</option><option value='1906' >1906</option><option value='1905' >1905</option><option value='1904' >1904</option><option value='1903' >1903</option><option value='1902' >1902</option><option value='1901' >1901</option><option value='1900' >1900</option>
                                 </select>
                             </div>
@@ -842,168 +912,196 @@
                             <label>
                             Degree
                             </label>
-                            <input class="form-control" name="degree" id="degree"  value=""/>
+                            <input class="form-control" name="edu_degree" id="degree"  value=""/>
                         </div>
                         <div class="form-group">
                             <label>
                             Area of study
                             </label>
-                            <input class="form-control" name="study" id="study" value=""/>
+                            <input class="form-control" name="edu_area" id="study" value=""/>
                         </div>
                         <div class="form-group">
 
                             <label>
                             Description
                             </label>
-                            <textarea class="form-control" name="desc" id="desc"></textarea>
+                            <textarea class="form-control" name="edu_desc" id="desc"></textarea>
                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <div class="theme-button-default">
+                            <a href="#" data-dismiss="modal">Cancel</a>
+                        </div> -->
+                        <div class="theme-button">
+                            <input type="hidden" name="action" id="action" value="addEducation">
+                            <input type="hidden" name="id" id="id" value="">
+                            <button type="submit" name="addEducation" id="addEducation" class="btn btn-system">Save</button>
+                        </div>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> 
 
+    <div class="certificateSection">
+        <div class="modal fade" id="certificationmodal" id="#" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+            <form method="post" name="certificateFrm" id="certificationForm">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                    </button>
+                    <h4 class="modal-title">
+                        Add Certificate
+                    </h4>
+                    </div>
+                    <div class="modal-body">
+                        <label class="red_error error_dur"></label>
+                        <div class="form-group">
+                            <label>
+                            Institute
+                            </label>
+                            <input class="form-control" name="cert_institute" class="cert_institute" id="#"  value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                            Duration
+                            </label>
+                            <select class="form-control" name="cert_duration" class="cert_duration">
+                                <option value="">--Select Duration--</option>
+                                <option value='1month' >1month</option>
+                                <option value='2to6moths' >2to6moths</option>
+                                <option value='6to12months' >6to12months</option>
+                                <option value='1to2years' >1to2years</option>
+                                <option value='plus2years' >plus2years</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                            Area of study
+                            </label>
+                            <input class="form-control" name="cert_area" id="#" value=""/>
+                        </div>
+                        <div class="form-group">
+
+                            <label>
+                            Description
+                            </label>
+                            <textarea class="form-control" name="cert_desc" id="#"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    <div class="theme-button">
+                        <input type="hidden" name="action" id="action" value="addCertification">
+                        <input type="hidden" name="id" id="id" value="">
+                        <button type="submit" class="btn btn-system">Save</button>
+                    </div>
+                    </div>
                 </div>
-                <div class="modal-footer">
+            </form>
+            </div>
+        </div>
+    </div> 
+
+    <div class="expSection">
+        <div class="modal fade " id="experiancemodal" id="#" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+            <form method="post" id="experienceFrm">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        ×
+                    </button>
+                    <h4 class="modal-title">
+                        Add Experience
+                    </h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label>
+                                Company Name
+                            </label>
+                            <input class="form-control"  name="exper_company" id="cmp_nm" value="">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Location
+                            </label>
+                            <input type="text" name="exper_location" id="location" class="form-control" value="">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Title
+                            </label>
+                            <input class="form-control" name="exper_title" id="title" value="">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Experience Duration
+                            </label>
+                            <div class="row">
+                                <div class="col-md-3 col-sm-3">
+                                <label>From</label>
+                                <select name="exper_start_month" id="start_month" class="form-control">
+                                    <option value="">--Select Month--</option><option value='January' >January</option><option value='February' >February</option><option value='March' >March</option><option value='April' >April</option><option value='May' >May</option><option value='June' >June</option><option value='July' >July</option><option value='August' >August</option><option value='September' >September</option><option value='October' >October</option><option value='November' >November</option><option value='December' >December</option>
+                                </select>
+                                </div>
+                                <div class="col-md-3 col-sm-3">
+                                <label>&nbsp;</label>
+                                <select name="exper_start_year" id="start_yr" class="form-control">
+                                    <option value="">--Select Year--</option><option value='2020' >2020</option><option value='2019' >2019</option><option value='2018' >2018</option><option value='2017' >2017</option><option value='2016' >2016</option><option value='2015' >2015</option><option value='2014' >2014</option><option value='2013' >2013</option><option value='2012' >2012</option><option value='2011' >2011</option><option value='2010' >2010</option><option value='2009' >2009</option><option value='2008' >2008</option><option value='2007' >2007</option><option value='2006' >2006</option><option value='2005' >2005</option><option value='2004' >2004</option><option value='2003' >2003</option><option value='2002' >2002</option><option value='2001' >2001</option><option value='2000' >2000</option><option value='1999' >1999</option><option value='1998' >1998</option><option value='1997' >1997</option><option value='1996' >1996</option><option value='1995' >1995</option><option value='1994' >1994</option><option value='1993' >1993</option><option value='1992' >1992</option><option value='1991' >1991</option><option value='1990' >1990</option><option value='1989' >1989</option><option value='1988' >1988</option><option value='1987' >1987</option><option value='1986' >1986</option><option value='1985' >1985</option><option value='1984' >1984</option><option value='1983' >1983</option><option value='1982' >1982</option><option value='1981' >1981</option><option value='1980' >1980</option><option value='1979' >1979</option><option value='1978' >1978</option><option value='1977' >1977</option><option value='1976' >1976</option><option value='1975' >1975</option><option value='1974' >1974</option><option value='1973' >1973</option><option value='1972' >1972</option><option value='1971' >1971</option><option value='1970' >1970</option><option value='1969' >1969</option><option value='1968' >1968</option><option value='1967' >1967</option><option value='1966' >1966</option><option value='1965' >1965</option><option value='1964' >1964</option><option value='1963' >1963</option><option value='1962' >1962</option><option value='1961' >1961</option><option value='1960' >1960</option><option value='1959' >1959</option><option value='1958' >1958</option><option value='1957' >1957</option><option value='1956' >1956</option><option value='1955' >1955</option><option value='1954' >1954</option><option value='1953' >1953</option><option value='1952' >1952</option><option value='1951' >1951</option><option value='1950' >1950</option><option value='1949' >1949</option><option value='1948' >1948</option><option value='1947' >1947</option><option value='1946' >1946</option><option value='1945' >1945</option><option value='1944' >1944</option><option value='1943' >1943</option><option value='1942' >1942</option><option value='1941' >1941</option><option value='1940' >1940</option><option value='1939' >1939</option><option value='1938' >1938</option><option value='1937' >1937</option><option value='1936' >1936</option><option value='1935' >1935</option><option value='1934' >1934</option><option value='1933' >1933</option><option value='1932' >1932</option><option value='1931' >1931</option><option value='1930' >1930</option><option value='1929' >1929</option><option value='1928' >1928</option><option value='1927' >1927</option><option value='1926' >1926</option><option value='1925' >1925</option><option value='1924' >1924</option><option value='1923' >1923</option><option value='1922' >1922</option><option value='1921' >1921</option><option value='1920' >1920</option><option value='1919' >1919</option><option value='1918' >1918</option><option value='1917' >1917</option><option value='1916' >1916</option><option value='1915' >1915</option><option value='1914' >1914</option><option value='1913' >1913</option><option value='1912' >1912</option><option value='1911' >1911</option><option value='1910' >1910</option><option value='1909' >1909</option><option value='1908' >1908</option><option value='1907' >1907</option><option value='1906' >1906</option><option value='1905' >1905</option><option value='1904' >1904</option><option value='1903' >1903</option><option value='1902' >1902</option><option value='1901' >1901</option><option value='1900' >1900</option>
+                                </select>
+                                </div>
+
+                                <div class="col-md-3 col-sm-3">
+                                <label>To</label>
+                                <select name="exper_end_month" id="end_month" class="form-control">
+                                    <option value="">--Select Month--</option><option value='January' >January</option><option value='February' >February</option><option value='March' >March</option><option value='April' >April</option><option value='May' >May</option><option value='June' >June</option><option value='July' >July</option><option value='August' >August</option><option value='September' >September</option><option value='October' >October</option><option value='November' >November</option><option value='December' >December</option>
+                                </select>
+                                </div>
+                                <div class="col-md-3 col-sm-3">
+                                <label>&nbsp;</label>
+                                <select name="exper_end_year" id="end_yr" class="form-control">
+                                    <option value="">--Select Year--</option><option value='2020' >2020</option><option value='2019' >2019</option><option value='2018' >2018</option><option value='2017' >2017</option><option value='2016' >2016</option><option value='2015' >2015</option><option value='2014' >2014</option><option value='2013' >2013</option><option value='2012' >2012</option><option value='2011' >2011</option><option value='2010' >2010</option><option value='2009' >2009</option><option value='2008' >2008</option><option value='2007' >2007</option><option value='2006' >2006</option><option value='2005' >2005</option><option value='2004' >2004</option><option value='2003' >2003</option><option value='2002' >2002</option><option value='2001' >2001</option><option value='2000' >2000</option><option value='1999' >1999</option><option value='1998' >1998</option><option value='1997' >1997</option><option value='1996' >1996</option><option value='1995' >1995</option><option value='1994' >1994</option><option value='1993' >1993</option><option value='1992' >1992</option><option value='1991' >1991</option><option value='1990' >1990</option><option value='1989' >1989</option><option value='1988' >1988</option><option value='1987' >1987</option><option value='1986' >1986</option><option value='1985' >1985</option><option value='1984' >1984</option><option value='1983' >1983</option><option value='1982' >1982</option><option value='1981' >1981</option><option value='1980' >1980</option><option value='1979' >1979</option><option value='1978' >1978</option><option value='1977' >1977</option><option value='1976' >1976</option><option value='1975' >1975</option><option value='1974' >1974</option><option value='1973' >1973</option><option value='1972' >1972</option><option value='1971' >1971</option><option value='1970' >1970</option><option value='1969' >1969</option><option value='1968' >1968</option><option value='1967' >1967</option><option value='1966' >1966</option><option value='1965' >1965</option><option value='1964' >1964</option><option value='1963' >1963</option><option value='1962' >1962</option><option value='1961' >1961</option><option value='1960' >1960</option><option value='1959' >1959</option><option value='1958' >1958</option><option value='1957' >1957</option><option value='1956' >1956</option><option value='1955' >1955</option><option value='1954' >1954</option><option value='1953' >1953</option><option value='1952' >1952</option><option value='1951' >1951</option><option value='1950' >1950</option><option value='1949' >1949</option><option value='1948' >1948</option><option value='1947' >1947</option><option value='1946' >1946</option><option value='1945' >1945</option><option value='1944' >1944</option><option value='1943' >1943</option><option value='1942' >1942</option><option value='1941' >1941</option><option value='1940' >1940</option><option value='1939' >1939</option><option value='1938' >1938</option><option value='1937' >1937</option><option value='1936' >1936</option><option value='1935' >1935</option><option value='1934' >1934</option><option value='1933' >1933</option><option value='1932' >1932</option><option value='1931' >1931</option><option value='1930' >1930</option><option value='1929' >1929</option><option value='1928' >1928</option><option value='1927' >1927</option><option value='1926' >1926</option><option value='1925' >1925</option><option value='1924' >1924</option><option value='1923' >1923</option><option value='1922' >1922</option><option value='1921' >1921</option><option value='1920' >1920</option><option value='1919' >1919</option><option value='1918' >1918</option><option value='1917' >1917</option><option value='1916' >1916</option><option value='1915' >1915</option><option value='1914' >1914</option><option value='1913' >1913</option><option value='1912' >1912</option><option value='1911' >1911</option><option value='1910' >1910</option><option value='1909' >1909</option><option value='1908' >1908</option><option value='1907' >1907</option><option value='1906' >1906</option><option value='1905' >1905</option><option value='1904' >1904</option><option value='1903' >1903</option><option value='1902' >1902</option><option value='1901' >1901</option><option value='1900' >1900</option>
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Description
+                            </label>
+
+                            <textarea name="exper_desc" id="exper_desc" class="form-control"></textarea>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="signin-check">I currently work here
+                                <input type="checkbox" name="exper_current" id="Current" value="1" >
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
                     <!-- <div class="theme-button-default">
                         <a href="#" data-dismiss="modal">Cancel</a>
                     </div> -->
                     <div class="theme-button">
-                        <input type="hidden" name="action" id="action" value="addEducation">
+                        <input type="hidden" name="action" id="action" value="addExp">
                         <input type="hidden" name="id" id="id" value="">
-                        <button type="submit" name="addEducation" id="addEducation" class="btn btn-system">Save</button>
+                        <button type="submit" name="addExperience" id="addExperience" class="btn btn-system">Save</button>
+                    </div>
                     </div>
                 </div>
-                </div>
-        </form>
-        </div>
-    </div>
-    </div> 
-
-    <div class="certificateSection">
-    <div class="modal fade" id="#" role="dialog" tabindex="-1">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-        <form method="post" name="certificateFrm" id="certificateFrm">
-            <div class="modal-content">
-                <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                &times;
-                </button>
-                <h4 class="modal-title">
-                    Add Certificate
-                </h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label>
-                        Certificate
-                        </label>
-                        <input class="form-control" name="certiName" id="certiName" value=""/>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                <div class="theme-button">
-                    <input type="hidden" name="action" id="action" value="addCertification">
-                    <input type="hidden" name="id" id="id" value="">
-                    <button type="submit" name="addCertification" id="addCertification" class="btn btn-system">Save</button>
-                </div>
-                </div>
+            </form>
             </div>
-        </form>
         </div>
-    </div>
-    </div> 
-
-    <div class="expSection">
-    <div class="modal fade" id="#" role="dialog" tabindex="-1">
-        <div class="modal-dialog">
-        <form method="post" name="experienceform" id="experienceform">
-            <div class="modal-content">
-                <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    ×
-                </button>
-                <h4 class="modal-title">
-                    Add Experience
-                </h4>
-                </div>
-                <div class="modal-body">
-
-                    <div class="form-group">
-                        <label>
-                            Company Name
-                        </label>
-                        <input class="form-control"  name="cmp_nm" id="cmp_nm" value="">
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            Location
-                        </label>
-                        <input type="text" name="location" id="location" class="form-control load_ggl_autocomplete" value="">
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            Title
-                        </label>
-                        <input class="form-control" name="title" id="title" value="">
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            Experience Duration
-                        </label>
-                        <div class="row">
-                            <div class="col-md-3 col-sm-3">
-                            <label>From</label>
-                            <select name="start_month" id="start_month" class="form-control">
-                                <option value="">--Select Month--</option><option value='January' >January</option><option value='February' >February</option><option value='March' >March</option><option value='April' >April</option><option value='May' >May</option><option value='June' >June</option><option value='July' >July</option><option value='August' >August</option><option value='September' >September</option><option value='October' >October</option><option value='November' >November</option><option value='December' >December</option>
-                            </select>
-                            </div>
-                            <div class="col-md-3 col-sm-3">
-                            <label>&nbsp;</label>
-                            <select name="start_yr" id="start_yr" class="form-control">
-                                <option value="">--Select Year--</option><option value='2020' >2020</option><option value='2019' >2019</option><option value='2018' >2018</option><option value='2017' >2017</option><option value='2016' >2016</option><option value='2015' >2015</option><option value='2014' >2014</option><option value='2013' >2013</option><option value='2012' >2012</option><option value='2011' >2011</option><option value='2010' >2010</option><option value='2009' >2009</option><option value='2008' >2008</option><option value='2007' >2007</option><option value='2006' >2006</option><option value='2005' >2005</option><option value='2004' >2004</option><option value='2003' >2003</option><option value='2002' >2002</option><option value='2001' >2001</option><option value='2000' >2000</option><option value='1999' >1999</option><option value='1998' >1998</option><option value='1997' >1997</option><option value='1996' >1996</option><option value='1995' >1995</option><option value='1994' >1994</option><option value='1993' >1993</option><option value='1992' >1992</option><option value='1991' >1991</option><option value='1990' >1990</option><option value='1989' >1989</option><option value='1988' >1988</option><option value='1987' >1987</option><option value='1986' >1986</option><option value='1985' >1985</option><option value='1984' >1984</option><option value='1983' >1983</option><option value='1982' >1982</option><option value='1981' >1981</option><option value='1980' >1980</option><option value='1979' >1979</option><option value='1978' >1978</option><option value='1977' >1977</option><option value='1976' >1976</option><option value='1975' >1975</option><option value='1974' >1974</option><option value='1973' >1973</option><option value='1972' >1972</option><option value='1971' >1971</option><option value='1970' >1970</option><option value='1969' >1969</option><option value='1968' >1968</option><option value='1967' >1967</option><option value='1966' >1966</option><option value='1965' >1965</option><option value='1964' >1964</option><option value='1963' >1963</option><option value='1962' >1962</option><option value='1961' >1961</option><option value='1960' >1960</option><option value='1959' >1959</option><option value='1958' >1958</option><option value='1957' >1957</option><option value='1956' >1956</option><option value='1955' >1955</option><option value='1954' >1954</option><option value='1953' >1953</option><option value='1952' >1952</option><option value='1951' >1951</option><option value='1950' >1950</option><option value='1949' >1949</option><option value='1948' >1948</option><option value='1947' >1947</option><option value='1946' >1946</option><option value='1945' >1945</option><option value='1944' >1944</option><option value='1943' >1943</option><option value='1942' >1942</option><option value='1941' >1941</option><option value='1940' >1940</option><option value='1939' >1939</option><option value='1938' >1938</option><option value='1937' >1937</option><option value='1936' >1936</option><option value='1935' >1935</option><option value='1934' >1934</option><option value='1933' >1933</option><option value='1932' >1932</option><option value='1931' >1931</option><option value='1930' >1930</option><option value='1929' >1929</option><option value='1928' >1928</option><option value='1927' >1927</option><option value='1926' >1926</option><option value='1925' >1925</option><option value='1924' >1924</option><option value='1923' >1923</option><option value='1922' >1922</option><option value='1921' >1921</option><option value='1920' >1920</option><option value='1919' >1919</option><option value='1918' >1918</option><option value='1917' >1917</option><option value='1916' >1916</option><option value='1915' >1915</option><option value='1914' >1914</option><option value='1913' >1913</option><option value='1912' >1912</option><option value='1911' >1911</option><option value='1910' >1910</option><option value='1909' >1909</option><option value='1908' >1908</option><option value='1907' >1907</option><option value='1906' >1906</option><option value='1905' >1905</option><option value='1904' >1904</option><option value='1903' >1903</option><option value='1902' >1902</option><option value='1901' >1901</option><option value='1900' >1900</option>
-                            </select>
-                            </div>
-
-                            <div class="col-md-3 col-sm-3">
-                            <label>To</label>
-                            <select name="end_month" id="end_month" class="form-control">
-                                <option value="">--Select Month--</option><option value='January' >January</option><option value='February' >February</option><option value='March' >March</option><option value='April' >April</option><option value='May' >May</option><option value='June' >June</option><option value='July' >July</option><option value='August' >August</option><option value='September' >September</option><option value='October' >October</option><option value='November' >November</option><option value='December' >December</option>
-                            </select>
-                            </div>
-                            <div class="col-md-3 col-sm-3">
-                            <label>&nbsp;</label>
-                            <select name="end_yr" id="end_yr" class="form-control">
-                                <option value="">--Select Year--</option><option value='2020' >2020</option><option value='2019' >2019</option><option value='2018' >2018</option><option value='2017' >2017</option><option value='2016' >2016</option><option value='2015' >2015</option><option value='2014' >2014</option><option value='2013' >2013</option><option value='2012' >2012</option><option value='2011' >2011</option><option value='2010' >2010</option><option value='2009' >2009</option><option value='2008' >2008</option><option value='2007' >2007</option><option value='2006' >2006</option><option value='2005' >2005</option><option value='2004' >2004</option><option value='2003' >2003</option><option value='2002' >2002</option><option value='2001' >2001</option><option value='2000' >2000</option><option value='1999' >1999</option><option value='1998' >1998</option><option value='1997' >1997</option><option value='1996' >1996</option><option value='1995' >1995</option><option value='1994' >1994</option><option value='1993' >1993</option><option value='1992' >1992</option><option value='1991' >1991</option><option value='1990' >1990</option><option value='1989' >1989</option><option value='1988' >1988</option><option value='1987' >1987</option><option value='1986' >1986</option><option value='1985' >1985</option><option value='1984' >1984</option><option value='1983' >1983</option><option value='1982' >1982</option><option value='1981' >1981</option><option value='1980' >1980</option><option value='1979' >1979</option><option value='1978' >1978</option><option value='1977' >1977</option><option value='1976' >1976</option><option value='1975' >1975</option><option value='1974' >1974</option><option value='1973' >1973</option><option value='1972' >1972</option><option value='1971' >1971</option><option value='1970' >1970</option><option value='1969' >1969</option><option value='1968' >1968</option><option value='1967' >1967</option><option value='1966' >1966</option><option value='1965' >1965</option><option value='1964' >1964</option><option value='1963' >1963</option><option value='1962' >1962</option><option value='1961' >1961</option><option value='1960' >1960</option><option value='1959' >1959</option><option value='1958' >1958</option><option value='1957' >1957</option><option value='1956' >1956</option><option value='1955' >1955</option><option value='1954' >1954</option><option value='1953' >1953</option><option value='1952' >1952</option><option value='1951' >1951</option><option value='1950' >1950</option><option value='1949' >1949</option><option value='1948' >1948</option><option value='1947' >1947</option><option value='1946' >1946</option><option value='1945' >1945</option><option value='1944' >1944</option><option value='1943' >1943</option><option value='1942' >1942</option><option value='1941' >1941</option><option value='1940' >1940</option><option value='1939' >1939</option><option value='1938' >1938</option><option value='1937' >1937</option><option value='1936' >1936</option><option value='1935' >1935</option><option value='1934' >1934</option><option value='1933' >1933</option><option value='1932' >1932</option><option value='1931' >1931</option><option value='1930' >1930</option><option value='1929' >1929</option><option value='1928' >1928</option><option value='1927' >1927</option><option value='1926' >1926</option><option value='1925' >1925</option><option value='1924' >1924</option><option value='1923' >1923</option><option value='1922' >1922</option><option value='1921' >1921</option><option value='1920' >1920</option><option value='1919' >1919</option><option value='1918' >1918</option><option value='1917' >1917</option><option value='1916' >1916</option><option value='1915' >1915</option><option value='1914' >1914</option><option value='1913' >1913</option><option value='1912' >1912</option><option value='1911' >1911</option><option value='1910' >1910</option><option value='1909' >1909</option><option value='1908' >1908</option><option value='1907' >1907</option><option value='1906' >1906</option><option value='1905' >1905</option><option value='1904' >1904</option><option value='1903' >1903</option><option value='1902' >1902</option><option value='1901' >1901</option><option value='1900' >1900</option>
-                            </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            Description
-                        </label>
-
-                        <textarea name="desc" id="desc" class="form-control"></textarea>
-
-                    </div>
-                    <div class="form-group">
-                        <label class="signin-check">I currently work here
-                            <input type="checkbox" name="Current" id="Current" value="y" >
-                            <span class="checkmark"></span>
-                        </label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                <!-- <div class="theme-button-default">
-                    <a href="#" data-dismiss="modal">Cancel</a>
-                </div> -->
-                <div class="theme-button">
-                    <input type="hidden" name="action" id="action" value="addExp">
-                    <input type="hidden" name="id" id="id" value="">
-                    <button type="submit" name="addExperience" id="addExperience" class="btn btn-system">Save</button>
-                </div>
-                </div>
-            </div>
-        </form>
-        </div>
-    </div>
     </div> 
 
     <div class="modal fade" id="categoryMofel" role="dialog" tabindex="-1">
@@ -2035,3 +2133,248 @@
         </div>
     </div>
 </section>
+
+<script type="text/javascript">
+
+    // Add Portofilo Ajax
+    $(document).on("click",".add_portfolio_btn",function(){
+        $('#portfolioModal').modal('show');
+    });
+
+
+    $(document).ready(function (e) {
+        $('#portfolioFrm').on('submit',(function(e) {
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            e.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                type:'POST',
+                url: '{{ route("portfolio.store",$lang)}}',
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    $('.fl-portfolio').append(
+                        "<div class='fl-portfolio-item showPortfolio"+data.id+"'>"+
+                            "<div class='media'>"+
+                                "<div class='media-left'>"+
+                                    "<div class='fl-portfolio-thumb'>"+
+                                        "<img src='{{asset("+data.image+")}}' title='test project'>"+
+                                    "</div>"+
+                                "</div>"+
+                                "<div class='media-body fl-portfolio-info'>"+
+                                    "<div class='fl-portfolio-heading'>"+
+                                        "<h4 class='main-title'>"+data.title+"</h4>"+
+                                        "<span>"+data.duration+"</span>"+
+                                    "</div>"+
+                                    "<div class='pull-right userdetail-itemaction'>"+
+                                        "<a href='javascript:void(0)' class='edit editRecord' data-entity='add_portfolio' data-id='8' data-div='portfolioSection' title='Edit'><i class='fa fa-pencil'></i></a>"+
+                                        "<a href='javascript:void(0)' class='delete delRecord' data-entity='portfolio' data-id='8' title='Delete'><i class='fa fa-trash-o'></i></a>"+
+                                    "</div>"+
+                                    "<div class='fl-portfolio-sort-info'>"+data.description+"</div>"+
+                                    "<ul class='fl-portfolio-skils'>"+
+                                        "<li class='flp-skil'>"+data.skills+"</li>"+
+                                    "</ul>"+
+                                "</div>"+
+                            "</div>"+
+                        "</div>"
+                    );
+                    $('#portfolioModal').modal('hide');
+                },
+                error: function(data){
+                    alert('error');
+                }
+            
+            });
+        
+        }));
+        
+    });
+
+    // Add Education
+    $(document).on("click",".add_education_btn",function(){
+        $('#educationmodal').modal('show');
+    });
+
+    $(document).ready(function (e) {
+        $('#educationForm').on('submit',(function(e) {
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            e.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                type:'POST',
+                url: '{{ route("education.store",$lang)}}',
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    $('.fl-ducations').append(
+                        "<div class='fl-edu"+data.id+"'>"+
+                            "<div class='fl-edu-item'>"+
+                                "<div class='media'>"+
+                                    "<div class='media-left'>"+
+                                        "<div class='fl-edu-icon'>"+
+                                            "<i class='fa fa-graduation-cap' aria-hidden='true'></i>"+
+                                        "</div>"+
+                                    "</div>"+
+                                    "<div class='media-body fl-edu-info'>"+
+                                        "<div class='fl-edu-heading'>"+
+                                            "<h4 class='main-title'>"+data.degree+ "<span>"+data.institute+"</span></h4>"+
+                                            "<div class='userdetail-itemaction'>"+
+                                                "<a href='javascript:void(0)' class='edit editRecord' data-entity='add_education' data-id='6' data-div='educationSection' title='Edit'><i class='fa fa-pencil'></i></a>"+
+                                                "<a href='javascript:void(0)' class='delete delRecord' data-entity='education' data-id='6' title='Delete'><i class='fa fa-trash-o'></i></a>"+
+                                            "</div>"+
+                                            "<div class='edu-years'>"+data.from +"-"+ data.to+"</div>"+
+                                            "<div class='edu-department'>"+data.area+"</div>"+
+                                        "</div>"+      
+                                        "<div class='fl-edu-sort-info'>"+data.description+"</div>"+
+                                    "</div>"+
+                                "</div>"+
+                            "</div>"+
+                        "</div>"
+                    );
+                    $('#educationmodal').modal('hide');
+                },
+                error: function(data){
+                    alert('error');
+                }
+            });
+        
+        }));  
+    });
+
+    // Add Certifications
+    $(document).on("click",".add_certification_btn",function(){
+        $('#certificationmodal').modal('show');
+    });
+
+    $(document).ready(function (e) {
+        $('#certificationForm').on('submit',(function(e) {
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            e.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                type:'POST',
+                url: '{{route("certification.store",$lang)}}',
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    $(".certificationShow").append(
+                        "<ul class='fl-certi"+data.id+"'>"+
+                            "<div class='fl-edu-item'>"+
+                                "<div class='media  fl-certi-item'>"+
+                                    "<div class='media-left media-middle'>"+
+                                        "<div class='fl-certi-thumb'>"+
+                                            "<img src='{{asset('frontend/img/certificate.png')}}' />"+
+                                        "</div>"+
+                                    "</div>"+
+                                    "<div class='media-body fl-edu-info'>"+
+                                        "<div class='fl-edu-heading'>"+
+                                            "<h4 class='main-title'>"+data.institute+ "<span>"+data.area+"</span></h4>"+
+                                            "<div class='userdetail-itemaction'>"+
+                                                "<a href='javascript:void(0)' class='edit editRecord' data-entity='add_education' data-id='6' data-div='educationSection' title='Edit'><i class='fa fa-pencil'></i></a>"+
+                                                "<a href='javascript:void(0)' class='delete delRecord' data-entity='education' data-id='6' title='Delete'><i class='fa fa-trash-o'></i></a>"+
+                                            "</div>"+
+                                            "<div class='edu-years'>"+data.duration+"</div>"+
+                                        "</div>"+      
+                                        "<div class='fl-edu-sort-info'>"+data.description+"</div>"+
+                                    "</div>"+
+                                "</div>"+
+                            "</div>"+
+                        "</ul>"+
+                        "<hr>"
+                    );
+                    $('#certificationmodal').modal('hide');
+                },
+                error: function(data){
+                    alert('error');
+                }
+            });
+        
+        }));  
+    });
+
+    // Add Experiances
+    $(document).on("click",".add_experience_btn",function(){
+        $('#experiancemodal').modal('show');
+    });
+
+    $(document).ready(function (e) {
+        $('#experienceFrm').on('submit',(function(e) {
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            e.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                type:'POST',
+                url: '{{route("experience.store",$lang)}}',
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    $('.fl-experience').append(
+                        "<div class='fl-experience-item experience"+data.id+"'>"+
+                            "<div class='media'>"+
+                                "<div class='media-left'>"+
+                                    "<div class='fl-experience-icon'>"+
+                                        "<i class='fa fa-briefcase' aria-hidden='true'></i>"+
+                                    "</div>"+
+                                "</div>"+
+                                "<div class='media-body fl-experience-info'>"+
+                                    "<div class='fl-experience-heading'>"+
+                                        "<h4 class='main-title'>"+data.title+ "<span>"+data.company+"</span></h4>"+
+                                        "<div class='experience-years'>Currently work here</div>"+
+                                        "<div class='experience-location'><span><i class='fa fa-map-marker'></i></span>"+data.location+"</div>"+
+                                    "</div>"+
+                                    "<div class='userdetail-itemaction'>"+
+                                        "<a href='javascript:void(0)' class='edit editRecord' data-entity='add_experience' data-id='4' data-div='expSection' title='Edit'><i class='fa fa-pencil'></i></a>"+
+                                        "<a href='javascript:void(0)' class='delete delRecord' data-entity='experience' data-id='4' title='Delete'><i class='fa fa-trash-o'></i></a>"+
+                                    "</div>"+
+                                    "<div class='fl-experience-sort-info'>"+data.description+"</div>"+
+                                "</div>"+
+                            "</div>"+
+                        "</div>"
+                    );
+                },
+                error: function(data){
+                    alert('error');
+                }
+            });
+        
+        }));  
+    });
+    
+
+    $(function(){
+        var hash = window.location.hash;
+        hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+
+        $('.nav-tabs a').click(function (e) {
+        $(this).tab('show');
+        var scrollmem = $('body').scrollTop() || $('html').scrollTop();
+        window.location.hash = this.hash;
+        $('html,body').scrollTop(scrollmem);
+        });
+    });
+
+</script>

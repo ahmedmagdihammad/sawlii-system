@@ -11,6 +11,10 @@ use App\Category;
 use App\subCategory;
 use App\Service;
 use App\Job;
+use App\Portfolio;
+use App\Education;
+use App\Certification;
+use App\Experience;
 
 class ProfileController extends Controller
 {
@@ -35,14 +39,18 @@ class ProfileController extends Controller
             $categories = Category::all();
             $services = Service::where('freelancer', Auth::user()->id)->get();
             $freelancer = Freelancer::where('userid', '=', Auth::user()->id)->first();
+            $portfolios = Portfolio::where('freelancer', Auth::user()->id)->get();
+            $educations = Education::where('freelancer', Auth::user()->id)->get();
+            $certifications = Certification::where('freelancer', Auth::user()->id)->get();
+            $experiences = Experience::where('freelancer', Auth::user()->id)->get();
             if (empty($freelancer)) {
-                return view('pages.frontend.profile', compact('lang', 'users', 'freelancer', 'categories','services'));
+                return view('pages.frontend.profile', compact('lang', 'users', 'experiences', 'certifications', 'educations', 'freelancer', 'categories','services', 'portfolios'));
             } else {
                 $languag = json_encode($freelancer->languages);
                 $languages = json_decode($languag);
                 $subcategories = subCategory::all();
 
-                return view('pages.frontend.profile', compact('lang', 'users', 'freelancer', 'languages', 'categories', 'services', 'subcategories'));
+                return view('pages.frontend.profile', compact('lang', 'users', 'experiences', 'certifications', 'educations', 'freelancer', 'languages', 'categories', 'services', 'subcategories', 'portfolios'));
             }
             
         }

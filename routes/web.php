@@ -70,8 +70,8 @@ Route::group(['middleware' => ['auth']], function () {
 
         // Route Experiences
         Route::post('/experience/store', 'Frontend\ExperiencesController@store')->name('experience.store');
-        Route::post('/experience/{id}/edit', 'Frontend\ExperiencesController@update')->name('experience.edit');
-        Route::post('/experience/{id}/delete', 'Frontend\ExperiencesController@destroy')->name('experience.delete');
+        Route::post('/experience/edit', 'Frontend\ExperiencesController@update')->name('experience.edit');
+        Route::post('/experience/delete', 'Frontend\ExperiencesController@destroy')->name('experience.delete');
 
         // Login Customers
         Route::get('c/profile', 'Frontend\C_profileController@c_profile')->name('c_profile');

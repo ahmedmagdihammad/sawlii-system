@@ -42,11 +42,22 @@ class ExperiencesController extends Controller
         $experience->company = $request->exper_company;
         $experience->location = $request->exper_location;
         $experience->title = $request->exper_title;
-        $experience->from = $request->exper_from;
-        $experience->to = $request->exper_to;
+        if($request->exper_current != '1'){
+        $experience->from = date("Y-m-d", strtotime($request->exper_from));
+        $experience->to = date("Y-m-d", strtotime($request->exper_to));
+        }else{
+            $experience->from = NULL;
+            $experience->to = NULL;
+        }
+        if($request->exper_current == '1'){
         $experience->current = $request->exper_current;
+        }else{
+            $experience->current = '0';
+        }
         $experience->description = $request->exper_desc;
         $experience->save();
+        $experience->dateFrom = date('Y M', strtotime($experience->from));
+        $experience->dateTo = date('Y M', strtotime($experience->to));
         return $experience;
     }
 
@@ -79,9 +90,30 @@ class ExperiencesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $lang)
     {
-        //
+        $experience = Experience::find($request->upexper_id);
+        $experience->freelancer = Auth::user()->id;
+        $experience->company = $request->upexper_company;
+        $experience->location = $request->upexper_location;
+        $experience->title = $request->upexper_title;
+        if($request->upexper_current != '1'){
+        $experience->from = date('Y-m-d', strtotime($experience->from));
+        $experience->to = date('Y-m-d', strtotime($experience->to));
+        }else{
+            $experience->from = NULL;
+            $experience->to = NULL;
+        }
+        if($request->upexper_current == '1'){
+        $experience->current = $request->upexper_current;
+        }else{
+        $experience->current = '0';
+        }
+        $experience->description = $request->upexper_desc;
+        $experience->save();
+        $experience->dateFrom = date('M Y', strtotime($experience->from));
+        $experience->dateTo = date('M Y', strtotime($experience->to));
+        return $experience;
     }
 
     /**
@@ -90,8 +122,9 @@ class ExperiencesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request, $lang)
     {
-        //
+        Experience::find($request->experdelete_id)->delete();
+        return response()->json('Record has been deleted successfully!');
     }
 }

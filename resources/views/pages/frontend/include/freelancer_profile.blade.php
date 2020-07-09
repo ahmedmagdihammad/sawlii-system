@@ -1,6 +1,7 @@
 <script>
     $("header .navbar-default .navbar-nav>li.notification .dropdown-menu").mCustomScrollbar();       
 </script>
+
 <!-- Your share button code -->
 <div id="main-content">
   <!-- Dashboard Navigation -->
@@ -345,32 +346,31 @@
                                                 </div>
                                                 <div class="panel-body">
                                                     <div class="fl-ducations">
+                                                        <div class="fl-edu">
                                                         @foreach($educations as $education)
-                                                        <div class="fl-edu{{$education->id}}">
-                                                            <div class="fl-edu-item">
-                                                                <div class="media">
-                                                                    <div class="media-left">
-                                                                        <div class="fl-edu-icon">
-                                                                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                                <div class="fl-edu-item edcateShow{{$education->id}}">
+                                                                    <div class="media">
+                                                                        <div class="media-left">
+                                                                            <div class="fl-edu-icon">
+                                                                                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="media-body fl-edu-info">
+                                                                            <div class="fl-edu-heading">
+                                                                                <h4 class="main-title">{{$education->degree}} <span>{{$education->institute}}</span></h4>
+                                                                                <div class="userdetail-itemaction">
+                                                                                    <a href="javascript:void(0)" class="edu_edit editRecord" data-id="{{$education->id}}" data-institute="{{$education->institute}}" data-from="{{$education->from}}" data-to="{{$education->to}}" data-degree="{{$education->degree}}" data-area="{{$education->area}}" data-description="{{$education->description}}" title="Edit"><i class="fa fa-pencil"></i></a>
+                                                                                    <a href="javascript:void(0)" class="edu_delete delRecord" data-id="{{$education->id}}" title="Delete"><i class="fa fa-trash-o"></i></a>
+                                                                                </div>
+                                                                                <div class="edu-years">{{$education->from}} - {{$education->to}}</div>
+                                                                                <div class="edu-department">{{$education->area}}</div>
+                                                                            </div>      
+                                                                            <div class="fl-edu-sort-info">{{$education->description}}</div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="media-body fl-edu-info">
-                                                                        <div class="fl-edu-heading">
-                                                                            <h4 class="main-title">{{$education->degree}} <span>{{$education->institute}}</span></h4>
-                                                                            <div class="userdetail-itemaction">
-                                                                                <a href="javascript:void(0)" class="edu_edit editRecord" data-id="{{$education->id}}" data-institute="{{$education->institute}}" data-from="{{$education->from}}" data-to="{{$education->to}}" data-degree="{{$education->degree}}" data-area="{{$education->area}}" data-description="{{$education->description}}" title="Edit"><i class="fa fa-pencil"></i></a>
-                                                                                <a href="javascript:void(0)" class="edu_delete delRecord" data-id="{{$education->id}}" title="Delete"><i class="fa fa-trash-o"></i></a>
-                                                                            </div>
-                                                                            <div class="edu-years">{{$education->from}} - {{$education->to}}</div>
-                                                                            <div class="edu-department">{{$education->area}}</div>
-                                                                        </div>      
-                                                                        <div class="fl-edu-sort-info">{{$education->description}}</div>
-                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <hr>
-                                                        </div>
                                                         @endforeach
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -398,8 +398,8 @@
                                                                         <div class="experience-years">{{$certifcat->duration}}</div>
                                                                         <div class="experience-location"><span><i class="fa fa-map-marker"></i></span>{{$certifcat->area}}</div>
                                                                         <div class="userdetail-itemaction">
-                                                                            <a href="javascript:void(0)" class="edit editRecord" data-id="{{$certifcat->id}}" data-institute="{{$certifcat->institute}}" data-duration="{{$certifcat->duration}}" data-area="{{$certifcat->area}}" data-description="{{$certifcat->description}}" title="Edit" ><i class="fa fa-pencil"></i></a>
-                                                                            <a href="javascript:void(0)" class="delete delRecord" data-id="{{$certifcat->id}}" title="Delete"> <i class="fa fa-trash-o"></i></a>
+                                                                            <a href="javascript:void(0)" class="certf_edit editRecord" data-id="{{$certifcat->id}}" data-institute="{{$certifcat->institute}}" data-duration="{{$certifcat->duration}}" data-area="{{$certifcat->area}}" data-description="{{$certifcat->description}}" title="Edit" ><i class="fa fa-pencil"></i></a>
+                                                                            <a href="javascript:void(0)" class="certf_delete delRecord" data-id="{{$certifcat->id}}" title="Delete"> <i class="fa fa-trash-o"></i></a>
                                                                         </div>
                                                                     </div>
                                                                     <div class="fl-experience-sort-info">{{$certifcat->description}}</div>
@@ -431,12 +431,12 @@
                                                                 <div class="media-body fl-experience-info">
                                                                     <div class="fl-experience-heading">
                                                                         <h4 class="main-title">{{$exper->title}} <span>{{$exper->company}}</span></h4>
-                                                                        <div class="experience-years">@if($exper->current == '0') {{$exper->from}} - {{$exper->to}} @else Currently work here @endif</div>
+                                                                        <div class="experience-years">@if($exper->current == '0') {{ date('M Y', strtotime($exper->from)) }} - {{ date('M Y', strtotime($exper->to)) }} @else Currently work here @endif</div>
                                                                         <div class="experience-location"><span><i class="fa fa-map-marker"></i></span>{{$exper->location}}</div>
                                                                     </div>
                                                                     <div class="userdetail-itemaction">
-                                                                        <a href="javascript:void(0)" class="edit editRecord" data-entity="add_experience" data-id="4" data-div="expSection" title="Edit"><i class="fa fa-pencil"></i></a>
-                                                                        <a href="javascript:void(0)" class="delete delRecord" data-entity="experience" data-id="4" title="Delete"><i class="fa fa-trash-o"></i></a>
+                                                                        <a href="javascript:void(0)" class="exper_edit editRecord" data-id="{{$exper->id}}" data-company="{{$exper->company}}" data-location="{{$exper->location}}" data-title="{{$exper->title}}" data-from="{{$exper->from}}" data-to="{{$exper->to}}" data-description="{{$exper->description}}" data-current="{{$exper->current}}" title="Edit"><i class="fa fa-pencil"></i></a>
+                                                                        <a href="javascript:void(0)" class="exper_delete delRecord" data-id="{{$exper->id}}" title="Delete"><i class="fa fa-trash-o"></i></a>
                                                                     </div>
                                                                     <div class="fl-experience-sort-info">{{$exper->description}}</div>
                                                                 </div>
@@ -1206,12 +1206,13 @@
                     </h4>
                     </div>
                     <div class="modal-body">
+                        <input type="hidden" class="form-control upcert_id" name="upcert_id" value="">
                         <label class="red_error error_dur"></label>
                         <div class="form-group">
                             <label>
                             Institute
                             </label>
-                            <input class="form-control" name="upcert_institute" class="upcert_institute" id="#"  value=""/>
+                            <input class="form-control upcert_institute" name="upcert_institute" value=""/>
                         </div>
                         <div class="form-group">
                             <label>
@@ -1253,6 +1254,36 @@
         </div>
     </div> 
 
+    <div class="modal fade" id="certDelete" role="dialog" data-backdrop="static" tabindex="-1">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <form name="#" id="certDeleteFrm" method="post">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                        </button>
+                        <h4 class="modal-title">
+                        Remove
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                        Are you sure you want to remove ?
+                        </p>
+                    </div>
+                    <div class="modal-footer">                   
+                    <div class="theme-button">
+                        <input type="hidden" name="certdelete_id" class="certdelete_id" value="">
+                        <button type="submit" class="btn btn-system">Delete</button>
+                    </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div class="expSection">
         <div class="modal fade " id="experiancemodal" id="#" role="dialog" tabindex="-1">
             <div class="modal-dialog">
@@ -1292,30 +1323,23 @@
                                 Experience Duration
                             </label>
                             <div class="row">
-                                <div class="col-md-3 col-sm-3">
-                                <label>From</label>
-                                <select name="exper_start_month" id="start_month" class="form-control">
-                                    <option value="">--Select Month--</option><option value='January' >January</option><option value='February' >February</option><option value='March' >March</option><option value='April' >April</option><option value='May' >May</option><option value='June' >June</option><option value='July' >July</option><option value='August' >August</option><option value='September' >September</option><option value='October' >October</option><option value='November' >November</option><option value='December' >December</option>
-                                </select>
+                                <div class="col-md-6 col-sm-6">
+                                    <label>From</label>
+                                    <div class="input-group date" data-provide="datepicker" data-date-format="mm-dd-yyyy">
+                                        <input type="text" class="form-control" name="exper_from">
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon"><i class="fa fa-th"></i></span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-3 col-sm-3">
-                                <label>&nbsp;</label>
-                                <select name="exper_start_year" id="start_yr" class="form-control">
-                                    <option value="">--Select Year--</option><option value='2020' >2020</option><option value='2019' >2019</option><option value='2018' >2018</option><option value='2017' >2017</option><option value='2016' >2016</option><option value='2015' >2015</option><option value='2014' >2014</option><option value='2013' >2013</option><option value='2012' >2012</option><option value='2011' >2011</option><option value='2010' >2010</option><option value='2009' >2009</option><option value='2008' >2008</option><option value='2007' >2007</option><option value='2006' >2006</option><option value='2005' >2005</option><option value='2004' >2004</option><option value='2003' >2003</option><option value='2002' >2002</option><option value='2001' >2001</option><option value='2000' >2000</option><option value='1999' >1999</option><option value='1998' >1998</option><option value='1997' >1997</option><option value='1996' >1996</option><option value='1995' >1995</option><option value='1994' >1994</option><option value='1993' >1993</option><option value='1992' >1992</option><option value='1991' >1991</option><option value='1990' >1990</option><option value='1989' >1989</option><option value='1988' >1988</option><option value='1987' >1987</option><option value='1986' >1986</option><option value='1985' >1985</option><option value='1984' >1984</option><option value='1983' >1983</option><option value='1982' >1982</option><option value='1981' >1981</option><option value='1980' >1980</option><option value='1979' >1979</option><option value='1978' >1978</option><option value='1977' >1977</option><option value='1976' >1976</option><option value='1975' >1975</option><option value='1974' >1974</option><option value='1973' >1973</option><option value='1972' >1972</option><option value='1971' >1971</option><option value='1970' >1970</option><option value='1969' >1969</option><option value='1968' >1968</option><option value='1967' >1967</option><option value='1966' >1966</option><option value='1965' >1965</option><option value='1964' >1964</option><option value='1963' >1963</option><option value='1962' >1962</option><option value='1961' >1961</option><option value='1960' >1960</option><option value='1959' >1959</option><option value='1958' >1958</option><option value='1957' >1957</option><option value='1956' >1956</option><option value='1955' >1955</option><option value='1954' >1954</option><option value='1953' >1953</option><option value='1952' >1952</option><option value='1951' >1951</option><option value='1950' >1950</option><option value='1949' >1949</option><option value='1948' >1948</option><option value='1947' >1947</option><option value='1946' >1946</option><option value='1945' >1945</option><option value='1944' >1944</option><option value='1943' >1943</option><option value='1942' >1942</option><option value='1941' >1941</option><option value='1940' >1940</option><option value='1939' >1939</option><option value='1938' >1938</option><option value='1937' >1937</option><option value='1936' >1936</option><option value='1935' >1935</option><option value='1934' >1934</option><option value='1933' >1933</option><option value='1932' >1932</option><option value='1931' >1931</option><option value='1930' >1930</option><option value='1929' >1929</option><option value='1928' >1928</option><option value='1927' >1927</option><option value='1926' >1926</option><option value='1925' >1925</option><option value='1924' >1924</option><option value='1923' >1923</option><option value='1922' >1922</option><option value='1921' >1921</option><option value='1920' >1920</option><option value='1919' >1919</option><option value='1918' >1918</option><option value='1917' >1917</option><option value='1916' >1916</option><option value='1915' >1915</option><option value='1914' >1914</option><option value='1913' >1913</option><option value='1912' >1912</option><option value='1911' >1911</option><option value='1910' >1910</option><option value='1909' >1909</option><option value='1908' >1908</option><option value='1907' >1907</option><option value='1906' >1906</option><option value='1905' >1905</option><option value='1904' >1904</option><option value='1903' >1903</option><option value='1902' >1902</option><option value='1901' >1901</option><option value='1900' >1900</option>
-                                </select>
-                                </div>
-
-                                <div class="col-md-3 col-sm-3">
-                                <label>To</label>
-                                <select name="exper_end_month" id="end_month" class="form-control">
-                                    <option value="">--Select Month--</option><option value='January' >January</option><option value='February' >February</option><option value='March' >March</option><option value='April' >April</option><option value='May' >May</option><option value='June' >June</option><option value='July' >July</option><option value='August' >August</option><option value='September' >September</option><option value='October' >October</option><option value='November' >November</option><option value='December' >December</option>
-                                </select>
-                                </div>
-                                <div class="col-md-3 col-sm-3">
-                                <label>&nbsp;</label>
-                                <select name="exper_end_year" id="end_yr" class="form-control">
-                                    <option value="">--Select Year--</option><option value='2020' >2020</option><option value='2019' >2019</option><option value='2018' >2018</option><option value='2017' >2017</option><option value='2016' >2016</option><option value='2015' >2015</option><option value='2014' >2014</option><option value='2013' >2013</option><option value='2012' >2012</option><option value='2011' >2011</option><option value='2010' >2010</option><option value='2009' >2009</option><option value='2008' >2008</option><option value='2007' >2007</option><option value='2006' >2006</option><option value='2005' >2005</option><option value='2004' >2004</option><option value='2003' >2003</option><option value='2002' >2002</option><option value='2001' >2001</option><option value='2000' >2000</option><option value='1999' >1999</option><option value='1998' >1998</option><option value='1997' >1997</option><option value='1996' >1996</option><option value='1995' >1995</option><option value='1994' >1994</option><option value='1993' >1993</option><option value='1992' >1992</option><option value='1991' >1991</option><option value='1990' >1990</option><option value='1989' >1989</option><option value='1988' >1988</option><option value='1987' >1987</option><option value='1986' >1986</option><option value='1985' >1985</option><option value='1984' >1984</option><option value='1983' >1983</option><option value='1982' >1982</option><option value='1981' >1981</option><option value='1980' >1980</option><option value='1979' >1979</option><option value='1978' >1978</option><option value='1977' >1977</option><option value='1976' >1976</option><option value='1975' >1975</option><option value='1974' >1974</option><option value='1973' >1973</option><option value='1972' >1972</option><option value='1971' >1971</option><option value='1970' >1970</option><option value='1969' >1969</option><option value='1968' >1968</option><option value='1967' >1967</option><option value='1966' >1966</option><option value='1965' >1965</option><option value='1964' >1964</option><option value='1963' >1963</option><option value='1962' >1962</option><option value='1961' >1961</option><option value='1960' >1960</option><option value='1959' >1959</option><option value='1958' >1958</option><option value='1957' >1957</option><option value='1956' >1956</option><option value='1955' >1955</option><option value='1954' >1954</option><option value='1953' >1953</option><option value='1952' >1952</option><option value='1951' >1951</option><option value='1950' >1950</option><option value='1949' >1949</option><option value='1948' >1948</option><option value='1947' >1947</option><option value='1946' >1946</option><option value='1945' >1945</option><option value='1944' >1944</option><option value='1943' >1943</option><option value='1942' >1942</option><option value='1941' >1941</option><option value='1940' >1940</option><option value='1939' >1939</option><option value='1938' >1938</option><option value='1937' >1937</option><option value='1936' >1936</option><option value='1935' >1935</option><option value='1934' >1934</option><option value='1933' >1933</option><option value='1932' >1932</option><option value='1931' >1931</option><option value='1930' >1930</option><option value='1929' >1929</option><option value='1928' >1928</option><option value='1927' >1927</option><option value='1926' >1926</option><option value='1925' >1925</option><option value='1924' >1924</option><option value='1923' >1923</option><option value='1922' >1922</option><option value='1921' >1921</option><option value='1920' >1920</option><option value='1919' >1919</option><option value='1918' >1918</option><option value='1917' >1917</option><option value='1916' >1916</option><option value='1915' >1915</option><option value='1914' >1914</option><option value='1913' >1913</option><option value='1912' >1912</option><option value='1911' >1911</option><option value='1910' >1910</option><option value='1909' >1909</option><option value='1908' >1908</option><option value='1907' >1907</option><option value='1906' >1906</option><option value='1905' >1905</option><option value='1904' >1904</option><option value='1903' >1903</option><option value='1902' >1902</option><option value='1901' >1901</option><option value='1900' >1900</option>
-                                </select>
+                                <div class="col-md-6 col-sm-6">
+                                    <label>To</label>
+                                    <div class="input-group date" data-provide="datepicker" data-date-format="mm-dd-yyyy">
+                                        <input type="text" class="form-control" name="exper_to">
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon"><i class="fa fa-th"></i></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1347,6 +1371,126 @@
                 </div>
             </form>
             </div>
+        </div>
+    </div>
+
+    <div class="editExpSection">
+        <div class="modal fade " id="editExperiancemodal" id="#" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+            <form method="post" id="editExperienceFrm">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        ×
+                    </button>
+                    <h4 class="modal-title">
+                        Add Experience
+                    </h4>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" class="form-control upexper_id" name="upexper_id">
+                        <div class="form-group">
+                            <label>
+                                Company Name
+                            </label>
+                            <input class="form-control upexper_company"  name="upexper_company" value="">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Location
+                            </label>
+                            <input type="text" name="upexper_location" class="form-control upexper_location" value="">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Title
+                            </label>
+                            <input class="form-control upexper_title" name="upexper_title" value="">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Experience Duration
+                            </label>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <label>From</label>
+                                    <div class="input-group date" data-provide="datepicker" data-date-format="mm-dd-yyyy">
+                                        <input type="text" class="form-control upexper_from" name="upexper_from">
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon"><i class="fa fa-th"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <label>To</label>
+                                    <div class="input-group date" data-provide="datepicker" data-date-format="mm-dd-yyyy">
+                                        <input type="text" class="form-control upexper_to" name="upexper_to">
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon"><i class="fa fa-th"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Description
+                            </label>
+
+                            <textarea name="upexper_desc" class="form-control upexper_desc"></textarea>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="signin-check">I currently work here
+                                <input type="checkbox" class="upexper_current" name="upexper_current" >
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    <!-- <div class="theme-button-default">
+                        <a href="#" data-dismiss="modal">Cancel</a>
+                    </div> -->
+                    <div class="theme-button">
+                        <input type="hidden" name="action" id="action" value="addExp">
+                        <input type="hidden" name="id" id="id" value="">
+                        <button type="submit" class="btn btn-system">Save</button>
+                    </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="experDelete" role="dialog" data-backdrop="static" tabindex="-1">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <form id="experDeleteFrm" method="post">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                        </button>
+                        <h4 class="modal-title">
+                        Remove
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                        Are you sure you want to remove ?
+                        </p>
+                    </div>
+                    <div class="modal-footer">                   
+                    <div class="theme-button">
+                        <input type="hidden" name="experdelete_id" class="experdelete_id" value="">
+                        <button type="submit" class="btn btn-system">Delete</button>
+                    </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div> 
 
@@ -2382,6 +2526,11 @@
 
 <script type="text/javascript">
 
+    $('.datepicker').datepicker({
+        format: 'mm/dd/yyyy',
+        startDate: '-3d'
+    });
+
     // Add Portofilo Ajax
     $(document).on("click",".add_portfolio_btn",function(){
         $('#portfolioModal').modal('show');
@@ -2568,30 +2717,27 @@
                 contentType: false,
                 processData: false,
                 success:function(data){
-                    $('.fl-ducations').append(
-                        "<div class='fl-edu"+data.id+"'>"+
-                            "<div class='fl-edu-item'>"+
-                                "<div class='media'>"+
-                                    "<div class='media-left'>"+
-                                        "<div class='fl-edu-icon'>"+
-                                            "<i class='fa fa-graduation-cap' aria-hidden='true'></i>"+
-                                        "</div>"+
-                                    "</div>"+
-                                    "<div class='media-body fl-edu-info'>"+
-                                        "<div class='fl-edu-heading'>"+
-                                            "<h4 class='main-title'>"+data.degree+ "<span>"+data.institute+"</span></h4>"+
-                                            "<div class='userdetail-itemaction'>"+
-                                                "<a href='javascript:void(0)'  class='edu_edit editRecord' data-id='"+data.id+"' data-institute="+data.institute+" data-from='"+data.from+"' data-to='"+data.to+"' data-degree='"+data.degree+"' data-area='"+data.area+"' data-description='"+data.description+"' title='Edit'><i class='fa fa-pencil'></i></a>"+
-                                                "<a href='javascript:void(0)' class='edu_delete delRecord' data-id='"+data.id+"' title='Delete'><i class='fa fa-trash-o'></i></a>"+
-                                            "</div>"+
-                                            "<div class='edu-years'>"+data.from +"-"+ data.to+"</div>"+
-                                            "<div class='edu-department'>"+data.area+"</div>"+
-                                        "</div>"+      
-                                        "<div class='fl-edu-sort-info'>"+data.description+"</div>"+
+                    $('.fl-edu').append(
+                        "<div class='fl-edu-item edcateShow"+data.id+"'>"+
+                            "<div class='media'>"+
+                                "<div class='media-left'>"+
+                                    "<div class='fl-edu-icon'>"+
+                                        "<i class='fa fa-graduation-cap' aria-hidden='true'></i>"+
                                     "</div>"+
                                 "</div>"+
+                                "<div class='media-body fl-edu-info'>"+
+                                    "<div class='fl-edu-heading'>"+
+                                        "<h4 class='main-title'>"+data.degree+ "<span>"+data.institute+"</span></h4>"+
+                                        "<div class='userdetail-itemaction'>"+
+                                            "<a href='javascript:void(0)'  class='edu_edit editRecord' data-id='"+data.id+"' data-institute="+data.institute+" data-from='"+data.from+"' data-to='"+data.to+"' data-degree='"+data.degree+"' data-area='"+data.area+"' data-description='"+data.description+"' title='Edit'><i class='fa fa-pencil'></i></a>"+
+                                            "<a href='javascript:void(0)' class='edu_delete delRecord' data-id='"+data.id+"' title='Delete'><i class='fa fa-trash-o'></i></a>"+
+                                        "</div>"+
+                                        "<div class='edu-years'>"+data.from +"-"+ data.to+"</div>"+
+                                        "<div class='edu-department'>"+data.area+"</div>"+
+                                    "</div>"+      
+                                    "<div class='fl-edu-sort-info'>"+data.description+"</div>"+
+                                "</div>"+
                             "</div>"+
-                            "<hr>"+
                         "</div>"
                     );
                     $('#educationmodal').modal('hide');
@@ -2635,30 +2781,27 @@
                 contentType: false,
                 processData: false,
                 success:function(data){
-                    $('.fl-edu'+eduId).replaceWith(
-                        "<div class='fl-edu"+data.id+"'>"+
-                            "<div class='fl-edu-item'>"+
-                                "<div class='media'>"+
-                                    "<div class='media-left'>"+
-                                        "<div class='fl-edu-icon'>"+
-                                            "<i class='fa fa-graduation-cap' aria-hidden='true'></i>"+
-                                        "</div>"+
-                                    "</div>"+
-                                    "<div class='media-body fl-edu-info'>"+
-                                        "<div class='fl-edu-heading'>"+
-                                            "<h4 class='main-title'>"+data.degree+ "<span>"+data.institute+"</span></h4>"+
-                                            "<div class='userdetail-itemaction'>"+
-                                                "<a href='javascript:void(0)'  class='edu_edit editRecord' data-id='"+data.id+"' data-institute="+data.institute+" data-from='"+data.from+"' data-to='"+data.to+"' data-degree='"+data.degree+"' data-area='"+data.area+"' data-description='"+data.description+"' title='Edit'><i class='fa fa-pencil'></i></a>"+
-                                                "<a href='javascript:void(0)' class='edu_delete delRecord' data-id='"+data.id+"' title='Delete'><i class='fa fa-trash-o'></i></a>"+
-                                            "</div>"+
-                                            "<div class='edu-years'>"+data.from +"-"+ data.to+"</div>"+
-                                            "<div class='edu-department'>"+data.area+"</div>"+
-                                        "</div>"+      
-                                        "<div class='fl-edu-sort-info'>"+data.description+"</div>"+
+                    $('.edcateShow'+eduId).replaceWith(
+                        "<div class='fl-edu-item edcateShow"+eduId+"'>"+
+                            "<div class='media'>"+
+                                "<div class='media-left'>"+
+                                    "<div class='fl-edu-icon'>"+
+                                        "<i class='fa fa-graduation-cap' aria-hidden='true'></i>"+
                                     "</div>"+
                                 "</div>"+
+                                "<div class='media-body fl-edu-info'>"+
+                                    "<div class='fl-edu-heading'>"+
+                                        "<h4 class='main-title'>"+data.degree+ "<span>"+data.institute+"</span></h4>"+
+                                        "<div class='userdetail-itemaction'>"+
+                                            "<a href='javascript:void(0)'  class='edu_edit editRecord' data-id='"+data.id+"' data-institute="+data.institute+" data-from='"+data.from+"' data-to='"+data.to+"' data-degree='"+data.degree+"' data-area='"+data.area+"' data-description='"+data.description+"' title='Edit'><i class='fa fa-pencil'></i></a>"+
+                                            "<a href='javascript:void(0)' class='edu_delete delRecord' data-id='"+data.id+"' title='Delete'><i class='fa fa-trash-o'></i></a>"+
+                                        "</div>"+
+                                        "<div class='edu-years'>"+data.from +"-"+ data.to+"</div>"+
+                                        "<div class='edu-department'>"+data.area+"</div>"+
+                                    "</div>"+      
+                                    "<div class='fl-edu-sort-info'>"+data.description+"</div>"+
+                                "</div>"+
                             "</div>"+
-                            "<hr>"+
                         "</div>"
                     );
                     $('#editEducationmodal').modal('hide');
@@ -2696,7 +2839,7 @@
                 contentType: false,
                 processData: false,
                 success:function(data){
-                    $('.fl-edu'+deleteId).remove();
+                    $('.edcateShow'+deleteId).remove();
                     $('#eduDelete').modal('hide');
                 },
                 error: function(data){
@@ -2707,6 +2850,7 @@
         }));
         
     });
+
 
     // Add Certifications
     $(document).on("click",".add_certification_btn",function(){
@@ -2743,8 +2887,8 @@
                                     "<div class='experience-years'>"+data.duration+"</div>"+
                                     "<div class='experience-location'><span><i class='fa fa-map-marker'></i></span>"+data.area+"</div>"+
                                     "<div class='userdetail-itemaction'>"+
-                                        "<a href='javascript:void(0)' class='edit editRecord' data-id='"+data.id+"' data-institute='"+data.institute+"' data-duration='"+data.duration+"' data-area='"+data.area+"' data-description='"+data.description+"' title='Edit' ><i class='fa fa-pencil'></i></a>"+
-                                        "<a href='javascript:void(0)' class='delete delRecord' data-id='"+data.id+"' title='Delete'> <i class='fa fa-trash-o'></i></a>"+
+                                        "<a href='javascript:void(0)' class='certf_edit editRecord' data-id='"+data.id+"' data-institute='"+data.institute+"' data-duration='"+data.duration+"' data-area='"+data.area+"' data-description='"+data.description+"' title='Edit' ><i class='fa fa-pencil'></i></a>"+
+                                        "<a href='javascript:void(0)' class='certf_delete delRecord' data-id='"+data.id+"' title='Delete'> <i class='fa fa-trash-o'></i></a>"+
                                     "</div>"+
                                 "</div>"+
                                 "<div class='fl-experience-sort-info'>"+data.description+"</div>"+
@@ -2761,7 +2905,105 @@
         }));  
     });
 
-    // Add Experiances
+    // Update Certifications Ajax
+    $(document).on("click",".certf_edit",function(){
+        $('#editCertificationmodal').modal('show');
+        $('#editCertificationForm').show();
+        $('.upcert_id').val($(this).data('id'));
+        $('.upcert_institute').val($(this).data('institute'));
+        $('.upcert_duration').append('<option value="'+$(this).data('duration')+'" selected>'+$(this).data('duration')+"</option>");
+        $('.upcert_area').val($(this).data('area'));
+        $('.upcert_desc').text($(this).data('description'));
+    });
+
+    $(document).ready(function (e) {
+        $('#editCertificationForm').on('submit',(function(e) {
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            e.preventDefault();
+            var formData = new FormData(this);
+            var certId = $('.upcert_id').val();
+            $.ajax({
+                type:'POST',
+                url: '{{route("certification.edit",$lang)}}',
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    $('.media'+certId).replaceWith(
+                        "<li class='media"+data.id+" fl-certi-item fl-experience-item'>"+
+                            "<div class='media-left'>"+
+                                "<div class='fl-certi-thumb fl-experience-icon'>"+
+                                    "<img src='{{asset('frontend/img/certificate.png')}}' />"+
+                                "</div>"+
+                            "</div>"+
+                            "<div class='media-body media-middle fl-certi-info fl-experience-info'>"+
+                                "<div class='fl-certi-heading fl-experience-heading'>"+
+                                    "<h4 class='main-title'>"+data.institute+"</h4>"+
+                                    "<div class='experience-years'>"+data.duration+"</div>"+
+                                    "<div class='experience-location'><span><i class='fa fa-map-marker'></i></span>"+data.area+"</div>"+
+                                    "<div class='userdetail-itemaction'>"+
+                                        "<a href='javascript:void(0)' class='certf_edit editRecord' data-id='"+data.id+"' data-institute='"+data.institute+"' data-duration='"+data.duration+"' data-area='"+data.area+"' data-description='"+data.description+"' title='Edit' ><i class='fa fa-pencil'></i></a>"+
+                                        "<a href='javascript:void(0)' class='certf_delete delRecord' data-id='"+data.id+"' title='Delete'> <i class='fa fa-trash-o'></i></a>"+
+                                    "</div>"+
+                                "</div>"+
+                                "<div class='fl-experience-sort-info'>"+data.description+"</div>"+
+                            "</div>"+
+                        "</li>"
+                    );
+                    $('#editCertificationmodal').modal('hide');
+                },
+                error: function(data){
+                    alert('error');
+                }
+            });
+        
+        }));  
+    });
+
+    // Delete Certifications Ajax
+    $(document).on("click",".certf_delete",function(){
+        $('#certDelete').modal('show');
+        $('#certDeleteFrm').show();
+        $('.certdelete_id').val($(this).data('id'));
+    });
+
+    $(document).ready(function (e) {
+        $('#certDeleteFrm').on('submit',(function(e) {
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            e.preventDefault();
+            var formData = new FormData(this);
+            var deleteId = $('.certdelete_id').val();
+            $.ajax({
+                type:'POST',
+                url: '{{route("certification.delete",$lang)}}',
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    $('.media'+deleteId).remove();
+                    $('#certDelete').modal('hide');
+                },
+                error: function(data){
+                    alert('error');
+                }
+            
+            });
+        }));
+        
+    });
+
+
+    // Add Experiances Ajax
     $(document).on("click",".add_experience_btn",function(){
         $('#experiancemodal').modal('show');
     });
@@ -2783,6 +3025,7 @@
                 contentType: false,
                 processData: false,
                 success:function(data){
+                    if (data.current == '1') {
                     $('.fl-experience').append(
                         "<div class='fl-experience-item experience"+data.id+"'>"+
                             "<div class='media'>"+
@@ -2798,14 +3041,40 @@
                                         "<div class='experience-location'><span><i class='fa fa-map-marker'></i></span>"+data.location+"</div>"+
                                     "</div>"+
                                     "<div class='userdetail-itemaction'>"+
-                                        "<a href='javascript:void(0)' class='edit editRecord' data-entity='add_experience' data-id='4' data-div='expSection' title='Edit'><i class='fa fa-pencil'></i></a>"+
-                                        "<a href='javascript:void(0)' class='delete delRecord' data-entity='experience' data-id='4' title='Delete'><i class='fa fa-trash-o'></i></a>"+
+                                        "<a href='javascript:void(0)' class='exper_edit editRecord' data-id="+data.id+" data-company="+data.company+" data-location="+data.location+" data-title="+data.title+" data-from="+data.from+" data-to="+data.to+" data-description="+data.description+" data-current="+data.current+" title='Edit'><i class='fa fa-pencil'></i></a>"+
+                                        "<a href='javascript:void(0)' class='exper_delete delRecord' data-id="+data.id+" title='Delete'><i class='fa fa-trash-o'></i></a>"+
                                     "</div>"+
                                     "<div class='fl-experience-sort-info'>"+data.description+"</div>"+
                                 "</div>"+
                             "</div>"+
                         "</div>"
                     );
+                    }else{
+                        $('.fl-experience').append(
+                            "<div class='fl-experience-item experience"+data.id+"'>"+
+                                "<div class='media'>"+
+                                    "<div class='media-left'>"+
+                                        "<div class='fl-experience-icon'>"+
+                                            "<i class='fa fa-briefcase' aria-hidden='true'></i>"+
+                                        "</div>"+
+                                    "</div>"+
+                                    "<div class='media-body fl-experience-info'>"+
+                                        "<div class='fl-experience-heading'>"+
+                                            "<h4 class='main-title'>"+data.title+ "<span>"+data.company+"</span></h4>"+
+                                            "<div class='experience-years'>"+data.dateFrom+ "-" +data.dateTo+"</div>"+
+                                            "<div class='experience-location'><span><i class='fa fa-map-marker'></i></span>"+data.location+"</div>"+
+                                        "</div>"+
+                                        "<div class='userdetail-itemaction'>"+
+                                            "<a href='javascript:void(0)' class='exper_edit editRecord' data-id="+data.id+" data-company="+data.company+" data-location="+data.location+" data-title="+data.title+" data-from="+data.from+" data-to="+data.to+" data-description="+data.description+" data-current="+data.current+" title='Edit'><i class='fa fa-pencil'></i></a>"+
+                                            "<a href='javascript:void(0)' class='exper_delete delRecord' data-id="+data.id+" title='Delete'><i class='fa fa-trash-o'></i></a>"+
+                                        "</div>"+
+                                        "<div class='fl-experience-sort-info'>"+data.description+"</div>"+
+                                    "</div>"+
+                                "</div>"+
+                            "</div>"
+                        );
+                    }
+                    $('#experiancemodal').modal('hide');
                 },
                 error: function(data){
                     alert('error');
@@ -2814,7 +3083,141 @@
         
         }));  
     });
-    
+
+    // Update Experiances Ajax
+    $(document).on("click",".exper_edit",function(){
+        $('#editExperiancemodal').modal('show');
+        $('#editExperienceFrm').show();
+        $('.upexper_id').val($(this).data('id'));
+        $('.upexper_company').val($(this).data('company'));
+        $('.upexper_location').val($(this).data('location'));
+        $('.upexper_title').val($(this).data('title'));
+        $('.upexper_from').val($(this).data('from'));
+        $('.upexper_to').val($(this).data('to'));
+        $('.upexper_desc').val($(this).data('description'));
+        if ($(this).data('current') == '1') {
+            $('.upexper_current').val($(this).data('current'));
+            $('.upexper_current').attr('checked', 'checked');
+        }else if($(this).data('current') == '0'){
+            $('.upexper_current').val($(this).data('current'));
+            $('.upexper_current').removeAttr('checked');
+        }
+    });
+
+    $(document).ready(function (e) {
+        $('#editExperienceFrm').on('submit',(function(e) {
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            e.preventDefault();
+            var formData = new FormData(this);
+            var experId = $('.upexper_id').val();
+            $.ajax({
+                type:'POST',
+                url: '{{route("experience.edit",$lang)}}',
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    if (data.current == 1) {
+                    $('.experience'+experId).replaceWith(
+                        "<div class='fl-experience-item experience"+data.id+"'>"+
+                            "<div class='media'>"+
+                                "<div class='media-left'>"+
+                                    "<div class='fl-experience-icon'>"+
+                                        "<i class='fa fa-briefcase' aria-hidden='true'></i>"+
+                                    "</div>"+
+                                "</div>"+
+                                "<div class='media-body fl-experience-info'>"+
+                                    "<div class='fl-experience-heading'>"+
+                                        "<h4 class='main-title'>"+data.title+ "<span>"+data.company+"</span></h4>"+
+                                        "<div class='experience-years'>Currently work here</div>"+
+                                        "<div class='experience-location'><span><i class='fa fa-map-marker'></i></span>"+data.location+"</div>"+
+                                    "</div>"+
+                                    "<div class='userdetail-itemaction'>"+
+                                        "<a href='javascript:void(0)' class='exper_edit editRecord' data-id="+data.id+" data-company="+data.company+" data-location="+data.location+" data-title="+data.title+" data-from="+data.from+" data-to="+data.to+" data-description="+data.description+" data-current="+data.current+" title='Edit'><i class='fa fa-pencil'></i></a>"+
+                                        "<a href='javascript:void(0)' class='exper_delete delRecord' data-id="+data.id+" title='Delete'><i class='fa fa-trash-o'></i></a>"+
+                                    "</div>"+
+                                    "<div class='fl-experience-sort-info'>"+data.description+"</div>"+
+                                "</div>"+
+                            "</div>"+
+                        "</div>"
+                    );
+                    }else{
+                    $('.experience'+experId).replaceWith(
+                        "<div class='fl-experience-item experience"+data.id+"'>"+
+                            "<div class='media'>"+
+                                "<div class='media-left'>"+
+                                    "<div class='fl-experience-icon'>"+
+                                        "<i class='fa fa-briefcase' aria-hidden='true'></i>"+
+                                    "</div>"+
+                                "</div>"+
+                                "<div class='media-body fl-experience-info'>"+
+                                    "<div class='fl-experience-heading'>"+
+                                        "<h4 class='main-title'>"+data.title+ "<span>"+data.company+"</span></h4>"+
+                                        "<div class='experience-years'>"+data.dateFrom+ " - " +data.dateTo+"</div>"+
+                                        "<div class='experience-location'><span><i class='fa fa-map-marker'></i></span>"+data.location+"</div>"+
+                                    "</div>"+
+                                    "<div class='userdetail-itemaction'>"+
+                                        "<a href='javascript:void(0)' class='exper_edit editRecord' data-id="+data.id+" data-company="+data.company+" data-location="+data.location+" data-title="+data.title+" data-from="+data.from+" data-to="+data.to+" data-description="+data.description+" data-current="+data.current+" title='Edit'><i class='fa fa-pencil'></i></a>"+
+                                        "<a href='javascript:void(0)' class='exper_delete delRecord' data-id="+data.id+" title='Delete'><i class='fa fa-trash-o'></i></a>"+
+                                    "</div>"+
+                                    "<div class='fl-experience-sort-info'>"+data.description+"</div>"+
+                                "</div>"+
+                            "</div>"+
+                        "</div>"
+                    );
+                    };
+                    $('#editExperiancemodal').modal('hide');
+                },
+                error: function(data){
+                    alert('error');
+                }
+            });
+        
+        }));  
+    });
+
+    // Delete Experiances Ajax
+    $(document).on("click",".exper_delete",function(){
+        $('#experDelete').modal('show');
+        $('.experdelete_id').val($(this).data('id'));
+    });
+
+    $(document).ready(function (e) {
+        $('#experDeleteFrm').on('submit',(function(e) {
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            e.preventDefault();
+            var formData = new FormData(this);
+            var deleteId = $('.experdelete_id').val();
+            $.ajax({
+                type:'POST',
+                url: '{{ route("experience.delete",$lang)}}',
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    $('.fl-experience .experience'+deleteId).remove();
+                    $('#experDelete').modal('hide');
+                },
+                error: function(data){
+                    alert('error');
+                }
+            
+            });
+        
+        }));
+        
+    });
+
 
     $(function(){
         var hash = window.location.hash;

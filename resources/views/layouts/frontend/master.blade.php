@@ -135,6 +135,7 @@
   <script src="{{asset('frontend/js/alertify.min.js')}}"></script>
   <script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
   <script src="{{asset('frontend/js/additional-methods.min.js')}}"></script>
+  
   @endif
   
 <script type="text/javascript">
@@ -230,6 +231,7 @@
 
 
 <!-- End Registration modal -->
+<script src="{{asset('frontend/js/bootstrap-datepicker.js')}}"></script>
 
 <script>
   $(document).ready(function(){

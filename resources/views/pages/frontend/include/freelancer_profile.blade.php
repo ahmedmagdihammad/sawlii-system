@@ -320,8 +320,8 @@
                                                                         <span>{{$portfolio->duration}}</span>
                                                                     </div>
                                                                     <div class="pull-right userdetail-itemaction">
-                                                                        <a href="javascript:void(0)" class="edit editRecord" data-entity="add_portfolio" data-id="8" data-div="portfolioSection" title="Edit"><i class="fa fa-pencil"></i></a>
-                                                                        <a href="javascript:void(0)" class="delete delRecord" data-entity="portfolio" data-id="8" title="Delete"><i class="fa fa-trash-o"></i></a>
+                                                                        <a href="javascript:void(0)" class="portf_edit editRecord" data-id="{{$portfolio->id}}" data-image="{{$portfolio->image}}" data-title="{{$portfolio->title}}" data-duration="{{$portfolio->duration}}" data-skills="{{$portfolio->skills}}" data-description="{{$portfolio->description}}" title="Edit"><i class="fa fa-pencil"></i></a>
+                                                                        <a href="javascript:void(0)" class="portf_delete delRecord"  data-id="{{$portfolio->id}}" title="Delete"><i class="fa fa-trash-o"></i></a>
                                                                     </div>
                                                                     <div class="fl-portfolio-sort-info">{{$portfolio->description}}</div>
                                                                     <ul class="fl-portfolio-skils">
@@ -358,8 +358,8 @@
                                                                         <div class="fl-edu-heading">
                                                                             <h4 class="main-title">{{$education->degree}} <span>{{$education->institute}}</span></h4>
                                                                             <div class="userdetail-itemaction">
-                                                                                <a href="javascript:void(0)" class="edit editRecord" data-entity="add_education" data-id="6" data-div="educationSection" title="Edit"><i class="fa fa-pencil"></i></a>
-                                                                                <a href="javascript:void(0)" class="delete delRecord" data-entity="education" data-id="6" title="Delete"><i class="fa fa-trash-o"></i></a>
+                                                                                <a href="javascript:void(0)" class="edu_edit editRecord" data-id="{{$education->id}}" data-institute="{{$education->institute}}" data-from="{{$education->from}}" data-to="{{$education->to}}" data-degree="{{$education->degree}}" data-area="{{$education->area}}" data-description="{{$education->description}}" title="Edit"><i class="fa fa-pencil"></i></a>
+                                                                                <a href="javascript:void(0)" class="edu_delete delRecord" data-id="{{$education->id}}" title="Delete"><i class="fa fa-trash-o"></i></a>
                                                                             </div>
                                                                             <div class="edu-years">{{$education->from}} - {{$education->to}}</div>
                                                                             <div class="edu-department">{{$education->area}}</div>
@@ -368,8 +368,8 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <hr>
                                                         </div>
-                                                        <hr>
                                                         @endforeach
                                                     </div>
                                                 </div>
@@ -384,33 +384,29 @@
                                                     </div>
                                                 </div>
                                                 <div class="panel-body">
-                                                    <div class="certificationShow">
-                                                        @foreach($certifications as $certi)
-                                                        <ul class="fl-certi{{$certi->id}}">
-                                                            <div class="fl-edu-item">
-                                                                <div class="media  fl-certi-item">
-                                                                    <div class="media-left media-middle">
-                                                                        <div class="fl-certi-thumb">
-                                                                            <img src="{{asset('frontend/img/certificate.png')}}" />
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="media-body fl-edu-info">
-                                                                        <div class="fl-edu-heading">
-                                                                            <h4 class="main-title">{{$certi->institute}} <span>{{$certi->area}}</span></h4>
-                                                                            <div class="userdetail-itemaction">
-                                                                                <a href="javascript:void(0)" class="edit editRecord" data-entity="add_education" data-id="6" data-div="educationSection" title="Edit"><i class="fa fa-pencil"></i></a>
-                                                                                <a href="javascript:void(0)" class="delete delRecord" data-entity="education" data-id="6" title="Delete"><i class="fa fa-trash-o"></i></a>
-                                                                            </div>
-                                                                            <div class="edu-years">{{$certi->duration}}</div>
-                                                                        </div>      
-                                                                        <div class="fl-edu-sort-info">{{$certi->description}}</div>
+                                                    <ul class="fl-certi fl-experience">
+                                                        @foreach($certifications as $certifcat)
+                                                            <li class="media{{$certifcat->id}} fl-certi-item fl-experience-item">
+                                                                <div class="media-left ">
+                                                                    <div class="fl-certi-thumb fl-experience-icon">
+                                                                        <img src="{{asset('frontend/img/certificate.png')}}" />
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </ul>
-                                                        <hr>
+                                                                <div class="media-body media-middle fl-certi-info fl-experience-info">
+                                                                    <div class="fl-certi-heading fl-experience-heading">
+                                                                        <h4 class="main-title">{{$certifcat->institute}}</h4>
+                                                                        <div class="experience-years">{{$certifcat->duration}}</div>
+                                                                        <div class="experience-location"><span><i class="fa fa-map-marker"></i></span>{{$certifcat->area}}</div>
+                                                                        <div class="userdetail-itemaction">
+                                                                            <a href="javascript:void(0)" class="edit editRecord" data-id="{{$certifcat->id}}" data-institute="{{$certifcat->institute}}" data-duration="{{$certifcat->duration}}" data-area="{{$certifcat->area}}" data-description="{{$certifcat->description}}" title="Edit" ><i class="fa fa-pencil"></i></a>
+                                                                            <a href="javascript:void(0)" class="delete delRecord" data-id="{{$certifcat->id}}" title="Delete"> <i class="fa fa-trash-o"></i></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="fl-experience-sort-info">{{$certifcat->description}}</div>
+                                                                </div>
+                                                            </li>
                                                         @endforeach
-                                                    </div>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
@@ -758,10 +754,12 @@
         </form>
         </div>
     </div>
+
     <div class="modal fade" id="delete" role="dialog" data-backdrop="static" tabindex="-1">
         <div class="modal-dialog">
             <!-- Modal content-->
-            <form name="#" id="#" method="post">
+            <form name="#" id="deleteFrm" class="deleteFrm" method="post">
+                @csrf
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">
@@ -778,10 +776,8 @@
                     </div>
                     <div class="modal-footer">                   
                     <div class="theme-button">
-                        <input type="hidden" name="entityType" id="entityType" value="">
-                        <input type="hidden" name="entityVal" id="entityVal" value="">
-                        <input type="hidden" name="action" value="deleteRecord">
-                        <button type="submit" name="deleteRecord" class="btn btn-system">Delete</button>
+                        <input type="text" name="delete_id" class="delete_id" id="delete_id" value="">
+                        <button type="submit" class="btn btn-system">Delete</button>
                     </div>
                     </div>
                 </div>
@@ -815,15 +811,15 @@
                                 <!-- <img height='100' width='100' class="hide imgPrev"/>
                                 
                                 </div> -->
-                                <input type="file" name="port_image" class="form-control">
+                                <input type="file" name="port_image" class="form-control port_image" value="">
                             </div>
                             <div class="form-group">
                                 <label>Project Title</label>
-                                <input class="form-control" name="port_title" id="projectTitle" value=""/>
+                                <input class="form-control port_title" name="port_title" value=""/>
                             </div>
                             <div class="form-group">
                                 <label>Project Duration</label>
-                                <select class="form-control" name="port_duration" id="projectDuration">
+                                <select class="form-control port_duration" name="port_duration">
                                     <option value=''>Select Duration</option>
                                     <option value="1day" >1 day or less</option>
                                     <option value="1week" >Less than 1 week</option>
@@ -835,7 +831,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Project Skills</label>
-                                <select data-placeholder="Skill List"  class="form-control skill_choose" multiple tabindex="4" name="port_skills[]" id="project_skill_name">
+                                <select data-placeholder="Skill List"  class="form-control skill_choose port_skills" multiple tabindex="4" name="port_skills[]">
                                     <option value="React Js">React Js</option>
                                     <option value="Selenium Web Driver" >Selenium Web Driver</option>
                                     <option value="QA Automation" >QA Automation</option>
@@ -851,7 +847,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Project Description</label>
-                                <textarea class="form-control" name="port_description" id="projectDesc"></textarea>
+                                <textarea class="form-control port_description" name="port_description"></textarea>
                             </div>
                     </div>
                     <div class="modal-footer">
@@ -859,6 +855,85 @@
                             <input type="hidden" name="action" id="action" value="addPortfolio">
                             <input type="hidden" name="id" id="id" value="">
                             <button type="submit" class="btn btn-system" id="savePortfolio">Save</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    <div class="editPortfolioSection">
+        <div class="modal fade" id="editPortfolioModal" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                        </button>
+                        <h4 class="modal-title">
+                            Edit Project
+                        </h4>
+                    </div>
+                    <div class="modal-body add_portfolio">
+                        <form method="POST" id="editPortfolioFrm"  enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="editport_id" class="form-control editport_id" value="">
+                            <div class="form-group text-center">
+                                <!-- <div class="file-input-wrapper">
+                                <label for="upload-file" class="file-input-button">
+                                Choose Image
+                                </label> -->
+                                <!-- <input id="upload-file" type="file" name="old_image" class="imgData" />
+                                <input type="hidden" name="old_image" id="old_image" value=""> -->
+                                <!-- <img height='100' width='100' class="hide imgPrev"/>
+                                
+                                </div> -->
+                                <input type="file" name="editport_image" class="form-control editport_image" value="">
+                            </div>
+                            <div class="form-group">
+                                <label>Project Title</label>
+                                <input class="form-control editport_title" name="editport_title" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <label>Project Duration</label>
+                                <select class="form-control editport_duration" name="editport_duration">
+                                    <option value=''>Select Duration</option>
+                                    <option value="1day" >1 day or less</option>
+                                    <option value="1week" >Less than 1 week</option>
+                                    <option value="1to2weeks" >1 to 2 weeks</option>
+                                    <option value="3to4weeks" >3 to 4 weeks</option>
+                                    <option value="1to6months" >1 to 6 month</option>
+                                    <option value="plus6months" >More than 6 month</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Project Skills</label>
+                                <select data-placeholder="Skill List"  class="form-control skill_choose editport_skills" multiple tabindex="4" name="editport_skills[]">
+                                    <option value="React Js">React Js</option>
+                                    <option value="Selenium Web Driver" >Selenium Web Driver</option>
+                                    <option value="QA Automation" >QA Automation</option>
+                                    <option value="Node Js" >Node Js</option>
+                                    <option value="Java" >Java</option>
+                                    <option value="UX Designers" >UX Designers</option>
+                                    <option value="Writer" >Writer</option>
+                                    <option value="Writers" >Writers</option>
+                                    <option value="Web Designers" >Web Designers</option>
+                                    <option value="Virtual Assistants" >Virtual Assistants</option>
+                                    <option value="Wordpress Developers" >Wordpress Developers</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Project Description</label>
+                                <textarea class="form-control editport_description" name="editport_description"></textarea>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="theme-button">
+                            <input type="hidden" name="action" id="action" value="addPortfolio">
+                            <input type="hidden" name="id" id="id" value="">
+                            <button type="submit" class="btn btn-system">Save</button>
                         </div>
                         </form>
                     </div>
@@ -888,7 +963,7 @@
                             <label>
                             Institute
                             </label>
-                            <input class="form-control" name="edu_institute" id="instituteName"  value=""/>
+                            <input class="form-control" name="edu_institute" id="instituteName"/>
                         </div>
                         <div class="form-group">
                             <label>
@@ -944,6 +1019,114 @@
         </div>
     </div> 
 
+    <div class="editEducationSection">
+        <div class="modal fade" id="editEducationmodal" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <form method="post" name="#" id="editEducationForm">
+                    @csrf
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                            &times;
+                            </button>
+                            <h4 class="modal-title">
+                                Edit Education
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <input class="form-control editedu_id" name="editedu_id" value=""/>
+                            <label class="red_error error_dur"></label>
+                            <div class="form-group">
+                                <label>
+                                Institute
+                                </label>
+                                <input class="form-control editedu_institute" name="editedu_institute"/>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                Date attended
+                                </label>
+                                <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <select class="form-control editedu_from" name="editedu_from">
+                                        <option value="">--Select Year--</option><option value='2020' >2020</option><option value='2019' >2019</option><option value='2018' >2018</option><option value='2017' >2017</option><option value='2016' >2016</option><option value='2015' >2015</option><option value='2014' >2014</option><option value='2013' >2013</option><option value='2012' >2012</option><option value='2011' >2011</option><option value='2010' >2010</option><option value='2009' >2009</option><option value='2008' >2008</option><option value='2007' >2007</option><option value='2006' >2006</option><option value='2005' >2005</option><option value='2004' >2004</option><option value='2003' >2003</option><option value='2002' >2002</option><option value='2001' >2001</option><option value='2000' >2000</option><option value='1999' >1999</option><option value='1998' >1998</option><option value='1997' >1997</option><option value='1996' >1996</option><option value='1995' >1995</option><option value='1994' >1994</option><option value='1993' >1993</option><option value='1992' >1992</option><option value='1991' >1991</option><option value='1990' >1990</option><option value='1989' >1989</option><option value='1988' >1988</option><option value='1987' >1987</option><option value='1986' >1986</option><option value='1985' >1985</option><option value='1984' >1984</option><option value='1983' >1983</option><option value='1982' >1982</option><option value='1981' >1981</option><option value='1980' >1980</option><option value='1979' >1979</option><option value='1978' >1978</option><option value='1977' >1977</option><option value='1976' >1976</option><option value='1975' >1975</option><option value='1974' >1974</option><option value='1973' >1973</option><option value='1972' >1972</option><option value='1971' >1971</option><option value='1970' >1970</option><option value='1969' >1969</option><option value='1968' >1968</option><option value='1967' >1967</option><option value='1966' >1966</option><option value='1965' >1965</option><option value='1964' >1964</option><option value='1963' >1963</option><option value='1962' >1962</option><option value='1961' >1961</option><option value='1960' >1960</option><option value='1959' >1959</option><option value='1958' >1958</option><option value='1957' >1957</option><option value='1956' >1956</option><option value='1955' >1955</option><option value='1954' >1954</option><option value='1953' >1953</option><option value='1952' >1952</option><option value='1951' >1951</option><option value='1950' >1950</option><option value='1949' >1949</option><option value='1948' >1948</option><option value='1947' >1947</option><option value='1946' >1946</option><option value='1945' >1945</option><option value='1944' >1944</option><option value='1943' >1943</option><option value='1942' >1942</option><option value='1941' >1941</option><option value='1940' >1940</option><option value='1939' >1939</option><option value='1938' >1938</option><option value='1937' >1937</option><option value='1936' >1936</option><option value='1935' >1935</option><option value='1934' >1934</option><option value='1933' >1933</option><option value='1932' >1932</option><option value='1931' >1931</option><option value='1930' >1930</option><option value='1929' >1929</option><option value='1928' >1928</option><option value='1927' >1927</option><option value='1926' >1926</option><option value='1925' >1925</option><option value='1924' >1924</option><option value='1923' >1923</option><option value='1922' >1922</option><option value='1921' >1921</option><option value='1920' >1920</option><option value='1919' >1919</option><option value='1918' >1918</option><option value='1917' >1917</option><option value='1916' >1916</option><option value='1915' >1915</option><option value='1914' >1914</option><option value='1913' >1913</option><option value='1912' >1912</option><option value='1911' >1911</option><option value='1910' >1910</option><option value='1909' >1909</option><option value='1908' >1908</option><option value='1907' >1907</option><option value='1906' >1906</option><option value='1905' >1905</option><option value='1904' >1904</option><option value='1903' >1903</option><option value='1902' >1902</option><option value='1901' >1901</option><option value='1900' >1900</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <select class="form-control editedu_to" name="editedu_to">
+                                        <option value="">--Select Year--</option><option value='2020' >2020</option><option value='2019' >2019</option><option value='2018' >2018</option><option value='2017' >2017</option><option value='2016' >2016</option><option value='2015' >2015</option><option value='2014' >2014</option><option value='2013' >2013</option><option value='2012' >2012</option><option value='2011' >2011</option><option value='2010' >2010</option><option value='2009' >2009</option><option value='2008' >2008</option><option value='2007' >2007</option><option value='2006' >2006</option><option value='2005' >2005</option><option value='2004' >2004</option><option value='2003' >2003</option><option value='2002' >2002</option><option value='2001' >2001</option><option value='2000' >2000</option><option value='1999' >1999</option><option value='1998' >1998</option><option value='1997' >1997</option><option value='1996' >1996</option><option value='1995' >1995</option><option value='1994' >1994</option><option value='1993' >1993</option><option value='1992' >1992</option><option value='1991' >1991</option><option value='1990' >1990</option><option value='1989' >1989</option><option value='1988' >1988</option><option value='1987' >1987</option><option value='1986' >1986</option><option value='1985' >1985</option><option value='1984' >1984</option><option value='1983' >1983</option><option value='1982' >1982</option><option value='1981' >1981</option><option value='1980' >1980</option><option value='1979' >1979</option><option value='1978' >1978</option><option value='1977' >1977</option><option value='1976' >1976</option><option value='1975' >1975</option><option value='1974' >1974</option><option value='1973' >1973</option><option value='1972' >1972</option><option value='1971' >1971</option><option value='1970' >1970</option><option value='1969' >1969</option><option value='1968' >1968</option><option value='1967' >1967</option><option value='1966' >1966</option><option value='1965' >1965</option><option value='1964' >1964</option><option value='1963' >1963</option><option value='1962' >1962</option><option value='1961' >1961</option><option value='1960' >1960</option><option value='1959' >1959</option><option value='1958' >1958</option><option value='1957' >1957</option><option value='1956' >1956</option><option value='1955' >1955</option><option value='1954' >1954</option><option value='1953' >1953</option><option value='1952' >1952</option><option value='1951' >1951</option><option value='1950' >1950</option><option value='1949' >1949</option><option value='1948' >1948</option><option value='1947' >1947</option><option value='1946' >1946</option><option value='1945' >1945</option><option value='1944' >1944</option><option value='1943' >1943</option><option value='1942' >1942</option><option value='1941' >1941</option><option value='1940' >1940</option><option value='1939' >1939</option><option value='1938' >1938</option><option value='1937' >1937</option><option value='1936' >1936</option><option value='1935' >1935</option><option value='1934' >1934</option><option value='1933' >1933</option><option value='1932' >1932</option><option value='1931' >1931</option><option value='1930' >1930</option><option value='1929' >1929</option><option value='1928' >1928</option><option value='1927' >1927</option><option value='1926' >1926</option><option value='1925' >1925</option><option value='1924' >1924</option><option value='1923' >1923</option><option value='1922' >1922</option><option value='1921' >1921</option><option value='1920' >1920</option><option value='1919' >1919</option><option value='1918' >1918</option><option value='1917' >1917</option><option value='1916' >1916</option><option value='1915' >1915</option><option value='1914' >1914</option><option value='1913' >1913</option><option value='1912' >1912</option><option value='1911' >1911</option><option value='1910' >1910</option><option value='1909' >1909</option><option value='1908' >1908</option><option value='1907' >1907</option><option value='1906' >1906</option><option value='1905' >1905</option><option value='1904' >1904</option><option value='1903' >1903</option><option value='1902' >1902</option><option value='1901' >1901</option><option value='1900' >1900</option>
+                                    </select>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                Degree
+                                </label>
+                                <input class="form-control editedu_degree" name="editedu_degree"  value=""/>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                Area of study
+                                </label>
+                                <input class="form-control editedu_area" name="editedu_area" value=""/>
+                            </div>
+                            <div class="form-group">
+
+                                <label>
+                                Description
+                                </label>
+                                <textarea class="form-control editedu_desc" name="editedu_desc" ></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <!-- <div class="theme-button-default">
+                                <a href="#" data-dismiss="modal">Cancel</a>
+                            </div> -->
+                            <div class="theme-button">
+                                <input type="hidden" name="action" id="action" value="addEducation">
+                                <input type="hidden" name="id" id="id" value="">
+                                <button type="submit" name="addEducation" id="addEducation" class="btn btn-system">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="eduDelete" role="dialog" data-backdrop="static" tabindex="-1">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <form name="#" id="eduDeleteFrm" method="post">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                        </button>
+                        <h4 class="modal-title">
+                        Remove
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                        Are you sure you want to remove ?
+                        </p>
+                    </div>
+                    <div class="modal-footer">                   
+                    <div class="theme-button">
+                        <input type="hidden" name="edudelete_id" class="edudelete_id" value="">
+                        <button type="submit" class="btn btn-system">Delete</button>
+                    </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div class="certificateSection">
         <div class="modal fade" id="certificationmodal" id="#" role="dialog" tabindex="-1">
             <div class="modal-dialog">
@@ -992,6 +1175,69 @@
                             Description
                             </label>
                             <textarea class="form-control" name="cert_desc" id="#"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    <div class="theme-button">
+                        <input type="hidden" name="action" id="action" value="addCertification">
+                        <input type="hidden" name="id" id="id" value="">
+                        <button type="submit" class="btn btn-system">Save</button>
+                    </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="editCertificateSection">
+        <div class="modal fade" id="editCertificationmodal" id="#" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+            <form method="post" id="editCertificationForm">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                    </button>
+                    <h4 class="modal-title">
+                        Add Certificate
+                    </h4>
+                    </div>
+                    <div class="modal-body">
+                        <label class="red_error error_dur"></label>
+                        <div class="form-group">
+                            <label>
+                            Institute
+                            </label>
+                            <input class="form-control" name="upcert_institute" class="upcert_institute" id="#"  value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                            Duration
+                            </label>
+                            <select class="form-control upcert_duration" name="upcert_duration">
+                                <option value="">--Select Duration--</option>
+                                <option value='1month' >1month</option>
+                                <option value='2to6moths' >2to6moths</option>
+                                <option value='6to12months' >6to12months</option>
+                                <option value='1to2years' >1to2years</option>
+                                <option value='plus2years' >plus2years</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                            Area of study
+                            </label>
+                            <input class="form-control upcert_area" name="upcert_area" id="#" value=""/>
+                        </div>
+                        <div class="form-group">
+
+                            <label>
+                            Description
+                            </label>
+                            <textarea class="form-control upcert_desc" name="upcert_desc" id="#"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -2141,7 +2387,6 @@
         $('#portfolioModal').modal('show');
     });
 
-
     $(document).ready(function (e) {
         $('#portfolioFrm').on('submit',(function(e) {
             $.ajaxSetup({
@@ -2164,7 +2409,7 @@
                             "<div class='media'>"+
                                 "<div class='media-left'>"+
                                     "<div class='fl-portfolio-thumb'>"+
-                                        "<img src='{{asset("+data.image+")}}' title='test project'>"+
+                                        "<img src='../"+data.image+"' title='test project'>"+
                                     "</div>"+
                                 "</div>"+
                                 "<div class='media-body fl-portfolio-info'>"+
@@ -2173,8 +2418,8 @@
                                         "<span>"+data.duration+"</span>"+
                                     "</div>"+
                                     "<div class='pull-right userdetail-itemaction'>"+
-                                        "<a href='javascript:void(0)' class='edit editRecord' data-entity='add_portfolio' data-id='8' data-div='portfolioSection' title='Edit'><i class='fa fa-pencil'></i></a>"+
-                                        "<a href='javascript:void(0)' class='delete delRecord' data-entity='portfolio' data-id='8' title='Delete'><i class='fa fa-trash-o'></i></a>"+
+                                        "<a href='javascript:void(0)' class='portf_edit editRecord' data-id='"+data.id+"' data-image='"+data.image+"' data-title='"+data.title+"' data-duration='"+data.duration+"' data-description='"+data.description+"' title='Edit'><i class='fa fa-pencil'></i></a>"+
+                                        "<a href='javascript:void(0)' class='portf_delete delRecord' data-id='"+data.id+"' title='Delete'><i class='fa fa-trash-o'></i></a>"+
                                     "</div>"+
                                     "<div class='fl-portfolio-sort-info'>"+data.description+"</div>"+
                                     "<ul class='fl-portfolio-skils'>"+
@@ -2196,7 +2441,112 @@
         
     });
 
-    // Add Education
+    // Update Portofilo Ajax
+    $(document).on("click",".portf_edit",function(){
+        $('#editPortfolioModal').modal('show');
+        $('#editPortfolioFrm').show();
+        $('.editport_id').val($(this).data('id'));
+        $('.editport_title').val($(this).data('title'));
+        $('.editport_duration').val($(this).data('duration'));
+        $('.editport_skills').val($(this).data('skills'));
+        $('.editport_description').val($(this).data('description'));
+        $('.editport_image').val($(this).data('image'));
+    });
+
+    $(document).ready(function (e) {
+        $('#editPortfolioFrm').on('submit',(function(e) {
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            e.preventDefault();
+            var formData = new FormData(this);
+            var portId = $('.editport_id').val();
+            $.ajax({
+                type:'POST',
+                url: '{{route("portfolio.edit",$lang)}}',
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    $('.showPortfolio'+portId).replaceWith(
+                        "<div class='fl-portfolio-item showPortfolio"+portId+"'>"+
+                            "<div class='media'>"+
+                                "<div class='media-left'>"+
+                                    "<div class='fl-portfolio-thumb'>"+
+                                        "<img src='../"+data.image+"' title='test project'>"+
+                                    "</div>"+
+                                "</div>"+
+                                "<div class='media-body fl-portfolio-info'>"+
+                                    "<div class='fl-portfolio-heading'>"+
+                                        "<h4 class='main-title'>"+data.title+"</h4>"+
+                                        "<span>"+data.duration+"</span>"+
+                                    "</div>"+
+                                    "<div class='pull-right userdetail-itemaction'>"+
+                                        "<a href='javascript:void(0)' class='portf_edit editRecord' data-id='"+data.id+"' data-image='"+data.image+"' data-title='"+data.title+"' data-duration='"+data.duration+"' data-description='"+data.description+"' title='Edit'><i class='fa fa-pencil'></i></a>"+
+                                        "<a href='javascript:void(0)' class='portf_delete delRecord' data-id='"+data.id+"' title='Delete'><i class='fa fa-trash-o'></i></a>"+
+                                    "</div>"+
+                                    "<div class='fl-portfolio-sort-info'>"+data.description+"</div>"+
+                                    "<ul class='fl-portfolio-skils'>"+
+                                        "<li class='flp-skil'>"+data.skills+"</li>"+
+                                    "</ul>"+
+                                "</div>"+
+                            "</div>"+
+                        "</div>"
+                    );
+                    $('#editPortfolioModal').modal('hide');
+                },
+                error: function(data){
+                    alert('error');
+                }
+            
+            });
+        
+        }));
+        
+    });
+
+    // Delete Portofilo Ajax 
+    $(document).on("click",".portf_delete",function(){
+        $('#delete').modal('show');
+        $('.delete_id').val($(this).data('id'));
+    });
+
+    $(document).ready(function (e) {
+        $('#deleteFrm').on('submit',(function(e) {
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            e.preventDefault();
+            var formData = new FormData(this);
+            var deleteId = $('.delete_id').val();
+            $.ajax({
+                type:'POST',
+                url: '{{ route("portfolio.delete",$lang)}}',
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    $('.showPortfolio'+deleteId).remove();
+                    $('#delete').modal('hide');
+                },
+                error: function(data){
+                    alert('error');
+                }
+            
+            });
+        
+        }));
+        
+    });
+
+
+    // Add Education Ajax
     $(document).on("click",".add_education_btn",function(){
         $('#educationmodal').modal('show');
     });
@@ -2231,8 +2581,8 @@
                                         "<div class='fl-edu-heading'>"+
                                             "<h4 class='main-title'>"+data.degree+ "<span>"+data.institute+"</span></h4>"+
                                             "<div class='userdetail-itemaction'>"+
-                                                "<a href='javascript:void(0)' class='edit editRecord' data-entity='add_education' data-id='6' data-div='educationSection' title='Edit'><i class='fa fa-pencil'></i></a>"+
-                                                "<a href='javascript:void(0)' class='delete delRecord' data-entity='education' data-id='6' title='Delete'><i class='fa fa-trash-o'></i></a>"+
+                                                "<a href='javascript:void(0)'  class='edu_edit editRecord' data-id='"+data.id+"' data-institute="+data.institute+" data-from='"+data.from+"' data-to='"+data.to+"' data-degree='"+data.degree+"' data-area='"+data.area+"' data-description='"+data.description+"' title='Edit'><i class='fa fa-pencil'></i></a>"+
+                                                "<a href='javascript:void(0)' class='edu_delete delRecord' data-id='"+data.id+"' title='Delete'><i class='fa fa-trash-o'></i></a>"+
                                             "</div>"+
                                             "<div class='edu-years'>"+data.from +"-"+ data.to+"</div>"+
                                             "<div class='edu-department'>"+data.area+"</div>"+
@@ -2241,6 +2591,7 @@
                                     "</div>"+
                                 "</div>"+
                             "</div>"+
+                            "<hr>"+
                         "</div>"
                     );
                     $('#educationmodal').modal('hide');
@@ -2251,6 +2602,110 @@
             });
         
         }));  
+    });
+
+    // Update Education Ajax
+    $(document).on("click",".edu_edit",function(){
+        $('#editEducationmodal').modal('show');
+        $('#editEducationForm').show();
+        $('.editedu_id').val($(this).data('id'));
+        $('.editedu_institute').val($(this).data('institute'));
+        $('.editedu_from').append("<option value='"+$(this).data('from')+"' selected>"+$(this).data('from')+"</option>");
+        $('.editedu_to').append("<option value='"+$(this).data('to')+"' selected>"+$(this).data('to')+"</option>");
+        $('.editedu_degree').val($(this).data('degree'));
+        $('.editedu_area').val($(this).data('area'));
+        $('.editedu_desc').text($(this).data('description'));
+    });
+
+    $(document).ready(function (e) {
+        $('#editEducationForm').on('submit',(function(e) {
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            e.preventDefault();
+            var formData = new FormData(this);
+            var eduId = $('.editedu_id').val();
+            $.ajax({
+                type:'POST',
+                url: '{{route("education.edit",$lang)}}',
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    $('.fl-edu'+eduId).replaceWith(
+                        "<div class='fl-edu"+data.id+"'>"+
+                            "<div class='fl-edu-item'>"+
+                                "<div class='media'>"+
+                                    "<div class='media-left'>"+
+                                        "<div class='fl-edu-icon'>"+
+                                            "<i class='fa fa-graduation-cap' aria-hidden='true'></i>"+
+                                        "</div>"+
+                                    "</div>"+
+                                    "<div class='media-body fl-edu-info'>"+
+                                        "<div class='fl-edu-heading'>"+
+                                            "<h4 class='main-title'>"+data.degree+ "<span>"+data.institute+"</span></h4>"+
+                                            "<div class='userdetail-itemaction'>"+
+                                                "<a href='javascript:void(0)'  class='edu_edit editRecord' data-id='"+data.id+"' data-institute="+data.institute+" data-from='"+data.from+"' data-to='"+data.to+"' data-degree='"+data.degree+"' data-area='"+data.area+"' data-description='"+data.description+"' title='Edit'><i class='fa fa-pencil'></i></a>"+
+                                                "<a href='javascript:void(0)' class='edu_delete delRecord' data-id='"+data.id+"' title='Delete'><i class='fa fa-trash-o'></i></a>"+
+                                            "</div>"+
+                                            "<div class='edu-years'>"+data.from +"-"+ data.to+"</div>"+
+                                            "<div class='edu-department'>"+data.area+"</div>"+
+                                        "</div>"+      
+                                        "<div class='fl-edu-sort-info'>"+data.description+"</div>"+
+                                    "</div>"+
+                                "</div>"+
+                            "</div>"+
+                            "<hr>"+
+                        "</div>"
+                    );
+                    $('#editEducationmodal').modal('hide');
+                },
+                error: function(data){
+                    alert('error');
+                }
+            });
+        
+        }));  
+    });
+
+    // Delete Education Ajax
+    $(document).on("click",".edu_delete",function(){
+        $('#eduDelete').modal('show');
+        $('#eduDeleteFrm').show();
+        $('.edudelete_id').val($(this).data('id'));
+    });
+
+    $(document).ready(function (e) {
+        $('#eduDeleteFrm').on('submit',(function(e) {
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            e.preventDefault();
+            var formData = new FormData(this);
+            var deleteId = $('.edudelete_id').val();
+            $.ajax({
+                type:'POST',
+                url: '{{route("education.delete",$lang)}}',
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    $('.fl-edu'+deleteId).remove();
+                    $('#eduDelete').modal('hide');
+                },
+                error: function(data){
+                    alert('error');
+                }
+            
+            });
+        }));
+        
     });
 
     // Add Certifications
@@ -2275,30 +2730,26 @@
                 contentType: false,
                 processData: false,
                 success:function(data){
-                    $(".certificationShow").append(
-                        "<ul class='fl-certi"+data.id+"'>"+
-                            "<div class='fl-edu-item'>"+
-                                "<div class='media  fl-certi-item'>"+
-                                    "<div class='media-left media-middle'>"+
-                                        "<div class='fl-certi-thumb'>"+
-                                            "<img src='{{asset('frontend/img/certificate.png')}}' />"+
-                                        "</div>"+
-                                    "</div>"+
-                                    "<div class='media-body fl-edu-info'>"+
-                                        "<div class='fl-edu-heading'>"+
-                                            "<h4 class='main-title'>"+data.institute+ "<span>"+data.area+"</span></h4>"+
-                                            "<div class='userdetail-itemaction'>"+
-                                                "<a href='javascript:void(0)' class='edit editRecord' data-entity='add_education' data-id='6' data-div='educationSection' title='Edit'><i class='fa fa-pencil'></i></a>"+
-                                                "<a href='javascript:void(0)' class='delete delRecord' data-entity='education' data-id='6' title='Delete'><i class='fa fa-trash-o'></i></a>"+
-                                            "</div>"+
-                                            "<div class='edu-years'>"+data.duration+"</div>"+
-                                        "</div>"+      
-                                        "<div class='fl-edu-sort-info'>"+data.description+"</div>"+
-                                    "</div>"+
+                    $(".fl-certi").append(
+                        "<li class='media"+data.id+" fl-certi-item fl-experience-item'>"+
+                            "<div class='media-left'>"+
+                                "<div class='fl-certi-thumb fl-experience-icon'>"+
+                                    "<img src='{{asset('frontend/img/certificate.png')}}' />"+
                                 "</div>"+
                             "</div>"+
-                        "</ul>"+
-                        "<hr>"
+                            "<div class='media-body media-middle fl-certi-info fl-experience-info'>"+
+                                "<div class='fl-certi-heading fl-experience-heading'>"+
+                                    "<h4 class='main-title'>"+data.institute+"</h4>"+
+                                    "<div class='experience-years'>"+data.duration+"</div>"+
+                                    "<div class='experience-location'><span><i class='fa fa-map-marker'></i></span>"+data.area+"</div>"+
+                                    "<div class='userdetail-itemaction'>"+
+                                        "<a href='javascript:void(0)' class='edit editRecord' data-id='"+data.id+"' data-institute='"+data.institute+"' data-duration='"+data.duration+"' data-area='"+data.area+"' data-description='"+data.description+"' title='Edit' ><i class='fa fa-pencil'></i></a>"+
+                                        "<a href='javascript:void(0)' class='delete delRecord' data-id='"+data.id+"' title='Delete'> <i class='fa fa-trash-o'></i></a>"+
+                                    "</div>"+
+                                "</div>"+
+                                "<div class='fl-experience-sort-info'>"+data.description+"</div>"+
+                            "</div>"+
+                        "</li>"
                     );
                     $('#certificationmodal').modal('hide');
                 },

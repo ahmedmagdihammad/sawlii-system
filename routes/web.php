@@ -55,18 +55,18 @@ Route::group(['middleware' => ['auth']], function () {
        
         // Route Portfolios
         Route::post('/portfolio/store', 'Frontend\PortfoliosControllers@store')->name('portfolio.store');
-        Route::post('/portfolio/{id}/edit', 'Frontend\PortfoliosControllers@update')->name('portfolio.edit');
-        Route::post('/portfolio/{id}/delete', 'Frontend\PortfoliosControllers@destroy')->name('portfolio.delete');
+        Route::post('/portfolio/edit', 'Frontend\PortfoliosControllers@update')->name('portfolio.edit');
+        Route::post('/portfolio/delete', 'Frontend\PortfoliosControllers@destroy')->name('portfolio.delete');
 
         // Route Educations
         Route::post('/education/store', 'Frontend\EducationsController@store')->name('education.store');
-        Route::post('/education/{id}/edit', 'Frontend\EducationsController@update')->name('education.edit');
-        Route::post('/education/{id}/delete', 'Frontend\EducationsController@destroy')->name('education.delete');
+        Route::post('/education/edit', 'Frontend\EducationsController@update')->name('education.edit');
+        Route::post('/education/delete', 'Frontend\EducationsController@destroy')->name('education.delete');
 
         // Route Certifications
         Route::post('certification/store', 'Frontend\CertificationsController@store')->name('certification.store');
-        Route::post('certification/{id}/edit', 'Frontend\CertificationsController@update')->name('certification.edit');
-        Route::post('certification/{id}/delete', 'Frontend\CertificationsController@destroy')->name('certification.delete');
+        Route::post('certification/edit', 'Frontend\CertificationsController@update')->name('certification.edit');
+        Route::post('certification/delete', 'Frontend\CertificationsController@destroy')->name('certification.delete');
 
         // Route Experiences
         Route::post('/experience/store', 'Frontend\ExperiencesController@store')->name('experience.store');

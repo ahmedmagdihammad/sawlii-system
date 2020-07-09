@@ -95,9 +95,20 @@ class PortfoliosControllers extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $lang)
     {
-        //
+        $portfoilo = Portfolio::find($request->editport_id);
+        $portfoilo->freelancer = Auth::user()->id;
+        $portfoilo->title = $request->editport_title;
+        $portfoilo->duration = $request->editport_duration;
+        $portfoilo->skills = $request->editport_skills;
+        $portfoilo->description = $request->editport_description;
+        if ($request->hasFile('editport_image')) {
+            $portfoilo->image = $this->uploadimage($request->editport_image);
+        }
+        $portfoilo->save();
+
+        return $portfoilo;
     }
 
     /**
@@ -106,8 +117,9 @@ class PortfoliosControllers extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $lang)
     {
-        //
+        $portfolio = Portfolio::find($request->delete_id)->delete();
+        return response()->json('Record has been deleted successfully!');
     }
 }

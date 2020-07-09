@@ -78,9 +78,18 @@ class EducationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $lang)
     {
-        //
+        $education = Education::find($request->editedu_id);
+        $education->freelancer = Auth::user()->id;
+        $education->institute = $request->editedu_institute;
+        $education->from = $request->editedu_from;
+        $education->to = $request->editedu_to;
+        $education->degree = $request->editedu_degree;
+        $education->area = $request->editedu_area;
+        $education->description = $request->editedu_desc;
+        $education->save();
+        return $education;
     }
 
     /**
@@ -89,8 +98,9 @@ class EducationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $lang)
     {
-        //
+        Education::find($request->edudelete_id)->delete();
+        return response()->json('Record has been deleted successfully!');
     }
 }

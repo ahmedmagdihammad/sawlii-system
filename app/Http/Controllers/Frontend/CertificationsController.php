@@ -76,9 +76,16 @@ class CertificationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $lang)
     {
-        //
+        $certification = Certification::find($request->upcert_id);
+        $certification->freelancer = Auth::user()->id;
+        $certification->institute = $request->upcert_institute;
+        $certification->duration = $request->upcert_duration;
+        $certification->area = $request->upcert_area;
+        $certification->description = $request->upcert_desc;
+        $certification->save();
+        return $certification;
     }
 
     /**
@@ -87,8 +94,9 @@ class CertificationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $lang)
     {
-        //
+        Certification::find($request->delcert_id);
+        return response()->json('Record has been deleted successfully!');
     }
 }

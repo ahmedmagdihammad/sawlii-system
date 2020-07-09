@@ -96,7 +96,7 @@ class CertificationsController extends Controller
      */
     public function destroy(Request $request, $lang)
     {
-        Certification::find($request->certdelete_id);
+        Certification::find($request->certdelete_id)->delete();
         return response()->json('Record has been deleted successfully!');
     }
 }
